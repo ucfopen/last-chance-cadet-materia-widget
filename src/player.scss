@@ -19,8 +19,8 @@
 	font-style  : normal;
 }
 
-::-webkit-scrollbar { 
-    display : none; 
+::-webkit-scrollbar {
+    display : none;
 }
 html, body {
 	position         : absolute;
@@ -212,7 +212,7 @@ html, body {
 							content: " ";
 							position       : absolute;
 							border-bottom  : 20px solid transparent;
-							border-top     : 20px solid transparent;	
+							border-top     : 20px solid transparent;
 							border-left   : 20px solid #DDD;
 							height: 4px;
 							margin-top: -20px;
@@ -229,7 +229,7 @@ html, body {
 							position       : absolute;
 							left: 0;
 							border-bottom  : 20px solid transparent;
-							border-top     : 20px solid transparent;	
+							border-top     : 20px solid transparent;
 							border-right   : 20px solid #DDD;
 							height: 4px;
 							margin-top: -20px;
@@ -266,7 +266,7 @@ html, body {
 					}
 				}
 			}
-			
+
 			&.selected {
 				.word-text {
 					background-color    : #27AE60;
@@ -278,7 +278,7 @@ html, body {
 					.word-text {
 						color               : #DECEC8;
 						background-color    : #27AE60;
-						border-bottom-color : #1F8D4E; 
+						border-bottom-color : #1F8D4E;
 					}
 				}
 				.word-text {
@@ -578,8 +578,8 @@ footer {
 	}
 }
 
-@media only screen 
-and (min-device-width : 768px) 
+@media only screen
+and (min-device-width : 768px)
 and (max-device-width : 1024px) {
 	 .word.matched:hover {
 		.word-text {
@@ -590,8 +590,8 @@ and (max-device-width : 1024px) {
 	}
 }
 
-@media only screen 
-and (min-device-width : 768px) 
+@media only screen
+and (min-device-width : 768px)
 and (max-device-width : 1024px)
 and (-webkit-min-device-pixel-ratio: 2){
 	.word.matched:hover {

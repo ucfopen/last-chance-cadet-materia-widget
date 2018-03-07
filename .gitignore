@@ -1,4 +1,7 @@
-.build
 .DS_Store
 .sass-cache
+.build
+.sass-cache
 node_modules
+build/
+yarn-error.log
