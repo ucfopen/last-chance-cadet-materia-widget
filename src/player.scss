@@ -1,4 +1,14 @@
+<<<<<<< HEAD
 @import "audioControls.scss";
+=======
+$color0: #ffffff;
+$color1: #79dcf3;
+$color2: #8479f3;
+$color3: #f179f3;
+$color4: #f37987;
+$color5: #f3ee79;
+$color6: #8af379;
+>>>>>>> f6b44c7... #1 Progress on reskinning Matching to become Last Chance Cadet - question/answer interface and title portions are done, icons/screen shots replaced.
 
 @font-face {
 	font-family: 'CorbelBold';
@@ -26,33 +36,109 @@
 }
 html, body {
 	position         : absolute;
-	height           : 548px;
-	width            : 750px;
+	height           : 100%;
+	width            : 100%;
 	cursor           : default;
 	overflow         : hidden;
 	color            : #FFF;
 	background-color : #2f3944;
 	padding          : 0;
 	margin           : 0;
-	font-family      : 'CorbelBold', sans-serif;
+	font-family      : 'Montserrat', sans-serif;
 	-webkit-user-select : none;
 	-moz-user-select : none;
 	-ms-user-select : none;
 	user-select : none;
 	-webkit-touch-callout : none;
+
+	background: #878787;
+	background: linear-gradient(to right, #bfbfbf 0%, #cacac9 10px, #878787 60px, #878787 95%, #4d4d4e 100%);
 }
 #header {
 	position         : fixed;
 	top              : 0;
-	z-index          : 0;
-	width            : 100%;
-	height           : 50px;
-	background-color : #3498DB;
-	h1 {
+	left             : 50vw;
+	transform        : translateX(-50%);
+	z-index          : 35;
+	height           : 55px;
+	background-color : #878787;
+	border-bottom: solid 2px #333333;
+
+	&:before,
+	&:after {
+		position: absolute;
+		bottom: 4px;
+		display: block;
+		content: '';
+		background-color : #878787;
+		width: 30px;
+		height: 20px;
+		border-bottom: solid 2px #333333;
+		z-index: -10;
+	}
+
+	&:before {
+		left: -23px;
+		transform: rotate(30deg);
+	}
+	&:after {
+		right: -23px;
+		transform: rotate(-30deg);
+	}
+
+	#titleContainer {
+		position: relative;
+		background: repeating-linear-gradient(
+			to right,
+			#575757,
+			#424242 4px
+		);
+		min-width: 330px;
+		max-width: 500px;
+		height: 40px;
+		border: 2px solid #666;
 		text-align : center;
 		margin-top : 5px;
+		overflow:hidden;
+		z-index:31;
+
+		#glowContainer {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			position: absolute;
+			left:0;
+			top:0;
+			width: 100%;
+			height: 100%;
+		}
+
+		.glow:before {
+			content: '';
+			display: block;
+			width: 60px;
+			height: 30px;
+			background: radial-gradient(ellipse at top,
+				rgba(255,254,171,.25),
+				rgba(255,254,171,0) 75%,
+				rgba(255,254,171,0) 100%
+			);
+		}
+
+		h1 {
+			width: 100%;
+			text-align: center;
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			border-top: 2px solid rgba(0,0,0,0.1);
+			border-bottom: 2px solid rgba(0,0,0,0.1);
+			border-left: 2px solid rgba(0,0,0,0.6);
+			border-right: 2px solid rgba(0,0,0,0.6);
+		}
 	}
 }
+
 .unselectable {
 	opacity : 0.6;
 	-webkit-transition : 0.2s;
@@ -63,27 +149,49 @@ html, body {
 	}
 }
 
-.audio-controls {
-	margin-top: -5px;
+.audio-control-container {
+	position: relative;
 
-	.seek-bar {
-		position: relative;
-	}
-
-	.seek-bar:before {
-		content: 'Audio Clue';
-		font-family: 'CorbelBold', sans-serif;
-		font-size: .75em;
+	.audio-controls {
 		position: absolute;
-		width: 100%;
-		text-align: center;
-		bottom: 25%;
-	}
+		top: -9px;
 
-	.play-btn:before {
-		position: absolute;
-		left: 6px;
-		top: 1px;
+		.seek-bar {
+			position: relative;
+		}
+
+		.seek-bar:before {
+			content: 'Audio Clue';
+			font-family: 'Montserrat', sans-serif;
+			font-size: .6em;
+			position: absolute;
+			width: 100%;
+			text-align: center;
+			bottom: 25%;
+		}
+
+		.play-btn:before {
+			position: absolute;
+			left: 6px;
+			top: 1px;
+		}
+
+		.play-btn:hover {
+			background-color: #545454;
+		}
+
+		.play-btn, .seek-bar input {
+			background-color: #828282;
+		}
+		.seek-bar input::-webkit-slider-thumb {
+			background-color: #ababab;
+		}
+		.seek-bar input::-moz-range-thumb {
+			background-color: #ababab;
+		}
+		.seek-bar input::-ms-range-thumb {
+			background-color: #ababab;
+		}
 	}
 }
 
@@ -104,30 +212,53 @@ html, body {
 
 .matched .audio-controls {
 	.play-btn:hover {
-		background-color: #1e382f;
+		background-color: #2f2f2f;
 	}
 
 	.play-btn, .seek-bar input {
-		background-color: #194c3b;
+		background-color: #545454;
 	}
 	.seek-bar input::-webkit-slider-thumb {
-		background-color: #2d896a;
+		background-color: #828282;
 	}
 	.seek-bar input::-moz-range-thumb {
-		background-color: #2d896a;
+		background-color: #828282;
 	}
 	.seek-bar input::-ms-range-thumb {
-		background-color: #2d896a;
+		background-color: #828282;
 	}
 }
 
 .gameboard {
 	z-index  : 20;
-	position : absolute;
-	top      : 30px;
-	width    : 100%;
-	height   : 445px;
-	transition : all 600ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+	position : relative;
+	top      : 40px;
+	margin   : 0 40px;
+
+	background: #453b5c;
+	background: radial-gradient(ellipse at center, #453b5c 0%, #453b5c 53%, #000008 100%);
+	border: solid 2px #333333;
+	border-radius: 25% / 10%;
+
+	overflow: hidden;
+
+	height   : 420px;
+
+	.transition {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index:1;
+
+		background: #000;
+		pointer-events: none;
+
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+
+		transition : all 600ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+	}
 
 	&.hidden {
 		-webkit-transform       : rotateX(-90deg) translateY(-550px) translateZ(550px);
@@ -145,6 +276,7 @@ html, body {
 		position: relative;
 		width    : 220px;
 		padding  : 0;
+		margin   : 10px 0 0;
 		&.column1 {
 			margin-left: 30px;
 			float:left;
@@ -164,6 +296,57 @@ html, body {
 			//lowered z-index to allow li to be clickable
 			z-index: -10;
 			svg {
+				.rocket g,
+				line {
+					&.c0, .c0 {stroke : $color0;}
+					&.c1, .c1 {stroke : $color1;}
+					&.c2, .c2 {stroke : $color2;}
+					&.c3, .c3 {stroke : $color3;}
+					&.c4, .c4 {stroke : $color4;}
+					&.c5, .c5 {stroke : $color5;}
+					&.c6, .c6 {stroke : $color6;}
+				}
+
+				.rocket g {
+					&.hover {
+						stroke: #1ABC9C;
+					}
+					&.selected {
+						stroke: #27AE60;
+					}
+				}
+
+				.astronaut {
+					g {transform-origin: center;}
+
+					.hover path {
+						fill: #1ABC9C;
+					}
+					.selected path {
+						fill: #27AE60;
+					}
+
+					path {
+						transform-origin: center;
+						animation: rotating 20s linear infinite;
+						&:not(.c0) {
+							animation-play-state: paused;
+						}
+					}
+
+					.c0 {fill : $color0;}
+					.c1 {fill : $color1;}
+					.c2 {fill : $color2;}
+					.c3 {fill : $color3;}
+					.c4 {fill : $color4;}
+					.c5 {fill : $color5;}
+					.c6 {fill : $color6;}
+
+					&:hover {
+						fill: #27AE60;
+					}
+				}
+
 				circle {
 					&:not(.hollows) {
 						&.selected {
@@ -172,12 +355,12 @@ html, body {
 						&:not(.selected) {
 							fill: none;
 							&.c0 {fill: none;}
-							&.c1 {stroke : #79dcf3; fill : #79dcf3;}
-							&.c2 {stroke : #8479f3; fill : #8479f3;}
-							&.c3 {stroke : #f179f3; fill : #f179f3;}
-							&.c4 {stroke : #f37987; fill : #f37987;}
-							&.c5 {stroke : #f3ee79; fill : #f3ee79;}
-							&.c6 {stroke : #8af379; fill : #8af379;}
+							&.c1 {stroke : $color1; fill : $color1;}
+							&.c2 {stroke : $color2; fill : $color2;}
+							&.c3 {stroke : $color3; fill : $color3;}
+							&.c4 {stroke : $color4; fill : $color4;}
+							&.c5 {stroke : $color5; fill : $color5;}
+							&.c6 {stroke : $color6; fill : $color6;}
 
 							&.circleHover{
 								fill: #27AE60;
@@ -198,11 +381,18 @@ html, body {
 					}
 				} //end circle
 
+
 				line {
-					stroke       : #27AE60;
-					stroke-width : 4;
-					&.linePlaced{
-						stroke: gray;
+					stroke: #27AE60;
+					stroke-width: 4;
+					&.linePlaced {
+						stroke-width : 5px;
+						stroke-dasharray: 20;
+						stroke-linecap: round;
+					}
+					&.behind {
+						stroke-width: 10;
+						stroke-opacity: 0.1;
 					}
 				}
 			}
@@ -213,8 +403,8 @@ html, body {
 			text-align    : center;
 			font-size     : 25px;
 			width         : 255px;
-			height        : 33px;
-			margin        : 16px 0;
+			height        : 25px;
+			margin        : 19px 0;
 			padding       : 10px 0;
 			border-radius : 10px;
 			transition : all 100ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
@@ -235,21 +425,22 @@ html, body {
 					display: block;
 				}
 			}
+
 			.word-text {
 				cursor           : default;
 				z-index          : -3;
 				position         : absolute;
-				background-color : #1ABC9C;
+				background       : rgba(255,255,255, .15);
 				margin-top       : -10px;
 				padding          : 5px 0px;
+				border           : 1px solid #fff;
 				border-radius    : 10px;
-				border-bottom    : 3px solid #15987E;
-				height           : 43px;
+				height           : 30px;
 				transition       : 0.2s;
 				.text-wrapper {
 					display          : inline-block;
 					vertical-align   : middle;
-					max-height       : 43px;
+					max-height       : 30px;
 					width            : 206px;
 					white-space      : normal;
 					word-wrap        : break-word;
@@ -382,7 +573,6 @@ html, body {
 			&.selected {
 				.word-text {
 					background-color    : #27AE60;
-					border-bottom-color : #1F8D4E;
 				}
 			}
 			&.matched {
@@ -390,18 +580,19 @@ html, body {
 					.word-text {
 						color               : #DECEC8;
 						background-color    : #27AE60;
-						border-bottom-color : #1F8D4E;
 					}
 				}
-				.word-text {
-					color               : #D1D1D1;
-					background-color    : #5B656D;
-					border-bottom-color : #444B51;
-				}
+				&.c0 .word-text{background-color : rgba($color0, 0.5);}
+				&.c1 .word-text{background-color : rgba($color1, 0.5);}
+				&.c2 .word-text{background-color : rgba($color2, 0.5);}
+				&.c3 .word-text{background-color : rgba($color3, 0.5);}
+				&.c4 .word-text{background-color : rgba($color4, 0.5);}
+				&.c5 .word-text{background-color : rgba($color5, 0.5);}
+				&.c6 .word-text{background-color : rgba($color6, 0.5);}
+
 				&:hover {
 					.word-text {
 						background-color    : #627D92;
-						border-bottom-color : #4F6576;
 					}
 				}
 			}
@@ -409,7 +600,6 @@ html, body {
 			&:hover {
 				.word-text {
 					background-color    : #2ECC71;
-					border-bottom-color : #25A55B;
 				}
 				transition : 0.2s;
 			}
@@ -423,8 +613,9 @@ html, body {
 
 footer {
 	position: absolute;
+	background-color: #f00;
 	width: 100%;
-	height: 80px;
+	height: 120px;
 	bottom: 0px;
 	z-index: 10;
 	&.onTop {
@@ -557,6 +748,15 @@ footer {
 	}
 }
 
+@keyframes rotating {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
 @keyframes animateRotationRight {
 	100% {transform : rotate(360deg);}
 }
@@ -571,13 +771,43 @@ footer {
 
 @keyframes pageAnimate {
 	50% {
-		transform: translateY(550px);
+		// transform: translateY(550px);
+		opacity: 1;
 	}
 	100% {
-		transform: translateY(0px);
+		// transform: translateY(0px);
+		opacity: 0;
 	}
 }
 
+
+.screenAnimate {
+	animation: screenAnimate 1s;
+	animation-timing-function: cubic-bezier(0.230, 1.000, 0.320, 1.000);
+}
+
+@keyframes screenAnimate{
+	0% {
+		transform: scale(1,0.9);
+		filter: brightness(1);
+	}
+	25% {
+		transform: scale(1,0);
+		filter: brightness(5);
+	}
+	30% {
+		transform: scale(0,0);
+		filter: brightness(1);
+	}
+	40% {
+		transform: scale(1,0);
+		filter: brightness(5);
+	}
+	100% {
+		transform: scale(1,1);
+		filter: brightness(1);
+	}
+}
 
 .no-transition {
 	transition : none !important;
@@ -664,7 +894,6 @@ and (max-device-width : 1024px) {
 		.word-text {
 			color: #D1D1D1;
 			background-color: #5B656D;
-			border-bottom-color: #444B51;
 		}
 	}
 }
@@ -677,7 +906,6 @@ and (-webkit-min-device-pixel-ratio: 2){
 		.word-text {
 			color: #D1D1D1;
 			background-color: #5B656D;
-			border-bottom-color: #444B51;
 		}
 	}
 }
