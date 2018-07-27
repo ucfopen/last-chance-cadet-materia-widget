@@ -677,6 +677,141 @@ footer {
 		}
 	}
 
+	.number-roller {
+		position: absolute;
+		display: block;
+		width: 130px;
+		height: 70px;
+		bottom: 50px;
+		left: 55px;
+
+		border: 2px solid #c8c8c8;
+		border-radius: 6px;
+		box-sizing: border-box;
+
+		padding: 2px;
+
+		background: linear-gradient(to right, #bbbbbb 0%, #818181 25%, #bbbbbb 100%);
+
+		.screw {
+			position: absolute;
+			top: 50%;
+			width: 20px;
+			height: 20px;
+
+			background: #bbbbbb;
+
+			border-left: 2px solid #c8c8c8;
+			border-top: 2px solid #c8c8c8;
+			border-radius: 10px;
+			box-sizing: border-box;
+
+			&:first-child {
+				left: -10px;
+				transform: translateY(-50%) rotate(-45deg);
+
+				.groove:after {
+					transform: translateY(-50%) rotate(300deg);
+				}
+			}
+			&:last-child {
+				right: -10px;
+				transform: translateY(-50%) rotate(135deg);
+
+				.groove:after {
+					transform: translateY(-50%) rotate(30deg);
+				}
+			}
+
+			.head {
+				display: block;
+				margin: 2px;
+				width: 10px;
+				height: 10px;
+				border-radius: 5px;
+				background: #7c7c7c;
+				border: 1px solid #111;
+				box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+
+				.groove {
+					display: block;
+					margin: 1px;
+					width: 8px;
+					height: 8px;
+					border-radius: 4px;
+					background: #7c7c7c;
+					border: 1px solid #111;
+					box-sizing: border-box;
+					box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+
+					&:after {
+						content: '';
+						display: block;
+						width: 100%;
+						height: 50%;
+						margin-top: 50%;
+						background: #111;
+					}
+				}
+			}
+		}
+
+		.inner-panel {
+			width: 100%;
+			height: 100%;
+
+			padding: 6px;
+
+			border-radius: 6px;
+			box-sizing: border-box;
+
+			background: linear-gradient(100deg, #d7d7d7 0%, #999999 35%, #cccccc 100%);
+
+			.numbers {
+				position: relative;
+				display: block;
+				margin: auto;
+
+				width: 100px;
+				height: 50px;
+
+				border: 5px solid #393939;
+				border-top: none;
+
+				border-radius: 6px;
+				box-sizing: border-box;
+				box-shadow: 0px 1px 0.5px 1px rgba(204,204,204,1);
+
+				background: #494949;
+
+				&:after,
+				&:before {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 0;
+
+					width: 100%;
+					height: 50px;
+				}
+				&:before {
+					background: linear-gradient(100deg,
+						rgba(0, 0, 0, 0.4) 0%,
+						rgba(0, 0, 0, 0) 25%,
+						rgba(0, 0, 0, 0) 100%);
+				}
+				&:after {
+					background: linear-gradient(to right,
+						rgba(0,0,0,0) 0%,
+						rgba(0,0,0,0) 60%,
+						rgba(255,255,255,0.2) 80%,
+						rgba(0,0,0,0) 95%,
+						rgba(0,0,0,0.1) 100%);
+				}
+			}
+		}
+	}
+
 	#page-selector {
 		z-index                    : 0;
 		position                   : absolute;

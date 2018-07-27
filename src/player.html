@@ -92,20 +92,20 @@
 						<!-- full lines, partial opacity - backmost -->
 						<line ng-repeat="line in lines[currentPage]"
 							class="behind {{line.color}}"
-							ng-attr-x1="{{line.startX}}"
+							ng-attr-x1="{{line.startX + 15}}"
 							ng-attr-y1="{{line.startY}}"
 							ng-attr-x2="{{line.endX}}"
 							ng-attr-y2="{{line.endY}}"/>
 						<!-- dashed lines, full opacity - forward -->
 						<line ng-repeat="line in lines[currentPage]"
 							class="linePlaced {{line.color}}"
-							ng-attr-x1="{{line.startX}}"
+							ng-attr-x1="{{line.startX + 15}}"
 							ng-attr-y1="{{line.startY}}"
 							ng-attr-x2="{{line.endX}}"
 							ng-attr-y2="{{line.endY}}"/>
 						<!-- pre-match lines, solid green - foremost -->
 						<line ng-repeat="line in prelines"
-							ng-attr-x1="{{line.linex1}}"
+							ng-attr-x1="{{line.linex1 + 15}}"
 							ng-attr-x2="{{line.linex2}}"
 							ng-attr-y1="{{line.liney1}}"
 							ng-attr-y2="{{line.liney2}}"/>
@@ -241,6 +241,21 @@
 		</section>
 
 		<footer ng-class="{'onTop': pageAnimate}">
+			<section class='number-roller'>
+				<div class='screws'>
+					<div ng-repeat='i in [1,2]'
+						class='screw'>
+						<div class='head'>
+							<div class='groove'></div>
+						</div>
+					</div>
+				</div>
+				<div class='inner-panel'>
+					<div class='numbers'>
+					</div>
+				</div>
+			</section>
+
 			<section id="page-selector">
 				<span class="button" id="prev-button"
 					ng-click="changePage('previous')"
