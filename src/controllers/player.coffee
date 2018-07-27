@@ -30,10 +30,10 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 	ITEMS_PER_PAGE = 6
 	NUM_OF_COLORS = 7
 	CIRCLE_START_X = 20
-	CIRCLE_END_X = 220
+	CIRCLE_END_X = 190
 	CIRCLE_RADIUS = 10
-	CIRCLE_SPACING = 69
-	CIRCLE_OFFSET = 61
+	CIRCLE_SPACING = 65
+	CIRCLE_OFFSET = 40
 	PROGRESS_BAR_LENGTH = 160
 
 	$scope.start = (instance, qset) ->
@@ -117,6 +117,7 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 				lightHover: false
 				type: 'answer-circle'
 				color: 'c0'
+				hackRotation: "rotate("+Math.floor(Math.random()*360)+" 0 0)"
 			}
 
 			_itemIndex++
@@ -161,6 +162,7 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 			answerId: $scope.selectedAnswer.id
 			answerIndex: $scope.selectedQA[$scope.currentPage].answer
 			matchPageId: $scope.currentPage
+			color: _getColor()
 		}
 
 	_applyCircleColor = () ->
@@ -251,6 +253,7 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 				startY:targetStartY
 				endX:CIRCLE_END_X
 				endY:targetEndY
+				color:match.color
 			}
 
 	$scope.getProgressAmount = () ->
@@ -276,6 +279,16 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 		$scope.answerCircles[$scope.currentPage].forEach (element) ->
 			element.isHover = false
 			element.lightHover = false
+
+	$scope.getMatchColor = (item) ->
+		if $scope.isInMatch(item)
+			if item.type == 'question'
+				matchedItem = $scope.matches.filter( (match) -> match.questionId == item.id)[0]
+			else if item.type == 'answer'
+				matchedItem = $scope.matches.filter( (match) -> match.answerId == item.id)[0]
+			matchedItem.color
+		else
+			'c0'
 
 	# truthiness evaluated from function return
 	$scope.isInMatch = (item) ->

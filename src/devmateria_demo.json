@@ -1,5 +1,5 @@
 {
-  "name": "Spanish Verbs",
+  "name": "Stupid Long Title To Test Long Titles",
   "qset": {
     "version": 1,
     "data": {
@@ -215,6 +215,27 @@
                   0,
                   "<%MEDIA='assets/audio/demo/pouring.mp3'%>",
                   "to pour"
+               ]
+            },
+            {
+              "materiaType": "question",
+              "id": 11,
+              "type": "QA",
+              "questions": [
+                {
+                  "text": "decir"
+                }
+              ],
+              "answers": [
+                {
+                  "value": 100,
+                  "text": "to say"
+                }
+              ],
+               "assets":[
+                  0,
+                  0,
+                  null
                ]
             }
           ]

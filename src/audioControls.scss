@@ -1,14 +1,4 @@
 @font-face {
-  font-family: 'CorbelBold';
-  src: url('assets/font/corbelb-webfont.eot');
-  src: url('assets/font/corbelb-webfont.eot?#iefix') format('embedded-opentype'),
-  url('assets/font/corbelb-webfont.woff') format('woff'),
-  url('assets/font/corbelb-webfont.ttf') format('truetype'),
-  url('assets/font/corbelb-webfont.svg#CorbelBold') format('svg');
-  font-weight : normal;
-  font-style  : normal;
-}
-@font-face {
 	font-family: 'icomoon';
 	src:url('assets/font/icomoon.eot');
 	src:url('assets/font/icomoon.eot?#iefix') format('embedded-opentype'),
@@ -42,8 +32,8 @@
 	background-color: #2d896a;
 	color: #fff;
 	width: 36px;
-	height: 36px;
-	line-height: 36px;
+	height: 30px;
+	line-height: 30px;
 	display: inline-block;
 
 	position: relative;
@@ -65,9 +55,9 @@
 }
 
 .duration {
-	font-family: 'CorbelBold', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	font-weight: bold;
-	font-size: .6em;
+	font-size: .5em;
 }
 
 .play-btn {

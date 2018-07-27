@@ -1,9 +1,9 @@
 {
-  "name": "Matching",
+  "name": "last-chance-cadet",
   "materia": {
-    "cleanName": "matching"
+    "cleanName": "last-chance-cadet"
   },
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "main": "app.js",
   "dependencies": {
@@ -28,12 +28,12 @@
   },
   "scripts": {
     "start": "webpack-dev-server",
-    "buildDev": "webpack",
+    "build-dev": "webpack",
     "build": "webpack -p",
     "pretest": "npm run buildDev",
     "test": "karma start ./karma.conf.js --no-auto-watch --single-run",
-    "pretestFull": "npm run buildDev",
-    "testFull": "karma start ./karma-full.conf.js",
+    "pretest-full": "npm run buildDev",
+    "test-full": "karma start ./karma-full.conf.js",
     "clientAssets:link": "cd ../materia-client-assets && yarn link && cd - && yarn link materia-client-assets",
     "devKit:link": "cd ../materia-widget-development-kit && yarn link && cd - && yarn link materia-widget-development-kit"
   },
