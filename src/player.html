@@ -15,6 +15,8 @@
 		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular.min.js"></script>
 =======
 		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto&text=1234567890" rel="stylesheet">
+
 		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
 >>>>>>> f6b44c7... #1 Progress on reskinning Matching to become Last Chance Cadet - question/answer interface and title portions are done, icons/screen shots replaced.
 
@@ -241,7 +243,7 @@
 		</section>
 
 		<footer ng-class="{'onTop': pageAnimate}">
-			<section class='number-roller'>
+			<section id='page-roller' class='number-roller'>
 				<div class='screws'>
 					<div ng-repeat='i in [1,2]'
 						class='screw'>
@@ -251,27 +253,68 @@
 					</div>
 				</div>
 				<div class='inner-panel'>
-					<div class='numbers'>
+					<div class='screen-effects'>
+						<div class='pointer'></div>
+					</div>
+					<div class='panel-screen'>
+						<div class='numbers'
+							ng-style='{left: (-1 * currentPage * 100)+px}'>
+							<span class='number'
+								ng-repeat='page in pages'>
+								{{$index + 1}}
+							</span>
+						</div>
 					</div>
 				</div>
 			</section>
 
-			<section id="page-selector">
-				<span class="button" id="prev-button"
-					ng-click="changePage('previous')"
-					ng-class="{'shown': currentPage >= 1}">
-					Previous Page
+			<section id='match-roller' class='number-roller'>
+				<div class='screws'>
+					<div ng-repeat='i in [1,2]'
+						class='screw'>
+						<div class='head'>
+							<div class='groove'></div>
+						</div>
+					</div>
+				</div>
+				<div class='inner-panel'>
+					<div class='screen-effects'>
+						<div class='pointer'></div>
+					</div>
+					<div class='panel-screen'>
+						<div class='numbers'
+							ng-style='{right: (-1 * matches.length * 100)+px}'>
+							<span class='number'
+								ng-repeat='i in [].constructor(totalItems + 1) track by $index'>
+								{{$index}}
+							</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id='page-indicator' class='panel-indicator'>
+				<span>Current Sector</span>
+			</section>
+			<section id='match-indicator' class='panel-indicator'>
+				<span>Astronauts Left</span>
+			</section>
+
+			<section id="page-selector" class='button-panel'>
+				<span class="button"
+					ng-click="changePage('previous')">
+					<span class='arrow'></span>
+					<span class='overlay'
+						ng-class="{'blink': unfinishedPagesBefore}"></span>
 				</span>
-				<span id="page-num" ng-class="{'animateRotationRight': pageAnimate && pageNext,
-					'animateRotationLeft': pageAnimate && !pageNext}">
-					Page <span>{{currentPage+1}}</span>/<span>{{totalPages}}</span>
-				</span>
-				<span class="button" id="next-button"
-					ng-click="changePage('next')"
-					ng-class="{'shown': currentPage+1 < totalPages}">
-					Next Page
+				<span class="button"
+					ng-click="changePage('next')">
+					<span class='arrow'></span>
+					<span class='overlay'
+						ng-class="{'blink': unfinishedPagesAfter}"></span>
 				</span>
 			</section>
+			<section class='button-panel'></section>
 
 			<section id="submit">
 				<div id="progress-bar">
