@@ -3,7 +3,6 @@ Matching = angular.module 'matching'
 Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope, $timeout, $sce) ->
 	$scope.title = ''
 
-	$scope.items = []
 	$scope.pages = []
 	$scope.selectedQA = []
 	$scope.matches = []
@@ -17,6 +16,9 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 	$scope.currentPage = 0
 	$scope.totalItems = 0
 	$scope.setCreated = false
+
+	$scope.unfinishedPagesBefore = false
+	$scope.unfinishedPagesAfter = false
 
 	$scope.qset = {}
 
@@ -132,21 +134,23 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 
 	$scope.changePage = (direction) ->
 		return false if $scope.pageAnimate
-		_clearSelections()
+		return false if direction == 'previous' and $scope.currentPage <= 0
+		return false if direction == 'next' and $scope.currentPage >= $scope.totalPages - 1
 
-		# pageAnimate is used by the li elements and the rotating circle, also sets footer onTop
-		$scope.pageNext = (direction == 'next')
+		_clearSelections()
 		$scope.pageAnimate = true
+
+		$scope.pageNext = (direction == 'next')
 		$timeout ->
-			if direction == 'previous'
-				$scope.currentPage-- unless $scope.currentPage <= 0
-			if direction == 'next'
-				$scope.currentPage++ unless $scope.currentPage >= $scope.totalPages - 1
+			$scope.currentPage-- if direction == 'previous'
+			$scope.currentPage++ if direction == 'next'
+			_checkUnfinishedPages()
 		, ANIMATION_DURATION/3
 
-		$timeout ->
-			$scope.pageAnimate = false
-		, ANIMATION_DURATION*1.1
+		if $scope.pageAnimate
+			$timeout ->
+				$scope.pageAnimate = false
+			, ANIMATION_DURATION*1.1
 
 
 	$scope.checkForQuestionAudio = (index) ->
@@ -234,6 +238,8 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 			_clearSelections()
 
 			_updateLines()
+
+			_checkUnfinishedPages()
 
 			$scope.unapplyHoverSelections()
 
@@ -407,6 +413,31 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 		for index in [1..qsetItems.length-1]
 			randomIndex = Math.floor Math.random() * (index + 1)
 			[qsetItems[index], qsetItems[randomIndex]] = [qsetItems[randomIndex], qsetItems[index]]
+
+	_checkUnfinishedPages = () ->
+		$scope.unfinishedPagesBefore = false
+		$scope.unfinishedPagesAfter = false
+
+		pairsPerPage = []
+		matchesPerPage = []
+		for index in [0..$scope.pages.length-1]
+			pairsPerPage[index] = $scope.pages[index].answers.length
+			matchesPerPage[index] = 0
+		for match in $scope.matches
+			matchesPerPage[match.matchPageId]++
+
+		unless $scope.currentPage == 0
+			for page in [0..$scope.currentPage]
+				if matchesPerPage[page] < pairsPerPage[page]
+					if matchesPerPage[$scope.currentPage] == pairsPerPage[$scope.currentPage]
+						$scope.unfinishedPagesBefore = true
+		unless $scope.currentPage == $scope.pages.length - 1
+			for page in [$scope.currentPage..pairsPerPage.length]
+				if matchesPerPage[page] < pairsPerPage[page]
+					if matchesPerPage[$scope.currentPage] == pairsPerPage[$scope.currentPage]
+						$scope.unfinishedPagesAfter = true
+
+		console.log($scope.unfinishedPagesBefore,$scope.unfinishedPagesAfter)
 
 	Materia.Engine.start $scope
 ]
