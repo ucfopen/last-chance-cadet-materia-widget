@@ -22,6 +22,8 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 
 	$scope.qset = {}
 
+	$scope.circumference = Math.PI * 80
+
 	# these are used for animation
 	$scope.pageAnimate = false
 	$scope.pageNext = false
@@ -34,7 +36,7 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 	CIRCLE_START_X = 20
 	CIRCLE_END_X = 190
 	CIRCLE_RADIUS = 10
-	CIRCLE_SPACING = 65
+	CIRCLE_SPACING = 72
 	CIRCLE_OFFSET = 40
 	PROGRESS_BAR_LENGTH = 160
 
@@ -262,6 +264,11 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 				color:match.color
 			}
 
+	$scope.getPercentDone = () ->
+		return 0 if $scope.totalItems is 0 or $scope.matches.length is 0
+		$scope.matches.length / $scope.totalItems
+		# Math.round $scope.matches.length / $scope.totalItems * 100
+
 	$scope.getProgressAmount = () ->
 		if $scope.totalItems == 0
 			return 0
@@ -391,6 +398,7 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 		_checkForMatches()
 
 	$scope.submit = () ->
+		console.log('ah shit')
 		qsetItems = $scope.qset.items[0].items
 
 		for i in [0..qsetItems.length-1]
@@ -436,8 +444,6 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 				if matchesPerPage[page] < pairsPerPage[page]
 					if matchesPerPage[$scope.currentPage] == pairsPerPage[$scope.currentPage]
 						$scope.unfinishedPagesAfter = true
-
-		console.log($scope.unfinishedPagesBefore,$scope.unfinishedPagesAfter)
 
 	Materia.Engine.start $scope
 ]
