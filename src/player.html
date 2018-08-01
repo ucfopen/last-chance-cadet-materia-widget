@@ -322,22 +322,21 @@
 					ng-click="submit()"></div>
 				<div class='bulb'></div>
 
-				<div class='progress-container'>
-
-					<svg xmlns="http://www.w3.org/2000/svg">
-						<circle
-							cx = '42.5'
-							cy = '42.5'
-							r = '40'
-							fill='none'
-							stroke='#a24040'
-							stroke-width='5'
-							style="
-								stroke-dasharray: {{ circumference }};
-								stroke-dashoffset: {{ circumference - (getPercentDone() * circumference) }};
-							"/>
-					</svg>
-				</div>
+				<svg xmlns="http://www.w3.org/2000/svg"
+					ng-show="setCreated"
+					class='progress-container'>
+					<circle
+						cx = '42.5'
+						cy = '42.5'
+						r = '40'
+						fill='none'
+						stroke='#a24040'
+						stroke-width='5'
+						style="
+							stroke-dasharray: {{ circumference }};
+							stroke-dashoffset: {{ circumference - (getPercentDone() * circumference) }};
+						"/>
+				</svg>
 			</section>
 		</footer>
 	</body>

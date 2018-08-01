@@ -1322,16 +1322,13 @@ footer {
 
 		.progress-container {
 			position: absolute;
-			display: block;
 			width: 85px;
 			height: 85px;
+			transform: rotate(-90deg);
 
-			&.under-half {
-				clip: rect(0px, 85px, 85px, 42.5px);
-			}
-
-			.progress {
-				transition: transform 0.25s ease-out;
+			circle {
+				stroke-dashoffset: 0;
+				transition: stroke-dashoffset 0.25s ease-out;
 			}
 		}
 		.overlay {
