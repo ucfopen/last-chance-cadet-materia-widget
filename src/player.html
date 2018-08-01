@@ -294,7 +294,7 @@
 			</section>
 
 			<section id='page-indicator' class='panel-indicator'>
-				<span>Current Sector</span>
+				<span>Current Page</span>
 			</section>
 			<section id='match-indicator' class='panel-indicator'>
 				<span>Astronauts Left</span>
@@ -316,22 +316,27 @@
 			</section>
 			<section class='button-panel'></section>
 
-			<section id="submit">
-				<div id="progress-bar">
+			<section id='finish-button'>
+				<div class='overlay blink'
+					ng-if='getPercentDone() == 1'
+					ng-click="submit()"></div>
+				<div class='bulb'></div>
+
+				<div class='progress-container'>
+
 					<svg xmlns="http://www.w3.org/2000/svg">
-						<rect id="bar"
-							x="0" y="0" rx="5" ry="5"
-							ng-attr-width="{{getProgressAmount()}}" height="10"
-							style="stroke-width: 1px;
-								stroke: rgb(189, 195, 199);
-								fill: rgb(189, 195, 199);
-								opacity: 1;">
-						</rect>
+						<circle
+							cx = '42.5'
+							cy = '42.5'
+							r = '40'
+							fill='none'
+							stroke='#a24040'
+							stroke-width='5'
+							style="
+								stroke-dasharray: {{ circumference }};
+								stroke-dashoffset: {{ circumference - (getPercentDone() * circumference) }};
+							"/>
 					</svg>
-				</div>
-				<div class="button" id="submit-button" ng-click="submit()"
-					ng-class="{'glowing': matches.length == totalItems && setCreated}">
-					Done
 				</div>
 			</section>
 		</footer>
