@@ -108,7 +108,7 @@
               ],
                "assets":[
                   0,
-                  "<%MEDIA='assets/audio/demo/writing.mp3'%>",
+                  0,
                   "to write"
                ]
             },
@@ -215,27 +215,6 @@
                   0,
                   "<%MEDIA='assets/audio/demo/pouring.mp3'%>",
                   "to pour"
-               ]
-            },
-            {
-              "materiaType": "question",
-              "id": 11,
-              "type": "QA",
-              "questions": [
-                {
-                  "text": "decir"
-                }
-              ],
-              "answers": [
-                {
-                  "value": 100,
-                  "text": "to say"
-                }
-              ],
-               "assets":[
-                  0,
-                  0,
-                  null
                ]
             }
           ]

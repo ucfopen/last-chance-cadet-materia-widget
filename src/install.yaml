@@ -17,7 +17,7 @@ files:
   flash_version: 0
 score:
   is_scorable: Yes
-  score_module: LastChanceCadet
+  score_module: Matching
 meta_data:
   features:
     - Customizable
