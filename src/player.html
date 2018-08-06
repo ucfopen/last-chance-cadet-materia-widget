@@ -325,17 +325,12 @@
 				<svg xmlns="http://www.w3.org/2000/svg"
 					ng-show="setCreated"
 					class='progress-container'>
-					<circle
-						cx = '42.5'
-						cy = '42.5'
-						r = '40'
-						fill='none'
-						stroke='#a24040'
-						stroke-width='5'
-						style="
-							stroke-dasharray: {{ circumference }};
-							stroke-dashoffset: {{ circumference - (getPercentDone() * circumference) }};
-						"/>
+					<circle cx = '42.5' cy = '42.5' r = '40' fill='none'
+						stroke='#a24040' stroke-width='5'
+						ng-style="{
+							'stroke-dasharray': circumference,
+							'stroke-dashoffset': circumference - (getPercentDone() * circumference)
+						}"/>
 				</svg>
 			</section>
 		</footer>
@@ -365,7 +360,7 @@
 				<section id='num-left-indicator-example' class='panel-indicator'>
 					<span class='point-right'>Astronauts Left</span>
 				</section>
-				<img id='num-left-image' src='/assets/svg/numleft.svg'/>
+				<img id='num-left-image' src='assets/svg/numleft.svg'/>
 				<span class='first-one'>Just one more astronaut left to save!</span>
 			</div>
 			<p>
@@ -376,7 +371,7 @@
 				<section id='page-nav-indicator-example' class='panel-indicator'>
 					<span class='point-left'>Current Page</span>
 				</section>
-				<img id='page-nav-image' src='/assets/svg/pagenav.svg'/>
+				<img id='page-nav-image' src='assets/svg/pagenav.svg'/>
 				<span class='second-one'>The page shown on screen</span>
 				<span class='third-one'>Go back a page</span>
 				<span class='fourth-one'>Go forward a page</span>
