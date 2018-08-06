@@ -85,7 +85,6 @@ describe('Matching', function() {
 
 			//make sure you can't go below 0
 			$scope.changePage('previous');
-			$timeout.flush();
 			$timeout.verifyNoPendingTasks();
 			expect($scope.currentPage).toEqual(0);
 		}));
@@ -98,16 +97,8 @@ describe('Matching', function() {
 
 			//make sure you can't go above the highest page
 			$scope.changePage('next');
-			$timeout.flush();
 			$timeout.verifyNoPendingTasks();
 			expect($scope.currentPage).toEqual(1);
-		}));
-
-		it('should animate on page change', inject(function ($timeout) {
-			$scope.changePage('next');
-			$timeout.flush();
-			$timeout.verifyNoPendingTasks();
-			expect($scope.pageAnimate).toBe(false);
 		}));
 
 		it('should not allow page switches before the animation completes', function() {
@@ -225,9 +216,12 @@ describe('Matching', function() {
 			//at this point --- 1 match, 10 total items, 160 is progress bar length
 			expect($scope.getProgressAmount()).toBe((1/10) * 160);
 
+			var temp = $scope.totalItems;
 			//in case there are no items
 			$scope.totalItems = 0;
 			expect($scope.getProgressAmount()).toBe(0);
+
+			$scope.totalItems = temp;
 		});
 
 		it('should style circles correctly', function () {
@@ -312,7 +306,14 @@ describe('Matching', function() {
 			expect($scope.prelines.length).toBe(1);
 		});
 
+		it('should not submit if there are any unmatched pairs', function() {
+			$scope.submit();
+			expect(Materia.Score.submitQuestionForScoring).not.toHaveBeenCalled();
+		});
+
 		it('should submit questions correctly', function () {
+			//let's play pretend
+			$scope.totalItems = 1;
 			$scope.matches = [];
 			$scope.matches.push({questionId:1, answerId: 1});
 
