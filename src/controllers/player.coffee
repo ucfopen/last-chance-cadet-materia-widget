@@ -16,6 +16,7 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 	$scope.currentPage = 0
 	$scope.totalItems = 0
 	$scope.setCreated = false
+	$scope.helpVisible = false
 
 	$scope.unfinishedPagesBefore = false
 	$scope.unfinishedPagesAfter = false
@@ -267,7 +268,6 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 	$scope.getPercentDone = () ->
 		return 0 if $scope.totalItems is 0 or $scope.matches.length is 0
 		$scope.matches.length / $scope.totalItems
-		# Math.round $scope.matches.length / $scope.totalItems * 100
 
 	$scope.getProgressAmount = () ->
 		if $scope.totalItems == 0
@@ -398,7 +398,7 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 		_checkForMatches()
 
 	$scope.submit = () ->
-		console.log('ah shit')
+		return if $scope.getPercentDone() < 1
 		qsetItems = $scope.qset.items[0].items
 
 		for i in [0..qsetItems.length-1]

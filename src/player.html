@@ -14,7 +14,7 @@
 
 		<!-- YOUR PREREQUISITES -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Roboto&text=1234567890" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:400,900" rel="stylesheet">
 
 		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
 
@@ -294,10 +294,10 @@
 			</section>
 
 			<section id='page-indicator' class='panel-indicator'>
-				<span>Current Page</span>
+				<span class='point-left'>Current Page</span>
 			</section>
 			<section id='match-indicator' class='panel-indicator'>
-				<span>Astronauts Left</span>
+				<span class='point-right'>Astronauts Left</span>
 			</section>
 
 			<section id="page-selector" class='button-panel'>
@@ -316,10 +316,10 @@
 			</section>
 			<section class='button-panel'></section>
 
-			<section id='finish-button'>
+			<section id='finish-button'
+				ng-click="submit()">
 				<div class='overlay blink'
-					ng-if='getPercentDone() == 1'
-					ng-click="submit()"></div>
+					ng-if='getPercentDone() == 1'></div>
 				<div class='bulb'></div>
 
 				<svg xmlns="http://www.w3.org/2000/svg"
@@ -339,5 +339,58 @@
 				</svg>
 			</section>
 		</footer>
+
+		<section id='help-button'
+			ng-click='helpVisible = !helpVisible'>
+			Help
+		</section>
+
+		<section id='instructions'
+			ng-class="{'visible': helpVisible}"
+			ng-click='helpVisible = false'>
+			<aside>A NewMedia Game</aside>
+			<h1>
+				<span>Last Chance Cadet</span>
+				<span>Instruction Manual</span>
+			</h1>
+			<h2>How to Play:</h2>
+			<p>
+				The objective in Last Chance Cadet is to <b>match the astronauts to their corresponding rockets</b>. Use the mouse to connect the tow cable from each rocket to an astronaut.
+			</p>
+			<p>
+				You need to match <b>all</b> astronauts. You can see the number of astronauts still needing help by the dial on the bottom right.
+			</p>
+			<div>
+				<span class='label'>Figure 1</span>
+				<section id='num-left-indicator-example' class='panel-indicator'>
+					<span class='point-right'>Astronauts Left</span>
+				</section>
+				<img id='num-left-image' src='/assets/svg/numleft.svg'/>
+				<span class='first-one'>Just one more astronaut left to save!</span>
+			</div>
+			<p>
+				Sometimes not all of the astronauts are on the screen at one time - they can be split up among pages. You can use the page selection buttons to move between pages.
+			</p>
+			<div>
+				<span class='label'>Figure 2</span>
+				<section id='page-nav-indicator-example' class='panel-indicator'>
+					<span class='point-left'>Current Page</span>
+				</section>
+				<img id='page-nav-image' src='/assets/svg/pagenav.svg'/>
+				<span class='second-one'>The page shown on screen</span>
+				<span class='third-one'>Go back a page</span>
+				<span class='fourth-one'>Go forward a page</span>
+			</div>
+			<p>
+				Once you have matched every astronaut to a rocket, the <b>Finish</b> button will glow. Press <b>Finish</b> to pull the astronauts in. Any incorrect matches will lead to stranded astronauts!
+			</p>
+			<p>
+				Upon completion you will receive your score.
+			</p>
+			<div class='close-tab'>
+				Click to
+				<br/>close!
+			</div>
+		</section>
 	</body>
 </html>
