@@ -4,8 +4,6 @@
     "cleanName": "last-chance-cadet"
   },
   "version": "2.0.0",
-  "private": true,
-  "main": "app.js",
   "dependencies": {
     "angular": "~1.5.0",
     "angular-animate": "~1.5.0",
@@ -13,7 +11,7 @@
     "angular-mocks": "~1.5.0",
     "angular-route": "~1.5.0",
     "angular-sanitize": "~1.5.0",
-    "materia-widget-development-kit": "git+ssh://git@clu.cdl.ucf.edu:materia/materia-widget-development-kit.git#~v1.2.0"
+    "materia-widget-development-kit": "v1.2.2"
   },
   "devDependencies": {
     "jasmine-core": "^2.4.1",
@@ -34,8 +32,7 @@
     "test": "karma start ./karma.conf.js --no-auto-watch --single-run",
     "pretest-full": "npm run build-dev",
     "test-full": "karma start ./karma-full.conf.js",
-    "clientAssets:link": "cd ../materia-client-assets && yarn link && cd - && yarn link materia-client-assets",
-    "devKit:link": "cd ../materia-widget-development-kit && yarn link && cd - && yarn link materia-widget-development-kit"
-  },
-  "author": "New Media"
+    "devkit:git": "cd .. && git clone https://github.com/ucfopen/Materia-Widget-Dev-Kit.git materia-widget-development-kit",
+    "devkit:link": "cd ../materia-widget-development-kit && yarn link && cd - && yarn link materia-widget-development-kit"
+  }
 }
