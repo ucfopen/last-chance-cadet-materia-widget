@@ -22,7 +22,7 @@
     "start": "webpack-dev-server",
     "build-dev": "webpack",
     "build": "webpack -p",
-    "pretest": "npm run buildDev",
+    "pretest": "npm run build-dev",
     "test": "karma start ./karma.conf.js --no-auto-watch --single-run",
     "pretest-full": "npm run build-dev",
     "test-full": "karma start ./karma-full.conf.js",
