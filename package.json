@@ -11,7 +11,7 @@
     "angular-mocks": "~1.5.0",
     "angular-route": "~1.5.0",
     "angular-sanitize": "~1.5.0",
-    "materia-widget-development-kit": "v1.2.2"
+    "materia-widget-development-kit": "^2.0.0"
   },
   "devDependencies": {
     "jasmine-core": "^2.4.1",
@@ -34,5 +34,8 @@
     "test-full": "karma start ./karma-full.conf.js",
     "devkit:git": "cd .. && git clone https://github.com/ucfopen/Materia-Widget-Dev-Kit.git materia-widget-development-kit",
     "devkit:link": "cd ../materia-widget-development-kit && yarn link && cd - && yarn link materia-widget-development-kit"
-  }
+  },
+  "author": "University of Central Florida, Center for Distributed Learning",
+  "description": "Last Chance Cadet is a stylized matching game that provides a list of items that students are asked to match with corresponding items.",
+  "license": "AGPL-3.0"
 }
