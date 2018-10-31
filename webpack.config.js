@@ -4,16 +4,21 @@ const widgetWebpack = require('materia-widget-development-kit/webpack-widget')
 
 const entries = widgetWebpack.getDefaultEntries()
 
-delete entries['creator.js']
-delete entries['player.js']
+entries['creator.js'] = [
+	path.join(srcPath, 'modules', 'matching.coffee'),
+	path.join(srcPath, 'controllers', 'creator.coffee'),
+	path.join(srcPath, 'directives', 'audioControls.coffee'),
+	path.join(srcPath, 'directives', 'focusMe.coffee'),
+	path.join(srcPath, 'directives', 'ngEnter.coffee'),
+	path.join(srcPath, 'directives', 'inputStateManager.coffee')
+]
 
-entries['modules/matching.js'] = [path.join(srcPath, 'modules', 'matching.coffee')]
-entries['controllers/creator.js'] = [path.join(srcPath, 'controllers', 'creator.coffee')]
-entries['controllers/player.js'] = [path.join(srcPath, 'controllers', 'player.coffee')]
-entries['directives/audioControls.js'] = [path.join(srcPath, 'directives', 'audioControls.coffee')]
-entries['directives/focusMe.js'] = [path.join(srcPath, 'directives', 'focusMe.coffee')]
-entries['directives/ngEnter.js'] = [path.join(srcPath, 'directives', 'ngEnter.coffee')]
-entries['directives/inputStateManager.js'] = [path.join(srcPath, 'directives', 'inputStateManager.coffee')]
+entries['player.js'] = [
+	path.join(srcPath, 'modules', 'matching.coffee'),
+	path.join(srcPath, 'controllers', 'player.coffee'),
+	path.join(srcPath, 'directives', 'audioControls.coffee'),
+]
+
 entries['audioControls.css'] = [
 	srcPath + 'audioControls.scss',
 	srcPath + 'audioControls.html'
