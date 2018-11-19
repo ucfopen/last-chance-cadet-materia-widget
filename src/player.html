@@ -255,10 +255,10 @@
 					</div>
 					<div class='panel-screen'>
 						<div class='numbers'
-							ng-style='{left: (-1 * currentPage * 100)+px}'>
+							style='left: calc(-1 * {{currentPage}} * 100px)'>
 							<span class='number'
 								ng-repeat='page in pages'>
-								{{$index + 1}}
+								<span>{{$index + 1}}</span>
 							</span>
 						</div>
 					</div>
@@ -280,7 +280,7 @@
 					</div>
 					<div class='panel-screen'>
 						<div class='numbers'
-							ng-style='{right: (-1 * matches.length * 100)+px}'>
+							style='right: calc(-1 * {{matches.length}} * 100px)'>
 							<span class='number'
 								ng-repeat='i in [].constructor(totalItems + 1) track by $index'>
 								{{$index}}
