@@ -313,6 +313,10 @@ body {
 				width          : 200px;
 				max-width      : 390px;
 
+				&::selection {
+					background: #969696;
+				}
+
 				// &.ng-empty.question-text.ng-touched:not(:focus) {
 				&.hasProblem:not(.focused) {
 					background-color: #FFBA74;
