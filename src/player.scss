@@ -781,8 +781,9 @@ $star_patterns: 30;
 	span {
 		position: relative;
 		display: block;
-		height:15px;
+		height:14px;
 		margin: 3px;
+		padding-top:1px;
 
 		font-family: 'Montserrat', sans-serif;
 		font-size: 0.6em;
@@ -810,7 +811,7 @@ $star_patterns: 30;
 
 		&.point-right {
 			letter-spacing: 0.25px;
-			padding: 0 0 0 1px;
+			padding: 1 0 0 1px;
 
 			&:after {
 				content: '';
