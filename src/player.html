@@ -50,8 +50,8 @@
 								ng-class="{'long': (question.text.length > 17)}">
 								{{checkForQuestionAudio($index) ? "" : question.text}}
 							</span>
-							<span ng-class="{'expand': (question.text.length > 61),
-								'noExpand': (question.text.length <= 61 || checkForQuestionAudio($index))}"
+							<span ng-class="{'expand': (question.text.length > 45),
+								'noExpand': (question.text.length <= 45 || checkForQuestionAudio($index))}"
 								data-icon="&#xe000;"
 								aria-hidden="true">
 							</span>
@@ -66,20 +66,20 @@
 						<div class="wrap">
 							<div class="popup"
 								ng-hide="checkForQuestionAudio($index)"
-								ng-class="{'shown': (question.text.length > 61)}">
+								ng-class="{'shown': (question.text.length > 45)}">
 								<div class="popup-text left">
 									{{question.text}}
 								</div>
 								<div class="popup-arrow"
-									ng-class="{'left': (question.text.length > 61)}">
+									ng-class="{'left': (question.text.length > 45)}">
 								</div>
 							</div>
 						</div>
 
 						<div class="wrap">
-							<div class="popup" ng-class="{'shown': (question.text.length > 61)}">
+							<div class="popup" ng-class="{'shown': (question.text.length > 45)}">
 								<div class="popup-text left">{{question.text}}</div>
-								<div class="popup-arrow" ng-class="{'left': (question.text.length > 61)}"></div>
+								<div class="popup-arrow" ng-class="{'left': (question.text.length > 45)}"></div>
 							</div>
 						</div>
 					</li>
@@ -208,8 +208,8 @@
 								ng-class="{'long': (answer.text.length > 17)}">
 								{{checkForAnswerAudio($index) ? "" : answer.text}}
 							</span>
-							<span ng-class="{'expand': (answer.text.length > 61),
-								'noExpand': (answer.text.length <= 61 || checkForAnswerAudio($index))}"
+							<span ng-class="{'expand': (answer.text.length > 45),
+								'noExpand': (answer.text.length <= 45 || checkForAnswerAudio($index))}"
 								data-icon="&#xe000;"
 								aria-hidden="true">
 							</span>
@@ -224,12 +224,12 @@
 						<div class="wrap">
 							<div class="popup"
 								ng-hide="checkForAnswerAudio($index)"
-								ng-class="{'shown': (answer.text.length > 61)}">
+								ng-class="{'shown': (answer.text.length > 45)}">
 								<div class="popup-text right">
 									{{answer.text}}
 								</div>
 								<div class="popup-arrow"
-									ng-class="{'right': (answer.text.length > 61)}">
+									ng-class="{'right': (answer.text.length > 45)}">
 								</div>
 							</div>
 						</div>
