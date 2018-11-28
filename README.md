@@ -1,19 +1,19 @@
 <h1>
     <img src="src/_icons/icon-60.png" width="36px"/>
-    Matching: A Materia Widget
+    Last Chance Cadet: A Materia Widget
 </h1>
 
-A matching game where students are provided two lists of terms, phrases, or audio to match. Matching is designed for use with [Materia](https://github.com/ucfopen/Materia), an open-source platform for interactive course content developed by the University of Central Florida.
+Last Chance Cadet is a stylized matching game that provides a list of items that students are asked to match with corresponding items. Last Chance Cadet is designed for use with [Materia](https://github.com/ucfopen/Materia), an open-source platform for interactive course content developed by the University of Central Florida.
 
-![Matching Player](src/_screen-shots/3.png)
+![Last Chance Cadet Player](src/_screen-shots/1.png)
 
 ### Basic Use
 
-In a production evironment, Matching is installed to your Materia instance and is accessed via the Widget Catalog. For development, Matching is bundled with the [Materia Widget Development Kit](https://github.com/ucfopen/Materia-Widget-Dev-Kit), which allows for rapid development in a local context using express.js.
+In a production evironment, Last Chance Cadet is installed to your Materia instance and is accessed via the Widget Catalog. For development, Last Chance Cadet is bundled with the [Materia Widget Development Kit](https://github.com/ucfopen/Materia-Widget-Dev-Kit), which allows for rapid development in a local context using express.js.
 
 ### Local Development
 
-Matching uses the Materia Widget Development Kit for local development. Check out [the docs for the MDK](https://ucfopen.github.io/Materia-Docs/develop/materia-widget-development-kit.html) to learn more about starting up the local express environment.
+Last Chance Cadet uses the Materia Widget Development Kit for location development. Check out [the docs for the MDK](https://ucfopen.github.io/Materia-Docs/develop/materia-widget-development-kit.html) to learn more about starting up the local express environment.
 
 ### Installation to Materia
 

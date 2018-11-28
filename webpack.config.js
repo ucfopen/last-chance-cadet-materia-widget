@@ -6,12 +6,6 @@ const widgetWebpack = require('materia-widget-development-kit/webpack-widget')
 const entries = widgetWebpack.getDefaultEntries()
 const copyList = widgetWebpack.getDefaultCopyList()
 
-// Append the new items we want copied
-copyList.push({
-	from: srcPath+'audioControls.html',
-	to: outputPath,
-})
-
 entries['creator.js'] = [
 	path.join(srcPath, 'modules', 'matching.coffee'),
 	path.join(srcPath, 'controllers', 'creator.coffee'),
@@ -24,7 +18,12 @@ entries['creator.js'] = [
 entries['player.js'] = [
 	path.join(srcPath, 'modules', 'matching.coffee'),
 	path.join(srcPath, 'controllers', 'player.coffee'),
-	path.join(srcPath, 'directives', 'audioControls.coffee')
+	path.join(srcPath, 'directives', 'audioControls.coffee'),
+]
+
+entries['audioControls.css'] = [
+	srcPath + 'audioControls.scss',
+	srcPath + 'audioControls.html'
 ]
 
 // options for the build

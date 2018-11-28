@@ -5,7 +5,7 @@ Matching.controller 'matchingCreatorCtrl', ['$scope', '$sce', ($scope, $sce) ->
 	materiaCallbacks = {}
 	# Stores data to be gathered on save.
 	$scope.widget =
-		title     : "My Matching widget"
+		title     : "My Last Chance Cadet widget"
 		wordPairs : []
 		uniqueIds : []
 

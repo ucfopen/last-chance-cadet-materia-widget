@@ -4,7 +4,6 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 	materiaCallbacks = {}
 	$scope.title = ''
 
-	$scope.items = []
 	$scope.pages = []
 	$scope.selectedQA = []
 	$scope.matches = []
@@ -18,8 +17,14 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 	$scope.currentPage = 0
 	$scope.totalItems = 0
 	$scope.setCreated = false
+	$scope.helpVisible = false
+
+	$scope.unfinishedPagesBefore = false
+	$scope.unfinishedPagesAfter = false
 
 	$scope.qset = {}
+
+	$scope.circumference = Math.PI * 80
 
 	# these are used for animation
 	$scope.pageAnimate = false
@@ -31,10 +36,10 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 	ITEMS_PER_PAGE = 6
 	NUM_OF_COLORS = 7
 	CIRCLE_START_X = 20
-	CIRCLE_END_X = 220
+	CIRCLE_END_X = 190
 	CIRCLE_RADIUS = 10
-	CIRCLE_SPACING = 69
-	CIRCLE_OFFSET = 61
+	CIRCLE_SPACING = 72
+	CIRCLE_OFFSET = 40
 	PROGRESS_BAR_LENGTH = 160
 
 	materiaCallbacks.start = (instance, qset) ->
@@ -118,6 +123,7 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 				lightHover: false
 				type: 'answer-circle'
 				color: 'c0'
+				hackRotation: "rotate("+Math.floor(Math.random()*360)+" 0 0)"
 			}
 
 			_itemIndex++
@@ -132,21 +138,23 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 
 	$scope.changePage = (direction) ->
 		return false if $scope.pageAnimate
-		_clearSelections()
+		return false if direction == 'previous' and $scope.currentPage <= 0
+		return false if direction == 'next' and $scope.currentPage >= $scope.totalPages - 1
 
-		# pageAnimate is used by the li elements and the rotating circle, also sets footer onTop
-		$scope.pageNext = (direction == 'next')
+		_clearSelections()
 		$scope.pageAnimate = true
+
+		$scope.pageNext = (direction == 'next')
 		$timeout ->
-			if direction == 'previous'
-				$scope.currentPage-- unless $scope.currentPage <= 0
-			if direction == 'next'
-				$scope.currentPage++ unless $scope.currentPage >= $scope.totalPages - 1
+			$scope.currentPage-- if direction == 'previous'
+			$scope.currentPage++ if direction == 'next'
+			_checkUnfinishedPages()
 		, ANIMATION_DURATION/3
 
-		$timeout ->
-			$scope.pageAnimate = false
-		, ANIMATION_DURATION*1.1
+		if $scope.pageAnimate
+			$timeout ->
+				$scope.pageAnimate = false
+			, ANIMATION_DURATION*1.1
 
 
 	$scope.checkForQuestionAudio = (index) ->
@@ -162,6 +170,7 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 			answerId: $scope.selectedAnswer.id
 			answerIndex: $scope.selectedQA[$scope.currentPage].answer
 			matchPageId: $scope.currentPage
+			color: _getColor()
 		}
 
 	_applyCircleColor = () ->
@@ -234,6 +243,8 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 
 			_updateLines()
 
+			_checkUnfinishedPages()
+
 			$scope.unapplyHoverSelections()
 
 	_clearSelections = () ->
@@ -252,7 +263,12 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 				startY:targetStartY
 				endX:CIRCLE_END_X
 				endY:targetEndY
+				color:match.color
 			}
+
+	$scope.getPercentDone = () ->
+		return 0 if $scope.totalItems is 0 or $scope.matches.length is 0
+		$scope.matches.length / $scope.totalItems
 
 	$scope.getProgressAmount = () ->
 		if $scope.totalItems == 0
@@ -277,6 +293,16 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 		$scope.answerCircles[$scope.currentPage].forEach (element) ->
 			element.isHover = false
 			element.lightHover = false
+
+	$scope.getMatchColor = (item) ->
+		if $scope.isInMatch(item)
+			if item.type == 'question'
+				matchedItem = $scope.matches.filter( (match) -> match.questionId == item.id)[0]
+			else if item.type == 'answer'
+				matchedItem = $scope.matches.filter( (match) -> match.answerId == item.id)[0]
+			matchedItem.color
+		else
+			'c0'
 
 	# truthiness evaluated from function return
 	$scope.isInMatch = (item) ->
@@ -373,6 +399,7 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 		_checkForMatches()
 
 	$scope.submit = () ->
+		return if $scope.getPercentDone() < 1
 		qsetItems = $scope.qset.items[0].items
 
 		for i in [0..qsetItems.length-1]
@@ -395,6 +422,29 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 		for index in [1..qsetItems.length-1]
 			randomIndex = Math.floor Math.random() * (index + 1)
 			[qsetItems[index], qsetItems[randomIndex]] = [qsetItems[randomIndex], qsetItems[index]]
+
+	_checkUnfinishedPages = () ->
+		$scope.unfinishedPagesBefore = false
+		$scope.unfinishedPagesAfter = false
+
+		pairsPerPage = []
+		matchesPerPage = []
+		for index in [0..$scope.pages.length-1]
+			pairsPerPage[index] = $scope.pages[index].answers.length
+			matchesPerPage[index] = 0
+		for match in $scope.matches
+			matchesPerPage[match.matchPageId]++
+
+		unless $scope.currentPage == 0
+			for page in [0..$scope.currentPage]
+				if matchesPerPage[page] < pairsPerPage[page]
+					if matchesPerPage[$scope.currentPage] == pairsPerPage[$scope.currentPage]
+						$scope.unfinishedPagesBefore = true
+		unless $scope.currentPage == $scope.pages.length - 1
+			for page in [$scope.currentPage..pairsPerPage.length]
+				if matchesPerPage[page] < pairsPerPage[page]
+					if matchesPerPage[$scope.currentPage] == pairsPerPage[$scope.currentPage]
+						$scope.unfinishedPagesAfter = true
 
 	Materia.Engine.start materiaCallbacks
 ]
