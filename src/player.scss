@@ -1241,7 +1241,11 @@ footer {
 				border: 1px solid #4f4f4f;
 				border-radius: 18px;
 
-				background: #666666;
+				background: rgb(184, 184, 184);
+
+				&:hover {
+					background: #fff;
+				}
 
 				&:before,
 				&:after {

@@ -47,7 +47,7 @@
 
 						<div class="word-text">
 							<span class="text-wrapper"
-								ng-class="{'long': (question.text.length > 17)}">
+								ng-class="{'long': (question.text.length > 13)}">
 								{{checkForQuestionAudio($index) ? "" : question.text}}
 							</span>
 							<span ng-class="{'expand': (question.text.length > 45),
@@ -205,7 +205,7 @@
 						<span class='clickable'></span>
 						<div class="word-text">
 							<span class="text-wrapper"
-								ng-class="{'long': (answer.text.length > 17)}">
+								ng-class="{'long': (answer.text.length > 13)}">
 								{{checkForAnswerAudio($index) ? "" : answer.text}}
 							</span>
 							<span ng-class="{'expand': (answer.text.length > 45),
