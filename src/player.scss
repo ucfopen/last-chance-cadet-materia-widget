@@ -1221,9 +1221,9 @@ footer {
 				height: 100%;
 
 				border-radius: 5px;
-				box-shadow: 0px 0px 5px 2px rgba(255,253,56,0.35);
+				box-shadow: 0px 0px 5px 2px rgba(255,253,110,0.35);
 
-				background: rgba(255,253,56,0.4);
+				background: rgba(255,253,110,0.65);
 
 				animation: blinking 1s step-start 0s infinite;
 			}
@@ -1297,7 +1297,7 @@ footer {
 			border-radius: 50px;
 			background-image:
 				linear-gradient(to bottom, #808080 0%, #565656 100%),
-				radial-gradient(circle at top left, #fbfbfb 40%, #999999 100%);
+				radial-gradient(circle at top left, #ffffff 40%, #c0c0c0 100%);
 			background-origin: border-box;
 			background-clip: content-box, border-box;
 		}
@@ -1329,8 +1329,8 @@ footer {
 			height: 75px;
 
 			border-radius: 50px;
-			background: radial-gradient(rgba(#fff, 0.5), rgba(#000, 0.5));
-			border: 5px solid #613939;
+			background: radial-gradient(rgba(#fff, 0.5), rgba(#000, 0.25));
+			border: 5px solid #8d4a4a;
 		}
 
 		.progress-container {
