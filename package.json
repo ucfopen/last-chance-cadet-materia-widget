@@ -3,7 +3,7 @@
   "materia": {
     "cleanName": "last-chance-cadet"
   },
-  "version": "2.0.1",
+  "version": "2.0.2",
   "dependencies": {
     "angular": "~1.5.0",
     "angular-animate": "~1.5.0",
