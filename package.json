@@ -3,7 +3,7 @@
   "materia": {
     "cleanName": "last-chance-cadet"
   },
-  "version": "2.0.0",
+  "version": "2.0.1",
   "dependencies": {
     "angular": "~1.5.0",
     "angular-animate": "~1.5.0",
@@ -14,9 +14,9 @@
     "materia-widget-development-kit": "^2.2.0"
   },
   "devDependencies": {
-    "jest-coffee-preprocessor": "^1.0.0",
     "angular-mocks": "~1.5.0",
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "jest-coffee-preprocessor": "^1.0.0"
   },
   "scripts": {
     "start": "webpack-dev-server",
@@ -29,7 +29,6 @@
     "clientAssets:link": "cd ../materia-client-assets && yarn link && cd - && yarn link materia-client-assets",
     "devKit:link": "cd ../materia-widget-development-kit && yarn link && cd - && yarn link materia-widget-development-kit"
   },
-
   "license": "AGPL-3.0",
   "description": "A matching game where students are provided two lists of terms, phrases, or audio to match. For use in Materia.",
   "author": "University of Central Florida, Center for Distributed Learning"
