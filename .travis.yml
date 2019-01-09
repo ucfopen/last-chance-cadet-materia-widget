@@ -1,0 +1,28 @@
+language: node_js
+node_js:
+- '6'
+cache:
+  yarn: true
+  directories:
+  - node_modules
+before_install:
+- npm config set spin false
+- npm install -g npm@^5
+script:
+- yarn test-ci
+- yarn build
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: "CmWci4zQGZxJDDR3udAinKyX5RabMOU8MWTjUjSsBtt0gGqPjjxwu2JTX8jadRM2UaViQX0gXy0rj43H7kWmHwHg43pJeeuh0y2WwkSnAEBpp86DXVShSaxf643mMvtSMNbx80Mr86Afzyb96DI4AY+M9Jn89KU7T1CpxmAn/bmybGkG9XUJg2/QcCkbNPayEXfvoPy0VdOO5Ab+65ZzP0paxlUE5M+Rji/I0jPrYTaaKGviMT09wMCqalZY7FRDdng+ybuko0JmDCVMpGFYs7FwFcy3ZJf32/NsHl4isRqU4anZ+ZI8Tw+DEwKtkzrSCwRHnCgTXwPEkgDfwf0aneLnIPV25HHczQFM2O83ZZnFiNuL41gTNaNZVKGQw3pCI/VjzHw7Np1Mpfw1iOF4OUxEE8lAGGueH2piGBPqTeT6xp9mUUTAH9DFcky5661WCsotZE9VAMxlKe90rwqsREF4FRH5hdk0APk/pufyhEk26/m5KyviarUvpAwEbzW9M42wgONQ7ueBUU2v0kwATzWNzix+XdjpxItpSUj6tFjJNtwnI1a5UJ3oNyHGN/gX+fCBPK0ICh/67kpxY4nGOkFtqvXswTcVEOdPn09DMj3uhCnkQoPpnwz2AgmaWtg2ArD3fl2NyCRen0tj8HiT00mU4EXSvbKs+ZhqsEXGZNI="
+  file:
+    - build/_output/last-chance-cadet.wigt
+    - build/_output/last-chance-cadet-build-info.yml
+  on:
+    tags: true
+    repo: ucfopen/last-chance-cadet-materia-widget
+notifications:
+  email: false
+  slack:
+    secure: "Y35lauv6keatD5XAv9AvDUA0/RNf0v9SRHLNChglUsULTqQvU6MyoR21YlwG9/TLnxphPQBtdEXkoWYuSGRKK+bc+fl254kTk047EgvycVjcI0jkrgyWk+RwXtWF67maL7g+yrZF64NaJgzf6sMAAzBY9oc/UQyPPqNyL7+DMljLENbw7dtNP/g+EO70m8Z8osUvoTM2kOXVXWIeGPM4qSwzsRbsdHylmp51QnwWIOrcu3tT4ioQWK9fxle0yuIROiZXmtjltqiBqeWiZkjw+n9r4xKhcRkstBY4qCLU7UgcKjfapnjTPpmU+R5XH3W/He8ncGDJLrCIr4tAa/OTJhMgVn6EunQ2NLuxfPoBgkKQPxDMbnX9GfKQ9XvTnw3kz1oPuO641gaskjZRYSVDwBe/lqUQWZg7/q5GJb4Ntn2DXsGFDNhinlkHeXitK9DbHe0ji9M0YO+NEg+6Bff/h9EImkfDCzLcMu0lHZ8Eyg79Kez1hKde7LzCG9Um2vSpnXqkvhJwnnz+x+Hx4f/9+tx0iVHTvKMDw5pH9WHgSZ3Ck2QRxiOEpqrWQxH/g9MzwxiM9OHJJCVyBhulrUIJREdBORxfvv8tUTFLffZG6ooYPe1/B0HQwOST2ZqCtKmEjX/rK2OLI1QjoxvFshSfantKdIdfqvOzJ4x5VZZk/Eg="
