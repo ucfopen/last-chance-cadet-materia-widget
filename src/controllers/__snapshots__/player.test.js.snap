@@ -4,6 +4,7 @@ exports[`Matching Player Controller override a match with an existing question a
 Object {
   "answerId": 3,
   "answerIndex": Any<Number>,
+  "color": "c3",
   "matchPageId": 0,
   "questionId": 2,
   "questionIndex": Any<Number>,
@@ -14,6 +15,7 @@ exports[`Matching Player Controller override a match with existing answer 1`] = 
 Object {
   "answerId": 2,
   "answerIndex": Any<Number>,
+  "color": "c2",
   "matchPageId": 0,
   "questionId": 2,
   "questionIndex": Any<Number>,
@@ -24,6 +26,7 @@ exports[`Matching Player Controller override a match with existing question 1`] 
 Object {
   "answerId": 3,
   "answerIndex": Any<Number>,
+  "color": "c2",
   "matchPageId": 0,
   "questionId": 2,
   "questionIndex": Any<Number>,
@@ -34,6 +37,7 @@ exports[`Matching Player Controller selecting a question and answer backwards cr
 Object {
   "answerId": 2,
   "answerIndex": Any<Number>,
+  "color": "c1",
   "matchPageId": 0,
   "questionId": 1,
   "questionIndex": Any<Number>,
@@ -44,6 +48,7 @@ exports[`Matching Player Controller selecting a question and answer creates a ma
 Object {
   "answerId": 2,
   "answerIndex": Any<Number>,
+  "color": "c1",
   "matchPageId": 0,
   "questionId": 1,
   "questionIndex": Any<Number>,

@@ -5,12 +5,6 @@
   },
   "version": "2.0.2",
   "dependencies": {
-    "angular": "~1.5.0",
-    "angular-animate": "~1.5.0",
-    "angular-loader": "~1.5.0",
-    "angular-mocks": "~1.5.0",
-    "angular-route": "~1.5.0",
-    "angular-sanitize": "~1.5.0",
     "materia-widget-development-kit": "^2.3.0"
   },
   "devDependencies": {
@@ -20,14 +14,35 @@
   },
   "scripts": {
     "start": "webpack-dev-server",
-    "build-dev": "webpack",
     "build": "webpack -p",
-    "pretest": "npm run build-dev",
-    "test": "karma start ./karma.conf.js --no-auto-watch --single-run",
-    "pretest-full": "npm run build-dev",
-    "test-full": "karma start ./karma-full.conf.js",
-    "clientAssets:link": "cd ../materia-client-assets && yarn link && cd - && yarn link materia-client-assets",
-    "devKit:link": "cd ../materia-widget-development-kit && yarn link && cd - && yarn link materia-widget-development-kit"
+    "build-dev": "webpack",
+    "test": "TZ='America/New_York' jest --verbose",
+    "test-ci": "TZ='America/New_York' CI=true jest --ci --useStderr --coverage --coverageReporters text-summary cobertura"
+  },
+  "jest": {
+    "coverageReporters": [
+      "text",
+      "lcov"
+    ],
+    "verbose": false,
+    "transform": {
+      "^.+\\.coffee$": "<rootDir>/node_modules/jest-coffee-preprocessor/index.js"
+    },
+    "moduleFileExtensions": [
+      "coffee",
+      "js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,coffee}"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 92,
+        "branches": 81,
+        "functions": 88,
+        "lines": 96
+      }
+    }
   },
   "license": "AGPL-3.0",
   "description": "A matching game where students are provided two lists of terms, phrases, or audio to match. For use in Materia.",

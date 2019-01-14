@@ -104,7 +104,6 @@ describe('Matching Player Controller', function(){
 
 		//make sure you can't go below 0
 		$scope.changePage('previous');
-		$timeout.flush();
 		$timeout.verifyNoPendingTasks();
 		expect($scope.currentPage).toEqual(0);
 	}));
@@ -118,7 +117,6 @@ describe('Matching Player Controller', function(){
 
 		//make sure you can't go above the highest page
 		$scope.changePage('next');
-		$timeout.flush();
 		$timeout.verifyNoPendingTasks();
 		expect($scope.currentPage).toEqual(1);
 	}));
@@ -363,23 +361,54 @@ describe('Matching Player Controller', function(){
 		expect($scope.prelines).toHaveLength(1);
 	});
 
-	it('should submit questions correctly with no matches', function () {
+	it('should not submit questions unless every question has been matched', function () {
 		materiaCallbacks.start(widgetInfo, qset.data);
 		$scope.submit();
-		expect(Materia.Score.submitQuestionForScoring).toHaveBeenCalledTimes(10)
-		expect(Materia.Score.submitQuestionForScoring).toHaveBeenCalledWith(9, null, undefined);
+		expect(Materia.Score.submitQuestionForScoring).toHaveBeenCalledTimes(0);
+	});
+
+	it('should indicate when there are unfinished pages after the current page', function () {
+		materiaCallbacks.start(widgetInfo, qset.data);
+		$scope.pages[0].questions.forEach((question, index) => {
+			$scope.selectQuestion(question);
+			$scope.selectAnswer($scope.pages[0].answers[index]);
+		});
+
+		expect($scope.unfinishedPagesAfter).toBe(true)
+	});
+
+	it('should indicate when there are unfinished pages before the current page', function () {
+		materiaCallbacks.start(widgetInfo, qset.data);
+
+		$scope.changePage('next');
+		$timeout.flush();
+		$timeout.verifyNoPendingTasks();
+
+		$scope.pages[$scope.currentPage].questions.forEach((question, index) => {
+			$scope.selectQuestion(question);
+			$scope.selectAnswer($scope.pages[$scope.currentPage].answers[index]);
+		});
+
+		expect($scope.unfinishedPagesBefore).toBe(true)
 	});
 
 	it('should submit questions correctly with matches', function () {
 		materiaCallbacks.start(widgetInfo, qset.data);
 
-		$scope.matches.push({questionId:1, answerId: 1}); // text answer
-		$scope.matches.push({questionId:6, answerId: 6}); // audio anwer
+		qset.data.items[0].items.forEach(question => {
+			$scope.matches.push({questionId:question.id, answerId: question.id});
+		})
 
 		$scope.submit();
 		expect(Materia.Score.submitQuestionForScoring).toHaveBeenCalledTimes(10)
-		expect(Materia.Score.submitQuestionForScoring).toHaveBeenCalledWith(1, 'to prefer', null);
-		expect(Materia.Score.submitQuestionForScoring).toHaveBeenCalledWith(6, 'to type', 'to type');
+
+		qset.data.items[0].items.forEach(question => {
+			expect(Materia.Score.submitQuestionForScoring).toHaveBeenCalledWith(
+				question.id,
+				question.answers[0].text,
+				question.assets[2] //null for text answers, audio description for audio answers
+			)
+		})
 	});
 
 	it('unapplyHoverSelections should reset isHover selections', function () {
@@ -470,4 +499,10 @@ describe('Matching Player Controller', function(){
 		expect($scope.pages[0].answers[0].text).toEqual('to change');
 	});
 
+	it('should return progress for empty sets, not that it should ever happen', function() {
+		materiaCallbacks.start(widgetInfo, qset.data);
+
+		$scope.totalItems = 0;
+		expect($scope.getProgressAmount()).toBe(0);
+	});
 });
