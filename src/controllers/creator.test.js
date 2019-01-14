@@ -71,14 +71,14 @@ describe('Matching Creator Controller', function(){
 		expect($scope.widget.wordPairs).toEqual([]);
 		expect($scope.showIntroDialog).toBe(true);
 		//this defaults if intro title is not set
-		expect($scope.widget.title).toEqual("My Matching widget");
+		expect($scope.widget.title).toEqual("My Last Chance Cadet widget");
 	});
 
 	it('should properly set title from input', function () {
 		materiaCallbacks.initNewWidget({name: 'matcher'});
 		//should give default title if no introTitle defined
 		$scope.setTitle();
-		expect($scope.widget.title).toEqual("My Matching widget");
+		expect($scope.widget.title).toEqual("My Last Chance Cadet widget");
 		//introTitle is ng-model on input
 		$scope.introTitle = "introTitle";
 		$scope.setTitle();
