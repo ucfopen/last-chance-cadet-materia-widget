@@ -27,12 +27,10 @@ const entries = {
 	'player.css': [
 			path.join(srcPath, 'player.html'),
 			path.join(srcPath, 'player.scss'),
-			path.join(srcPath, 'controllers', 'player.coffee')
 	],
 	'creator.css': [
 			path.join(srcPath, 'creator.html'),
 			path.join(srcPath, 'creator.scss'),
-			path.join(srcPath, 'controllers', 'creator.coffee')
 	],
 	'guides/player.temp.html': [
 			path.join(srcPath, '_guides', 'player.md')
