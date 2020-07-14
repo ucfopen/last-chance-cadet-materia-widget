@@ -317,6 +317,55 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 
 		return false
 
+	$scope.getName = (item) ->
+		if item.asset != undefined
+			return "Audio Clue"
+
+		if item.text.length >= 0
+			return item.text
+
+		return ""
+
+	$scope.getMatchName = (item) ->
+		#Must check if it is an audio clue question/answer and if so return "Audio Clue"
+		if item.type == 'question'
+			found = $scope.matches.find( (match) -> match.questionId == item.id)
+
+			if (found)
+				elementId = found.answerId
+				# get the index of the item in the current page by finding it with its id
+				indexId = $scope.pages[$scope.currentPage].answers.map((element) -> element.id).indexOf elementId
+				# selectedAnswer allows us to find the item we want in our initialized question array at the specified index
+				# selectedAnswer represents the answer [right] column selection
+
+				if indexId >= 0
+					selectedAnswer = $scope.pages[$scope.currentPage].answers[indexId]
+
+					if selectedAnswer.asset != undefined
+						return "Audio Clue"
+
+					return (selectedAnswer.text)
+
+		if item.type == 'answer'
+			found = $scope.matches.find( (match) -> match.answerId == item.id)
+			console.log(found)
+			if (found)
+				elementId = found.questionId
+				# get the index of the item in the current page by finding it with its id
+				indexId = $scope.pages[$scope.currentPage].questions.map((element) -> element.id).indexOf elementId
+				# selectedAnswer allows us to find the item we want in our initialized question array at the specified index
+				# selectedAnswer represents the answer [right] column selection
+
+				if indexId >= 0
+					selectedQuestion = $scope.pages[$scope.currentPage].questions[indexId]
+
+					if selectedQuestion.asset != undefined
+						return "Audio Clue"
+
+					return (selectedQuestion.text)
+
+		return ""
+
 	$scope.drawPrelineToRight = (hoverItem) ->
 		elementId = hoverItem.id
 		# get the index of the item in the current page by finding it with its id

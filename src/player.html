@@ -41,13 +41,17 @@
 					<li class="word {{getMatchColor(question)}}"
 						ng-repeat="question in pages[currentPage].questions"
 						ng-click="selectQuestion(question)"
+						ng-keyup="$event.keyCode == 13 ? selectQuestion(question) : null"
 						ng-mouseover="drawPrelineToLeft(question)"
 						ng-mouseleave="unapplyHoverSelections()"
-						ng-class="{'matched' : isInMatch(question)}">
-
+						ng-class="{'matched' : isInMatch(question)}"
+						tabindex="0">
 						<div class="word-text">
+							<span aria-label="{{isInMatch(question) ? getName(question) + '. has been matched with ' + getMatchName(question) : getName(question) + '. has not been matched'}}">
+							</span>
 							<span class="text-wrapper"
-								ng-class="{'long': (question.text.length > 13)}">
+								ng-class="{'long': (question.text.length > 13)}"
+								aria-hidden="true">
 								{{checkForQuestionAudio($index) ? "" : question.text}}
 							</span>
 							<span ng-class="{'expand': (question.text.length > 45),
@@ -67,7 +71,7 @@
 							<div class="popup"
 								ng-hide="checkForQuestionAudio($index)"
 								ng-class="{'shown': (question.text.length > 45)}">
-								<div class="popup-text left">
+								<div aria-hidden="true" class="popup-text left">
 									{{question.text}}
 								</div>
 								<div class="popup-arrow"
@@ -78,7 +82,7 @@
 
 						<div class="wrap">
 							<div class="popup" ng-class="{'shown': (question.text.length > 45)}">
-								<div class="popup-text left">{{question.text}}</div>
+								<div aria-hidden="true" class="popup-text left">{{question.text}}</div>
 								<div class="popup-arrow" ng-class="{'left': (question.text.length > 45)}"></div>
 							</div>
 						</div>
@@ -199,12 +203,16 @@
 					<li class="word {{getMatchColor(answer)}}"
 						ng-repeat="answer in pages[currentPage].answers"
 						ng-click="selectAnswer(answer)"
+						ng-keyup="$event.keyCode == 13 ? selectAnswer(answer) : null"
 						ng-mouseover="drawPrelineToRight(answer)"
 						ng-mouseleave="unapplyHoverSelections()"
-						ng-class="{matched : isInMatch(answer)}">
+						ng-class="{matched : isInMatch(answer)}"
+						tabindex="0">
 						<span class='clickable'></span>
 						<div class="word-text">
-							<span class="text-wrapper"
+							<span aria-label="{{isInMatch(answer) ? getName(answer) + '. has been matched with ' + getMatchName(answer) : getName(answer) + '. has not been matched'}}">
+							</span>
+							<span aria-hidden="true" class="text-wrapper"
 								ng-class="{'long': (answer.text.length > 13)}">
 								{{checkForAnswerAudio($index) ? "" : answer.text}}
 							</span>
@@ -225,7 +233,7 @@
 							<div class="popup"
 								ng-hide="checkForAnswerAudio($index)"
 								ng-class="{'shown': (answer.text.length > 45)}">
-								<div class="popup-text right">
+								<div aria-hidden="true" class="popup-text right">
 									{{answer.text}}
 								</div>
 								<div class="popup-arrow"
@@ -239,7 +247,7 @@
 		</section>
 
 		<footer ng-class="{'onTop': pageAnimate}">
-			<section id='page-roller' class='number-roller'>
+			<section aria-hidden='true' id='page-roller' class='number-roller'>
 				<div class='screws'>
 					<div ng-repeat='i in [1,2]'
 						class='screw'>
@@ -264,7 +272,7 @@
 				</div>
 			</section>
 
-			<section id='match-roller' class='number-roller'>
+			<section aria-hidden='true' id='match-roller' class='number-roller'>
 				<div class='screws'>
 					<div ng-repeat='i in [1,2]'
 						class='screw'>
@@ -289,22 +297,30 @@
 				</div>
 			</section>
 
-			<section id='page-indicator' class='panel-indicator'>
-				<span class='point-left'>Current Page</span>
+			<section id='page-indicator' class='panel-indicator' aria-label='The current page is {{currentPage + 1}}.'>
+				<span aria-hidden="true" class='point-left'>Current Page</span>
 			</section>
-			<section id='match-indicator' class='panel-indicator'>
-				<span class='point-right'>Astronauts Left</span>
+			<section id='match-indicator' class='panel-indicator' aria-label='There are {{totalItems - matches.length}} astronauts left.'>
+				<span aria-hidden="true" class='point-right'>Astronauts Left</span>
 			</section>
 
 			<section id="page-selector" class='button-panel'>
 				<span class="button"
-					ng-click="changePage('previous')">
+					ng-click="changePage('previous')"
+					ng-keyup="$event.keyCode == 13 ? changePage('previous') : null"
+					tabindex='0'
+					role='button'
+					aria-label='previous page'>
 					<span class='arrow'></span>
 					<span class='overlay'
 						ng-class="{'blink': unfinishedPagesBefore}"></span>
 				</span>
 				<span class="button"
-					ng-click="changePage('next')">
+					ng-click="changePage('next')"
+					ng-keyup="$event.keyCode == 13 ? changePage('next') : null"
+					tabindex='0'
+					role='button'
+					aria-label='next page'>>
 					<span class='arrow'></span>
 					<span class='overlay'
 						ng-class="{'blink': unfinishedPagesAfter}"></span>
@@ -313,7 +329,11 @@
 			<section class='button-panel'></section>
 
 			<section id='finish-button'
-				ng-click="submit()">
+				aria-label='Finish'
+				role='button'
+				ng-click="submit()"
+				ng-keyup="$event.keyCode == 13 ? submit() : null"
+				tabindex="0">
 				<div class='overlay blink'
 					ng-if='getPercentDone() == 1'></div>
 				<div class='bulb'></div>
