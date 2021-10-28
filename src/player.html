@@ -19,7 +19,7 @@
 		<!-- MAIN PLAYER SCRIPT -->
 		<script src="player.js"></script>
 	</head>
-	<body ng-app='matching' ng-controller='matchingPlayerCtrl'>
+	<body ng-app='matching' ng-controller='matchingPlayerCtrl' ng-keydown='keydownHandler($event)'>
 		<header id="header">
 			<div id='titleContainer'>
 				<h1>{{ title }}</h1>

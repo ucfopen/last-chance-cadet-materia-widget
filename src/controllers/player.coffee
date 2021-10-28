@@ -379,6 +379,29 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 		}
 		$scope.questionCircles[$scope.currentPage][endIndex].isHover = true
 
+	$scope.keydownHandler = (event) ->
+		# keyboard input for the widget
+		switch event.code
+			# 1 - 6 will select the question in column 1
+			when "Digit1" then $scope.selectQuestion($scope.pages[$scope.currentPage].questions[0])
+			when "Digit2" then $scope.selectQuestion($scope.pages[$scope.currentPage].questions[1])
+			when "Digit3" then $scope.selectQuestion($scope.pages[$scope.currentPage].questions[2])
+			when "Digit4" then $scope.selectQuestion($scope.pages[$scope.currentPage].questions[3])
+			when "Digit5" then $scope.selectQuestion($scope.pages[$scope.currentPage].questions[4])
+			when "Digit6" then $scope.selectQuestion($scope.pages[$scope.currentPage].questions[5])
+			# QWERTY will select the answer in column 2
+			when "KeyQ" then $scope.selectAnswer($scope.pages[$scope.currentPage].answers[0])
+			when "KeyW" then $scope.selectAnswer($scope.pages[$scope.currentPage].answers[1])
+			when "KeyE" then $scope.selectAnswer($scope.pages[$scope.currentPage].answers[2])
+			when "KeyR" then $scope.selectAnswer($scope.pages[$scope.currentPage].answers[3])
+			when "KeyT" then $scope.selectAnswer($scope.pages[$scope.currentPage].answers[4])
+			when "KeyY" then $scope.selectAnswer($scope.pages[$scope.currentPage].answers[5])
+			# left and right arrow keys will change the page
+			when "ArrowLeft" then $scope.changePage('previous')
+			when "ArrowRight" then $scope.changePage('next')
+			# enter will submit questions for scoring
+			when "Enter" then $scope.submit()
+
 	$scope.selectQuestion = (selectionItem) ->
 		elementId = selectionItem.id
 		# get the index of the item in the current page by finding it with its id
