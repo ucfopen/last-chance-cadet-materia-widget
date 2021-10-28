@@ -43,7 +43,8 @@
 						ng-click="selectQuestion(question)"
 						ng-mouseover="drawPrelineToLeft(question)"
 						ng-mouseleave="unapplyHoverSelections()"
-						ng-class="{'matched' : isInMatch(question)}">
+						ng-class="{'matched' : isInMatch(question)}"
+						tabindex="0">
 
 						<div class="word-text">
 							<span class="text-wrapper"
@@ -201,7 +202,8 @@
 						ng-click="selectAnswer(answer)"
 						ng-mouseover="drawPrelineToRight(answer)"
 						ng-mouseleave="unapplyHoverSelections()"
-						ng-class="{matched : isInMatch(answer)}">
+						ng-class="{matched : isInMatch(answer)}"
+						tabindex="0">
 						<span class='clickable'></span>
 						<div class="word-text">
 							<span class="text-wrapper"
@@ -298,13 +300,17 @@
 
 			<section id="page-selector" class='button-panel'>
 				<span class="button"
-					ng-click="changePage('previous')">
+					aria-label="Previous page"
+					ng-click="changePage('previous')"
+					tabindex="0">
 					<span class='arrow'></span>
 					<span class='overlay'
 						ng-class="{'blink': unfinishedPagesBefore}"></span>
 				</span>
 				<span class="button"
-					ng-click="changePage('next')">
+					aria-label="Next page"
+					ng-click="changePage('next')"
+					tabindex="0">
 					<span class='arrow'></span>
 					<span class='overlay'
 						ng-class="{'blink': unfinishedPagesAfter}"></span>
@@ -313,7 +319,8 @@
 			<section class='button-panel'></section>
 
 			<section id='finish-button'
-				ng-click="submit()">
+				ng-click="submit()"
+				tabindex="0">
 				<div class='overlay blink'
 					ng-if='getPercentDone() == 1'></div>
 				<div class='bulb'></div>
