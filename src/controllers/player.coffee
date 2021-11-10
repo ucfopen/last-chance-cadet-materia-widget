@@ -399,8 +399,16 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 			# left and right arrow keys will change the page
 			when "ArrowLeft" then $scope.changePage('previous')
 			when "ArrowRight" then $scope.changePage('next')
-			# enter will submit questions for scoring
-			when "Enter" then $scope.submit()
+
+	$scope.getItemLetter = (index) ->
+		# determines the letter that will be displayed next to each answer choice in the second column
+		switch index
+			when 0 then "Q"
+			when 1 then "W"
+			when 2 then "E"
+			when 3 then "R"
+			when 4 then "T"
+			when 5 then "Y"
 
 	$scope.selectQuestion = (selectionItem) ->
 		elementId = selectionItem.id

@@ -47,6 +47,7 @@
 						tabindex="0">
 
 						<div class="word-text">
+							<span class="item-number">{{$index + 1}}</span>
 							<span class="text-wrapper"
 								ng-class="{'long': (question.text.length > 13)}">
 								{{checkForQuestionAudio($index) ? "" : question.text}}
@@ -206,6 +207,7 @@
 						tabindex="0">
 						<span class='clickable'></span>
 						<div class="word-text">
+							<span class="item-letter">{{getItemLetter($index)}}</span>
 							<span class="text-wrapper"
 								ng-class="{'long': (answer.text.length > 13)}">
 								{{checkForAnswerAudio($index) ? "" : answer.text}}

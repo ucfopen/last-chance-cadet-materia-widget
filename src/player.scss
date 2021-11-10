@@ -1,12 +1,12 @@
 @import "audioControls.scss";
 
-$color0: #ffffff;
-$color1: #79dcf3;
-$color2: #8479f3;
-$color3: #f179f3;
-$color4: #f37987;
-$color5: #f3ee79;
-$color6: #8af379;
+$color0: #ffffff;	//white
+$color1: #79dcf3;	//blue
+$color2: #8479f3;	//purple
+$color3: #f179f3;	//pink
+$color4: #f37987;	//red
+$color5: #f3ee79;	//yellow
+$color6: #8af379;	//green
 
 @font-face {
 	font-family: 'ArrowGlyph';
@@ -543,7 +543,7 @@ $star_patterns: 30;
 
 			&:hover > .word-text > .expand {
 				&:after {
-					transtion: 700ms ease;
+					transition: 700ms ease;
 					opacity: .6;
 				}
 			}
@@ -622,6 +622,33 @@ $star_patterns: 30;
 					display: none;
 				}
 			}
+
+			.item-number {
+				position: absolute;
+				right: 210px;
+				height: 34px;
+  			width: 34px;
+				background-color: #67676F;
+  			border-radius: 50%;
+				border: 1px;
+				border-style: solid;
+				border-color: white;
+  			display: inline-block;
+			}
+
+			.item-letter {
+				position: absolute;
+				left: 210px;
+				height: 34px;
+  			width: 34px;
+				background-color: #67676F;
+  			border-radius: 50%;
+				border: 1px;
+				border-style: solid;
+				border-color: white;
+  			display: inline-block;
+			}
+
 			.popup {
 				opacity: 0;
 				position: absolute;
@@ -742,9 +769,41 @@ $star_patterns: 30;
 					background-color : rgba($color6, 0.5);
 				}
 
+				&.c0 .item-number, &.c0 .item-letter{
+					border-color : rgba($color0, 1);
+					background-color : #818181;
+				}
+				&.c1 .item-number, &.c1 .item-letter{
+					border-color : rgba($color1, 1);
+					background-color : #507486;
+				}
+				&.c2 .item-number, &.c2 .item-letter{
+					border-color : rgba($color2, 1);
+					background-color : #4e4b8b;
+				}
+				&.c3 .item-number, &.c3 .item-letter{
+					border-color : rgba($color3, 1);
+					background-color : #81508f;
+				}
+				&.c4 .item-number, &.c4 .item-letter{
+					border-color : rgba($color4, 1);
+					background-color : #834e5d;
+				}
+				&.c5 .item-number, &.c5 .item-letter{
+					border-color : rgba($color5, 1);
+					background-color : #868258;
+				}
+				&.c6 .item-number, &.c6 .item-letter{
+					border-color : rgba($color6, 1);
+					background-color : #5b8053;
+				}
+
 				&:hover {
 					.word-text {
 						background-color    : #627D92;
+					}
+					.item-number, .item-letter {
+						background-color		: #627D92;
 					}
 				}
 			}
@@ -752,6 +811,10 @@ $star_patterns: 30;
 			&:hover {
 				.word-text {
 					background-color    : #2ECC71;
+				}
+				.item-number, .item-letter {
+					background-color		: #42D47E;
+					transition     		  : 0.2s;
 				}
 				transition : 0.2s;
 			}
