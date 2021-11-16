@@ -411,11 +411,15 @@ $star_patterns: 30;
 		&.column1 {
 			margin-left: 30px;
 			float:left;
+			.word {
+				outline: none;
+			}
 		}
 		&.column2 {
 			margin-right: 30px;
 			float:right;
 			.word {
+				outline: none;
 				margin-left : -45px;
 				padding-left: 35px;
 			}
@@ -568,6 +572,7 @@ $star_patterns: 30;
 				border-radius    : 10px;
 				height           : 40px;
 				transition       : 0.2s;
+				outline: none;
 				.text-wrapper {
 					display          : inline-block;
 					vertical-align   : middle;
@@ -628,6 +633,7 @@ $star_patterns: 30;
 				right: 210px;
 				height: 34px;
   			width: 34px;
+				outline: none;
 				background-color: #67676F;
   			border-radius: 50%;
 				border: 1px;
@@ -641,6 +647,7 @@ $star_patterns: 30;
 				left: 210px;
 				height: 34px;
   			width: 34px;
+				outline: none;
 				background-color: #67676F;
   			border-radius: 50%;
 				border: 1px;
@@ -806,9 +813,18 @@ $star_patterns: 30;
 						background-color		: #627D92;
 					}
 				}
+
+				&:focus {
+					.word-text {
+						background-color    : #75b19e;
+					}
+					.item-number, .item-letter {
+						background-color		: #75b19e;
+					}
+				}
 			}
 
-			&:hover {
+			&:hover, &:focus {
 				.word-text {
 					background-color    : #2ECC71;
 				}
@@ -943,7 +959,8 @@ footer {
 			transition       : 0.4s;
 			opacity          : 0;
 			pointer-events   : none;
-			&:hover {
+			&:hover, &:focus {
+				outline: none;
 				background-color : rgb(55,61,66);
 				transition : 0.2s;
 			}
@@ -1328,6 +1345,14 @@ footer {
 					right: 3px;
 				}
 			}
+			&:focus {
+				outline: none;
+				border-color: #5b550e;
+				.arrow {
+					background: #fff;
+					box-shadow: 0px 0px 11px 5px rgba(#ffff66,0.4);
+				}
+			}
 		}
 	}
 
@@ -1342,6 +1367,8 @@ footer {
 		border-radius: 50px;
 
 		transform: translateX(-50%);
+
+		outline: none;
 
 		cursor: pointer;
 		// pointer-events: none;
@@ -1388,6 +1415,11 @@ footer {
 
 		&:hover:not(:active) .bulb {
 			background: radial-gradient(rgba(#fff, 0.75), rgba(#000, 0.5));
+		}
+
+		&:focus:not(:active) .bulb {
+			background: radial-gradient(rgba(#fff, 0.8), rgba(#000, 0.6));
+			border-color: #cd9385;
 		}
 
 		.bulb {

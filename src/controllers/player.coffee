@@ -399,6 +399,10 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 			# left and right arrow keys will change the page
 			when "ArrowLeft" then $scope.changePage('previous')
 			when "ArrowRight" then $scope.changePage('next')
+			# enter will function the same as clicking on the focused element
+			when "Enter"
+				switch window.document.activeElement.id
+					when "finish-button" then $scope.submit()
 
 	$scope.getItemLetter = (index) ->
 		# determines the letter that will be displayed next to each answer choice in the second column
