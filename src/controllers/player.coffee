@@ -402,6 +402,20 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 			# enter will function the same as clicking on the focused element
 			when "Enter"
 				switch window.document.activeElement.id
+					when "question-choice 0" then $scope.selectQuestion($scope.pages[$scope.currentPage].questions[0])
+					when "question-choice 1" then $scope.selectQuestion($scope.pages[$scope.currentPage].questions[1])
+					when "question-choice 2" then $scope.selectQuestion($scope.pages[$scope.currentPage].questions[2])
+					when "question-choice 3" then $scope.selectQuestion($scope.pages[$scope.currentPage].questions[3])
+					when "question-choice 4" then $scope.selectQuestion($scope.pages[$scope.currentPage].questions[4])
+					when "question-choice 5" then $scope.selectQuestion($scope.pages[$scope.currentPage].questions[5])
+					when "answer-choice 0" then $scope.selectAnswer($scope.pages[$scope.currentPage].answers[0])
+					when "answer-choice 1" then $scope.selectAnswer($scope.pages[$scope.currentPage].answers[1])
+					when "answer-choice 2" then $scope.selectAnswer($scope.pages[$scope.currentPage].answers[2])
+					when "answer-choice 3" then $scope.selectAnswer($scope.pages[$scope.currentPage].answers[3])
+					when "answer-choice 4" then $scope.selectAnswer($scope.pages[$scope.currentPage].answers[4])
+					when "answer-choice 5" then $scope.selectAnswer($scope.pages[$scope.currentPage].answers[5])
+					when "previous-page" then $scope.changePage('previous')
+					when "next-page" then $scope.changePage('next')
 					when "finish-button" then $scope.submit()
 
 	$scope.getItemLetter = (index) ->

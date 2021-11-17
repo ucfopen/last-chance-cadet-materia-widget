@@ -38,7 +38,7 @@
 			</div>
 			<div ng-class="{'screenAnimate': pageAnimate}">
 				<ul class="column column1">
-					<li class="word {{getMatchColor(question)}}"
+					<li id="question-choice {{$index}}" class="word {{getMatchColor(question)}}"
 						ng-repeat="question in pages[currentPage].questions"
 						ng-click="selectQuestion(question)"
 						ng-mouseover="drawPrelineToLeft(question)"
@@ -198,7 +198,7 @@
 				</div>
 
 				<ul class="column column2">
-					<li class="word {{getMatchColor(answer)}}"
+					<li id="answer-choice {{$index}}" class="word {{getMatchColor(answer)}}"
 						ng-repeat="answer in pages[currentPage].answers"
 						ng-click="selectAnswer(answer)"
 						ng-mouseover="drawPrelineToRight(answer)"
@@ -301,7 +301,7 @@
 			</section>
 
 			<section id="page-selector" class='button-panel'>
-				<span class="button"
+				<span id="previous-page" class="button"
 					aria-label="Previous page"
 					ng-click="changePage('previous')"
 					tabindex="0">
@@ -309,7 +309,7 @@
 					<span class='overlay'
 						ng-class="{'blink': unfinishedPagesBefore}"></span>
 				</span>
-				<span class="button"
+				<span id="next-page" class="button"
 					aria-label="Next page"
 					ng-click="changePage('next')"
 					tabindex="0">
