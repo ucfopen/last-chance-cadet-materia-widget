@@ -735,16 +735,21 @@ $star_patterns: 30;
 				}
 			}
 
-			&.selected {
-				.word-text {
-					background-color    : #27AE60;
+			&.selected-word {
+				.word-text, .item-letter, .item-number {
+					border-color    : #27AE60;
+				}
+				.item-letter, .item-number {
+					background-color: #657169;
 				}
 			}
 			&.matched {
-				&.selected {
-					.word-text {
-						color            : #DECEC8;
-						background-color : #27AE60;
+				&.selected-word {
+					.word-text, .item-letter, .item-number {
+						border-color : #27AE60;
+					}
+					.item-letter, .item-number {
+						background-color: #657169;
 					}
 				}
 				&.c0 .word-text{
@@ -833,6 +838,12 @@ $star_patterns: 30;
 					transition     		  : 0.2s;
 				}
 				transition : 0.2s;
+			}
+			&.selected-word {
+				border-color: #27AE60;
+				.item-letter, .item-number {
+					background-color: #657169;
+				}
 			}
 		}
 	}

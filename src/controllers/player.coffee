@@ -288,6 +288,16 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 				return true
 		false
 
+	$scope.applyQuestionClass = (index) ->
+		if index == $scope.selectedQA[$scope.currentPage].question
+			return true
+		false
+
+	$scope.applyAnswerClass = (index) ->
+		if index == $scope.selectedQA[$scope.currentPage].answer
+			return true
+		false
+
 	$scope.unapplyHoverSelections = () ->
 		$scope.prelines = []
 		$scope.questionCircles[$scope.currentPage].forEach (element) ->
@@ -418,7 +428,7 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 
 					when "previous-page" then $scope.changePage('previous')
 					when "next-page" then $scope.changePage('next')
-					
+
 					when "finish-button" then $scope.submit()
 
 	$scope.getItemLetter = (index) ->

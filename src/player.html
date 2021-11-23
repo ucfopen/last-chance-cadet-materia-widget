@@ -43,7 +43,8 @@
 						ng-click="selectQuestion(question)"
 						ng-mouseover="drawPrelineToLeft(question)"
 						ng-mouseleave="unapplyHoverSelections()"
-						ng-class="{'matched' : isInMatch(question)}"
+						ng-class="{'selected-word' : applyQuestionClass($index),
+							'matched' : isInMatch(question)}"
 						tabindex="0">
 
 						<div class="word-text">
@@ -203,7 +204,8 @@
 						ng-click="selectAnswer(answer)"
 						ng-mouseover="drawPrelineToRight(answer)"
 						ng-mouseleave="unapplyHoverSelections()"
-						ng-class="{matched : isInMatch(answer)}"
+						ng-class="{'selected-word' : applyAnswerClass($index),
+							'matched' : isInMatch(answer)}"
 						tabindex="0">
 						<span class='clickable'></span>
 						<div class="word-text">
