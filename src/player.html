@@ -304,7 +304,7 @@
 
 			<section id="page-selector" class='button-panel'>
 				<span id="previous-page" class="button"
-					aria-label="Previous page"
+					aria-label="{{'Return to page ' + 1 + ' of ' + totalPages + '. ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page.' }}"
 					ng-click="changePage('previous')"
 					tabindex="0">
 					<span class='arrow'></span>
@@ -312,7 +312,7 @@
 						ng-class="{'blink': unfinishedPagesBefore}"></span>
 				</span>
 				<span id="next-page" class="button"
-					aria-label="Next page"
+					aria-label="{{'Return to page ' + 2 + ' of ' + totalPages + '. ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page.' }}"
 					ng-click="changePage('next')"
 					tabindex="0">
 					<span class='arrow'></span>
@@ -342,14 +342,20 @@
 			</section>
 		</footer>
 
-		<section id='help-button'
-			ng-click='helpVisible = !helpVisible'>
+		<button id='help-button'
+			ng-click='helpVisible = !helpVisible'
+			aria-describedby="keyboard-instructions"
+			aria-label="Keyboard Instructions"
+			tabindex="1">
 			Help
-		</section>
+	    </button>
 
-		<section id='instructions'
+        <section id='instructions'
 			ng-class="{'visible': helpVisible}"
-			ng-click='helpVisible = false'>
+			ng-click='helpVisible = false'
+			role="alertdialog"
+			aria-modal="true">
+			
 			<aside>A NewMedia Game</aside>
 			<h1>
 				<span>Last Chance Cadet</span>
@@ -386,13 +392,23 @@
 			<p>
 				Once you have matched every astronaut to a rocket, the <b>Finish</b> button will glow. Press <b>Finish</b> to pull the astronauts in. Any incorrect matches will lead to stranded astronauts!
 			</p>
+
+			 <div id="keyboard-instructions">
+				<p>
+					insert keyboard instructions here!
+				</p>
+				
+			 </div>
+			 
 			<p>
 				Upon completion you will receive your score.
 			</p>
+			
 			<div class='close-tab'>
 				Click to
-				<br/>close!
+				<br/>close!	
 			</div>
+
 		</section>
 	</body>
 </html>

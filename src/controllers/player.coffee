@@ -18,6 +18,7 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 	$scope.totalItems = 0
 	$scope.setCreated = false
 	$scope.helpVisible = false
+	$scope.completePerPage = []
 
 	$scope.unfinishedPagesBefore = false
 	$scope.unfinishedPagesAfter = false
@@ -25,6 +26,9 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 	$scope.qset = {}
 
 	$scope.circumference = Math.PI * 80
+
+
+	_boardElement = document.getElementById('gameboard')
 
 	# these are used for animation
 	$scope.pageAnimate = false
@@ -54,6 +58,7 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 			$scope.selectedQA.push {question:-1, answer:-1}
 			$scope.questionCircles.push []
 			$scope.answerCircles.push []
+			$scope.completePerPage.push 0
 
 		_itemIndex = 0
 		_pageIndex = 0
@@ -154,10 +159,15 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 			_checkUnfinishedPages()
 		, ANIMATION_DURATION/3
 
+		
+
 		if $scope.pageAnimate
 			$timeout ->
 				$scope.pageAnimate = false
 			, ANIMATION_DURATION*1.1
+        
+		
+
 
 
 	$scope.checkForQuestionAudio = (index) ->
@@ -165,6 +175,7 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 
 	$scope.checkForAnswerAudio = (index) ->
 		$scope.pages[$scope.currentPage].answers[index].asset != undefined
+
 
 	_pushMatch = () ->
 		$scope.matches.push {
@@ -175,6 +186,9 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 			matchPageId: $scope.currentPage
 			color: _getColor()
 		}
+
+	
+
 
 	_applyCircleColor = () ->
 		# find appropriate circle
@@ -253,6 +267,13 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 	_clearSelections = () ->
 		$scope.selectedQA[$scope.currentPage].question = -1
 		$scope.selectedQA[$scope.currentPage].answer = -1
+
+	_updateCompletionStatus = () ->
+		$scope.completePerPage  = []
+		for match in $scope.matches
+			if !$scope.completePerPage[match.matchPageId] then $scope.completePerPage[match.matchPageId] = 1
+			else $scope.completePerPage[match.matchPageId]++
+
 
 	_updateLines = () ->
 		$scope.lines = []
