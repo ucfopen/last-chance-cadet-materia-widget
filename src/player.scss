@@ -1851,3 +1851,9 @@ and (-webkit-min-device-pixel-ratio: 2){
 .wrap {
 	position: relative;
 }
+
+.assistive-element
+{
+  position:absolute;
+  opacity:0;
+}

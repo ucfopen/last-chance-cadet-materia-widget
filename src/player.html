@@ -30,9 +30,18 @@
 					</span>
 				</div>
 			</div>
+	
 		</header>
 
-		<section class="gameboard">
+		<div class="assistive-element" id="assistive-notification" aria-live="assertive"></div>
+		<div class="assistive-element" id="assistive-alert" aria-live="assertive"></div>
+
+		<section
+		 class="gameboard"
+		 id="gameboard"
+		aria-label="Game board."
+			role="application"
+			tabindex="0">
 			<div class='transition'
 				ng-class="{'pageAnimate': pageAnimate}">
 			</div>
@@ -50,7 +59,8 @@
 						ng-mouseleave="unapplyHoverSelections()"
 						ng-class="{'selected-word' : applyQuestionClass($index),
 							'matched' : isInMatch(question)}"
-						>
+						ng-keyup="handleBoardKeypress($event, question)"
+							>
 
 						<div class="word-text">
 							<span class="item-number">{{$index + 1}}</span>
@@ -215,7 +225,8 @@
 						ng-mouseover="drawPrelineToRight(answer)"
 						ng-mouseleave="unapplyHoverSelections()"
 						ng-class="{'selected-word' : applyAnswerClass($index),
-							'matched' : isInMatch(answer)}">
+							'matched' : isInMatch(answer)}"
+						ng-keyup="handleBoardKeypress($event, question)">
 						<span class='clickable'></span>
 						<div class="word-text">
 							<span class="item-letter">{{getItemLetter($index)}}</span>
@@ -313,7 +324,7 @@
 
 			<section id="page-selector" class='button-panel'>
 				<span id="previous-page" class="button"
-					aria-label="{{'Return to page ' + 1 + ' of ' + totalPages + '. ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page.' }}"
+					aria-label="{{ 'Return to page ' + (currentPage+2) + ' of ' + totalPages + '. ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page.' }}"
 					ng-click="changePage('previous')"
 					tabindex="0">
 					<span class='arrow'></span>
@@ -321,7 +332,7 @@
 						ng-class="{'blink': unfinishedPagesBefore}"></span>
 				</span>
 				<span id="next-page" class="button"
-					aria-label="{{'Return to page ' + 2 + ' of ' + totalPages + '. ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page.' }}"
+					aria-label="{{ 'Advance to page ' + (currentPage+2) + ' of ' + totalPages + '. ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page.' }}"
 					ng-click="changePage('next')"
 					tabindex="0">
 					<span class='arrow'></span>
@@ -349,15 +360,16 @@
 						}"/>
 				</svg>
 			</section>
+
 		</footer>
 
 		<button id='help-button'
 			ng-click='helpVisible = !helpVisible'
-			aria-describedby="keyboard-instructions"
 			aria-label="Keyboard Instructions"
+			aria-describedby="keyboard-instructions-description"
 			tabindex="1">
 			Help
-		</section>
+		</button>
 
 	
    <section id='instructions'
@@ -373,6 +385,7 @@
                 <span>Instruction Manual </span>
             </h1>
             
+		
            <br>  <h2>How to Play:</h2>
             <p>
                 The objective in Last Chance Cadet is to <b>match the astronauts to their corresponding rockets</b>. Use the mouse to connect the tow cable from each rocket to an astronaut.
@@ -404,16 +417,21 @@
             <p>
                 Once you have matched every astronaut to a rocket, the <b>Finish</b> button will glow. Press <b>Finish</b> to pull the astronauts in. Any incorrect matches will lead to stranded astronauts!
             </p>
-          
-                <h3>Keyboard:</h3>
+
+			<h3>Keyboard Instructions:</h3>
+
+		    <div id="keyboard-instructions-description"> 
+	
             <p>
                 Use <strong>tab </strong> and <strong> shift-tab </strong> to move between items and buttons at the bottom.
                 Use <strong> enter </strong> or <strong> space </strong> to select an item to match. 
-                Use <strong> left </strong> arrow and <strong>right </strong> arrow to quickly switch between the left and right side.
             </p>
+		
             <p>
                 Upon completion you will receive your score. 
-            </p> <br>
+            </p>
+			</div>
+			 <br>
 			
 
    </div>
@@ -424,70 +442,5 @@
              </div>
                
         </section>
-	    </button>
-
-        <section id='instructions'
-			ng-class="{'visible': helpVisible}"
-			ng-click='helpVisible = false'
-			role="alertdialog"
-			aria-modal="true">
-			
-			<aside>A NewMedia Game</aside>
-			<h1>
-				<span>Last Chance Cadet</span>
-				<span>Instruction Manual</span>
-			</h1>
-			<h2>How to Play:</h2>
-			<p>
-				The objective in Last Chance Cadet is to <b>match the astronauts to their corresponding rockets</b>. Use the mouse to connect the tow cable from each rocket to an astronaut.
-			</p>
-			<p>
-				You need to match <b>all</b> astronauts. You can see the number of astronauts still needing help by the dial on the bottom right.
-			</p>
-			<div>
-				<span class='label'>Figure 1</span>
-				<section id='num-left-indicator-example' class='panel-indicator'>
-					<span class='point-right'>Astronauts Left</span>
-				</section>
-				<img id='num-left-image' src='assets/svg/numleft.svg'/>
-				<span class='first-one'>Just one more astronaut left to save!</span>
-			</div>
-			<p>
-				Sometimes not all of the astronauts are on the screen at one time - they can be split up among pages. You can use the page selection buttons to move between pages.
-			</p>
-			<div>
-				<span class='label'>Figure 2</span>
-				<section id='page-nav-indicator-example' class='panel-indicator'>
-					<span class='point-left'>Current Page</span>
-				</section>
-				<img id='page-nav-image' src='assets/svg/pagenav.svg'/>
-				<span class='second-one'>The page shown on screen</span>
-				<span class='third-one'>Go back a page</span>
-				<span class='fourth-one'>Go forward a page</span>
-			</div>
-			<p>
-				Once you have matched every astronaut to a rocket, the <b>Finish</b> button will glow. Press <b>Finish</b> to pull the astronauts in. Any incorrect matches will lead to stranded astronauts!
-			</p>
-
-			 <div id="keyboard-instructions">
-				 <h3>Keyboard:</h3>
-            <p>
-                Use <strong>tab </strong> and <strong> shift-tab </strong> to move between items and buttons at the bottom.
-                Use <strong> enter </strong> or <strong> space </strong> to select an item to match. 
-                Use <strong> left </strong> arrow and <strong>right </strong> arrow to quickly switch between the left and right side.
-            </p>
-				
-			 </div>
-			 
-			<p>
-				Upon completion you will receive your score.
-			</p>
-		</div>
-			<div class='close-tab'>
-				Click to
-				<br/>close!	
-			</div>
-
-		</section>
 	</body>
 </html>
