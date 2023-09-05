@@ -1498,152 +1498,161 @@ footer {
 }
 
 #instructions {
-	position: absolute;
-	width: 520px;
-	height: 98%;
-	top: 0;
-	left: 20%;
-	z-index: 1000;
+  position: absolute;
+  width: 520px;
+  height: 100%;
+  top: 0;
+  left: 20%;
+  z-index: 1000;
+  //overflow-y: auto;
+  cursor: pointer;
 
-	cursor: pointer;
 
-	background-color: #fff;
-	color: #000;
+  background-color: #fff;
+  color: #000;
 
-	font-family: 'Roboto', sans-serif;
-	font-weight: 400;
-	letter-spacing: 1px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  letter-spacing: 1px;
 
-	padding: 0 12px;
-	overflow: hidden;
+  padding: 0 12px;
+ overflow: hidden;
 
-	transition: all 0.9s ease-out;
+  transition: all 0.9s ease-out;
 
-	&:not(.visible) {
-		transform: rotate(90deg);
-		top: -100%;
-		left: -50%;
-	}
+  .scrollable-container {
+   
+    flex-direction: column;
+    height: 100%;
+      overflow-y: auto;
+  }
 
-	aside {
-		text-align: right;
-		font-size: 8px;
-		font-weight: 900;
-		margin-top: 10px;
-	}
+  &:not(.visible) {
+    transform: rotate(90deg);
+    top: -100%;
+    left: -50%;
+  }
 
-	h1 {
-		background-color: #333;
-		color: #fff;
-		text-align: center;
-		padding: 5px;
-		margin: 0;
+  aside {
+    text-align: right;
+    font-size: 8px;
+    font-weight: 900;
+    margin-top: 10px;
+  }
 
-		span {
-			display: block;
+  h1 {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    margin: 0;
 
-			&:first-child {
-				font-size: 14px;
-			}
-			&:last-child {
-				font-weight: 900;
-				letter-spacing: 2px;
-			}
-		}
-	}
+    span {
+      display: block;
 
-	h2 {
-		margin: 5px 0;
-		padding: 0;
-		font-size: 20px;
-	}
+      &:first-child {
+        font-size: 14px;
+      }
+      &:last-child {
+        font-weight: 900;
+        letter-spacing: 2px;
+      }
+    }
+  }
 
-	p {
-		margin: 0 5px;
-		line-height: 18px;
-		font-size: 12px;
+  h2 {
+    margin: 5px 0;
+    padding: 0;
+    font-size: 20px;
+  }
 
-		&:not(:first-child) {
-			margin-top: 19px;
-		}
-	}
+  p {
+    margin: 0 5px;
+    line-height: 18px;
+    font-size: 12px;
 
-	div {
-		position: relative;
-		height: 80px;
+    &:not(:first-child) {
+      margin-top: 19px;
+    }
+  }
 
-		.panel-indicator {
-			background: #fff;
+  div {
+    position: relative;
+    height: 80px;
 
-			&#num-left-indicator-example {
-				left: 100px;
-				bottom: 40px;
-			}
-			&#page-nav-indicator-example {
-				left: 247px;
-			}
-		}
+    .panel-indicator {
+      background: #fff;
 
-		img {
-			position: absolute;
+      &#num-left-indicator-example {
+        left: 100px;
+        bottom: 40px;
+      }
+      &#page-nav-indicator-example {
+        left: 247px;
+      }
+    }
 
-			&#num-left-image {
-				right: 80px;
-			}
+    img {
+      position: absolute;
 
-			&#page-nav-image {
-				left: 50px;
-			}
-		}
+      &#num-left-image {
+        right: 80px;
+      }
 
-		> span {
-			position: absolute;
-			letter-spacing: 0;
-			font-size: 10px;
+      &#page-nav-image {
+        left: 50px;
+      }
+    }
 
-			&.label {
-				top: 50%;
-				left: 10px;
-			}
+    > span {
+      position: absolute;
+      letter-spacing: 0;
+      font-size: 10px;
 
-			&.first-one {
-				right: 20px;
-				bottom: 10px;
-				width: 100px;
-			}
+      &.label {
+        top: 50%;
+        left: 10px;
+      }
 
-			&.second-one {
-				left: 0;
-				bottom: 0;
-			}
+      &.first-one {
+        right: 20px;
+        bottom: 10px;
+        width: 100px;
+      }
 
-			&.third-one {
-				left: 245px;
-				bottom: 0;
-			}
+      &.second-one {
+        left: 0;
+        bottom: 0;
+      }
 
-			&.fourth-one {
-				bottom: 0;
-				right: 100px;
-			}
-		}
-	}
+      &.third-one {
+        left: 245px;
+        bottom: 0;
+      }
 
-	.close-tab {
-		position: absolute;
-		right: -80px;
-		bottom: -25px;
+      &.fourth-one {
+        bottom: 0;
+        right: 100px;
+      }
+    }
+  }
 
-		background-color: #333;
+  .close-tab {
+    position: relative;
+    right: -380px;
+    bottom: 190px;
+   
+    background-color: #333;
 
-		color: #fff;
-		font-size:16px;
-		font-weight: 900;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 900;
 
-		padding: 10px 60px;
-		transform: rotate(-45deg);
-	}
+    padding: 10px 60px;
+    transform: rotate(-45deg);
+  }
 }
+
 
 @keyframes blinking {
 	50% {
