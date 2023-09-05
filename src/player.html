@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Materia Widget Player</title>
+		<title> Last Chance Cadet Materia Widget </title>
 		<meta charset="utf-8" />
 
 		<!-- STYLESHEETS -->
@@ -39,13 +39,18 @@
 			<div ng-class="{'screenAnimate': pageAnimate}">
 				<ul class="column column1">
 					<li id="question-choice {{$index}}" class="word {{getMatchColor(question)}}"
+					tabindex="0"
+					role="term"
+					aria-label="{{'Question: ' + ($index+1) + ' of ' + pages[currentPage].questions.length + ': ' + question.text 
+					+ ', ' + (isInMatch(question) ? 'Matched with: ' + getMatchWith(question) 
+					: 'Unmatched.') + (checkForQuestionAudio($index) ? ' This question has an audio clue.' : '')}}"
 						ng-repeat="question in pages[currentPage].questions"
 						ng-click="selectQuestion(question)"
 						ng-mouseover="drawPrelineToLeft(question)"
 						ng-mouseleave="unapplyHoverSelections()"
 						ng-class="{'selected-word' : applyQuestionClass($index),
 							'matched' : isInMatch(question)}"
-						tabindex="0">
+						>
 
 						<div class="word-text">
 							<span class="item-number">{{$index + 1}}</span>
@@ -200,13 +205,17 @@
 
 				<ul class="column column2">
 					<li id="answer-choice {{$index}}" class="word {{getMatchColor(answer)}}"
+					 tabindex="0"
+					role="definition"
+					aria-label="{{'Answer. ' + ($index+1) + ' of ' + pages[currentPage].answers.length + ': ' 
+					+ answer.text + ', ' + (isInMatch(answer) ? 'Matched with: ' + getMatchWith(answer) 
+					: 'Unmatched.') + (checkForAnswerAudio($index) ? ' This answer has an audio clue.' : '')}}"
 						ng-repeat="answer in pages[currentPage].answers"
 						ng-click="selectAnswer(answer)"
 						ng-mouseover="drawPrelineToRight(answer)"
 						ng-mouseleave="unapplyHoverSelections()"
 						ng-class="{'selected-word' : applyAnswerClass($index),
-							'matched' : isInMatch(answer)}"
-						tabindex="0">
+							'matched' : isInMatch(answer)}">
 						<span class='clickable'></span>
 						<div class="word-text">
 							<span class="item-letter">{{getItemLetter($index)}}</span>
@@ -347,52 +356,68 @@
 			Help
 		</section>
 
-		<section id='instructions'
-			ng-class="{'visible': helpVisible}"
-			ng-click='helpVisible = false'>
-			<aside>A NewMedia Game</aside>
-			<h1>
-				<span>Last Chance Cadet</span>
-				<span>Instruction Manual</span>
-			</h1>
-			<h2>How to Play:</h2>
-			<p>
-				The objective in Last Chance Cadet is to <b>match the astronauts to their corresponding rockets</b>. Use the mouse to connect the tow cable from each rocket to an astronaut.
-			</p>
-			<p>
-				You need to match <b>all</b> astronauts. You can see the number of astronauts still needing help by the dial on the bottom right.
-			</p>
-			<div>
-				<span class='label'>Figure 1</span>
-				<section id='num-left-indicator-example' class='panel-indicator'>
-					<span class='point-right'>Astronauts Left</span>
-				</section>
-				<img id='num-left-image' src='assets/svg/numleft.svg'/>
-				<span class='first-one'>Just one more astronaut left to save!</span>
-			</div>
-			<p>
-				Sometimes not all of the astronauts are on the screen at one time - they can be split up among pages. You can use the page selection buttons to move between pages.
-			</p>
-			<div>
-				<span class='label'>Figure 2</span>
-				<section id='page-nav-indicator-example' class='panel-indicator'>
-					<span class='point-left'>Current Page</span>
-				</section>
-				<img id='page-nav-image' src='assets/svg/pagenav.svg'/>
-				<span class='second-one'>The page shown on screen</span>
-				<span class='third-one'>Go back a page</span>
-				<span class='fourth-one'>Go forward a page</span>
-			</div>
-			<p>
-				Once you have matched every astronaut to a rocket, the <b>Finish</b> button will glow. Press <b>Finish</b> to pull the astronauts in. Any incorrect matches will lead to stranded astronauts!
-			</p>
-			<p>
-				Upon completion you will receive your score.
-			</p>
-			<div class='close-tab'>
-				Click to
-				<br/>close!
-			</div>
-		</section>
+	
+   <section id='instructions'
+            ng-class="{'visible': helpVisible}"
+            ng-click='helpVisible = false'
+			tabindex="0">
+            <div class='scrollable-container'>
+            <aside>A NewMedia Game</aside>
+            <h1>
+                <span>Last Chance Cadet</span>
+                <span>Instruction Manual </span>
+            </h1>
+            
+           <br>  <h2>How to Play:</h2>
+            <p>
+                The objective in Last Chance Cadet is to <b>match the astronauts to their corresponding rockets</b>. Use the mouse to connect the tow cable from each rocket to an astronaut.
+            </p>
+            <p>
+                You need to match <b>all</b> astronauts. You can see the number of astronauts still needing help by the dial on the bottom right.
+            </p>
+            <div>
+                <span class='label'>Figure 1</span>
+                <section id='num-left-indicator-example' class='panel-indicator'>
+                    <span class='point-right'>Astronauts Left</span>
+                </section>
+                <img id='num-left-image' src='assets/svg/numleft.svg'/>
+                <span class='first-one'>Just one more astronaut left to save!</span>
+            </div>
+            <p>
+                Sometimes not all of the astronauts are on the screen at one time - they can be split up among pages. You can use the page selection buttons to move between pages.
+            </p>
+            <div>
+                <span class='label'>Figure 2</span>
+                <section id='page-nav-indicator-example' class='panel-indicator'>
+                    <span class='point-left'>Current Page</span>
+                </section>
+                <img id='page-nav-image' src='assets/svg/pagenav.svg'/>
+                <span class='second-one'>The page shown on screen</span>
+                <span class='third-one'>Go back a page</span>
+                <span class='fourth-one'>Go forward a page</span>
+            </div>
+            <p>
+                Once you have matched every astronaut to a rocket, the <b>Finish</b> button will glow. Press <b>Finish</b> to pull the astronauts in. Any incorrect matches will lead to stranded astronauts!
+            </p>
+          
+                <h3>Keyboard:</h3>
+            <p>
+                Use <strong>tab </strong> and <strong> shift-tab </strong> to move between items and buttons at the bottom.
+                Use <strong> enter </strong> or <strong> space </strong> to select an item to match. 
+                Use <strong> left </strong> arrow and <strong>right </strong> arrow to quickly switch between the left and right side.
+            </p>
+            <p>
+                Upon completion you will receive your score. 
+            </p> <br>
+			
+
+   </div>
+
+                <div class='close-tab'>
+                  Click to
+                <br/> close!
+             </div>
+               
+        </section>
 	</body>
 </html>

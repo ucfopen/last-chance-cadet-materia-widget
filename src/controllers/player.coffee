@@ -327,6 +327,15 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 
 		return false
 
+	$scope.getMatchWith = (item) ->
+		if item.type == 'question'
+			a = $scope.matches.find( (match) -> match.questionId == item.id)
+			if a then return $scope.pages[a.matchPageId].answers[a.answerIndex].text
+
+		else if item.type == 'answer'
+			q = $scope.matches.find( (match) -> match.answerId == item.id)
+			if q then return $scope.pages[q.matchPageId].questions[q.questionIndex].text
+
 	$scope.drawPrelineToRight = (hoverItem) ->
 		elementId = hoverItem.id
 		# get the index of the item in the current page by finding it with its id
@@ -510,6 +519,14 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 				if matchesPerPage[page] < pairsPerPage[page]
 					if matchesPerPage[$scope.currentPage] == pairsPerPage[$scope.currentPage]
 						$scope.unfinishedPagesAfter = true
+
+	_assistiveNotification = (msg) ->
+		notificationEl = document.getElementById('assistive-notification')
+		if notificationEl then notificationEl.innerHTML = msg
+
+	_assistiveAlert = (msg) ->
+		alertEl = document.getElementById('assistive-alert')
+		if alertEl then alertEl.innerHTML = msg
 
 	Materia.Engine.start materiaCallbacks
 ]
