@@ -323,22 +323,22 @@
 			</section>
 
 			<section id="page-selector" class='button-panel'>
-				<span id="previous-page" class="button"
+				<button id="previous-page" 
 					aria-label="{{ 'Return to page ' + (currentPage+2) + ' of ' + totalPages + '. ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page.' }}"
 					ng-click="changePage('previous')"
 					tabindex="0">
 					<span class='arrow'></span>
 					<span class='overlay'
 						ng-class="{'blink': unfinishedPagesBefore}"></span>
-				</span>
-				<span id="next-page" class="button"
+			</button>
+				<button id="next-page" 
 					aria-label="{{ 'Advance to page ' + (currentPage+2) + ' of ' + totalPages + '. ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page.' }}"
 					ng-click="changePage('next')"
 					tabindex="0">
 					<span class='arrow'></span>
 					<span class='overlay'
 						ng-class="{'blink': unfinishedPagesAfter}"></span>
-				</span>
+		</button>
 			</section>
 			<section class='button-panel'></section>
 
@@ -366,10 +366,16 @@
 		<button id='help-button'
 			ng-click='helpVisible = !helpVisible'
 			aria-label="Keyboard Instructions"
-			aria-describedby="keyboard-instructions-description"
+			aria-describedby="instructions"
 			tabindex="1">
 			Help
 		</button>
+
+		<div id="instructions">
+        Select a question from the question list by using space or enter. Match it to an answer by selecting
+		one from the answer list and using space or enter to confirm your choice. Use the left and right arrow keys to quickly switch
+		between the question and answer lists.
+		</div>
 
 	
    <section id='instructions'
@@ -420,11 +426,12 @@
 
 			<h3>Keyboard Instructions:</h3>
 
-		    <div id="keyboard-instructions-description"> 
+		    <div > 
 	
             <p>
                 Use <strong>tab </strong> and <strong> shift-tab </strong> to move between items and buttons at the bottom.
                 Use <strong> enter </strong> or <strong> space </strong> to select an item to match. 
+				Use <strong>left arrow </strong> or <strong> right arrow </strong> to quickly switch between the left and right side.
             </p>
 		
             <p>

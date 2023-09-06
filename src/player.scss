@@ -1263,7 +1263,7 @@ footer {
 			}
 		}
 
-		.button {
+		#previous-page, #next-page {
 			position: absolute;
 			display: block;
 			top: 3px;
@@ -1292,13 +1292,14 @@ footer {
 				content: '';
 				position: absolute;
 				display: block;
-				left: 1px;
+				left: 0px;
 
 				border: 1px solid #4f4f4f;
 				border-radius: 25px;
 
 				width: 26px;
 				height: 26px;
+				bottom: 0px;
 
 				background: linear-gradient(to bottom, #808080 0%, #565656 100%);
 			}
@@ -1324,7 +1325,7 @@ footer {
 				display: block;
 				z-index: 1;
 				top: 4px;
-				left: 5px;
+				left: 4px;
 
 				width: 18px;
 				height: 18px;
@@ -1857,3 +1858,4 @@ and (-webkit-min-device-pixel-ratio: 2){
   position:absolute;
   opacity:0;
 }
+
