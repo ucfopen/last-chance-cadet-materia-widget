@@ -30,7 +30,6 @@
 					</span>
 				</div>
 			</div>
-	
 		</header>
 
 		<div class="assistive-element" id="assistive-notification" aria-live="assertive"></div>
@@ -324,7 +323,7 @@
 
 			<section id="page-selector" class='button-panel'>
 				<button id="previous-page" 
-					aria-label="{{ 'Return to page ' + (currentPage+2) + ' of ' + totalPages + '. ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page.' }}"
+					aria-label="{{ 'Return to previous page ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page.' }}"
 					ng-click="changePage('previous')"
 					tabindex="0">
 					<span class='arrow'></span>
@@ -332,7 +331,7 @@
 						ng-class="{'blink': unfinishedPagesBefore}"></span>
 			</button>
 				<button id="next-page" 
-					aria-label="{{ 'Advance to page ' + (currentPage+2) + ' of ' + totalPages + '. ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page.' }}"
+					aria-label="{{ 'Advance to next page ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page.' }}"
 					ng-click="changePage('next')"
 					tabindex="0">
 					<span class='arrow'></span>
@@ -342,7 +341,7 @@
 			</section>
 			<section class='button-panel'></section>
 
-			<section id='finish-button'
+			<button id='finish-button'
 				ng-click="submit()"
 				tabindex="0">
 				<div class='overlay blink'
@@ -359,24 +358,19 @@
 							'stroke-dashoffset': circumference - (getPercentDone() * circumference)
 						}"/>
 				</svg>
-			</section>
+			</button>
 
 		</footer>
 
 		<button id='help-button'
 			ng-click='helpVisible = !helpVisible'
+			aria-describedby="keyboard-instructions"
 			aria-label="Keyboard Instructions"
-			aria-describedby="instructions"
 			tabindex="1">
 			Help
 		</button>
 
-		<div id="instructions">
-        Select a question from the question list by using space or enter. Match it to an answer by selecting
-		one from the answer list and using space or enter to confirm your choice. Use the left and right arrow keys to quickly switch
-		between the question and answer lists.
-		</div>
-
+	
 	
    <section id='instructions'
             ng-class="{'visible': helpVisible}"
@@ -424,11 +418,11 @@
                 Once you have matched every astronaut to a rocket, the <b>Finish</b> button will glow. Press <b>Finish</b> to pull the astronauts in. Any incorrect matches will lead to stranded astronauts!
             </p>
 
-			<h3>Keyboard Instructions:</h3>
+			<h3> Keyboard Instructions </h3>
 
 		    <div > 
 	
-            <p>
+            <p id ="keyboard-instructions">
                 Use <strong>tab </strong> and <strong> shift-tab </strong> to move between items and buttons at the bottom.
                 Use <strong> enter </strong> or <strong> space </strong> to select an item to match. 
 				Use <strong>left arrow </strong> or <strong> right arrow </strong> to quickly switch between the left and right side.
@@ -448,6 +442,6 @@
                 <br/> close!
              </div>
                
-        </section>
+			</section>
 	</body>
 </html>
