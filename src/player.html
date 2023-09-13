@@ -16,10 +16,8 @@
 
 		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular.min.js"></script>
 
-		<!-- MAIN PLAYER SCRIPT -->
-		<script src="player.js"></script>
 	</head>
-	<body ng-app='matching' ng-controller='matchingPlayerCtrl' ng-keydown='keydownHandler($event)'>
+	<body ng-controller='matchingPlayerCtrl' ng-keydown='keydownHandler($event)'>
 		<header id="header">
 			<div id='titleContainer'>
 				<h1>{{ title }}</h1>
@@ -394,5 +392,7 @@
 				<br/>close!
 			</div>
 		</section>
+		<!-- MAIN PLAYER SCRIPT -->
+		<script src="player.js"></script>
 	</body>
 </html>

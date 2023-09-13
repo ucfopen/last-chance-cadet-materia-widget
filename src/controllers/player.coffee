@@ -1,6 +1,5 @@
-Matching = angular.module 'matching'
-
-Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope, $timeout, $sce) ->
+angular.module 'matching'
+.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope, $timeout, $sce) ->
 	materiaCallbacks = {}
 	$scope.title = ''
 
@@ -513,3 +512,5 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 
 	Materia.Engine.start materiaCallbacks
 ]
+
+angular.bootstrap(document, ['matching'])
