@@ -23,6 +23,8 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 	$scope.unfinishedPagesBefore = false
 	$scope.unfinishedPagesAfter = false
 
+	
+
 	$scope.qset = {}
 
 	$scope.circumference = Math.PI * 80
@@ -162,12 +164,6 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 		_clearSelections()
 		$scope.pageAnimate = true
 
-		_updateCompletionStatus = () ->
-		$scope. completePerPage  = []
-		for match in $scope.matches
-			if !$scope.completePerPage[match.matchPageId] then $scope.completePerPage[match.matchPageId] = 1
-			else $scope.completePerPage[match.matchPageId]++
-
 		$scope.pageNext = (direction == 'next')
 		$timeout ->
 			$scope.currentPage-- if direction == 'previous'
@@ -183,6 +179,15 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 		if _boardElement then _boardElement.focus()
 		if direction == 'next' then _assistiveNotification 'Page incremented. You are on the next page.'
 		else if direction == 'previous' then _assistiveNotification 'Page decremented. You are on the previous page.'
+
+
+	_updateCompletionStatus = () ->
+		$scope.completePerPage  = []
+		for match in $scope.matches
+			if !$scope.completePerPage[match.matchPageId] then $scope.completePerPage[match.matchPageId] = 1
+			else $scope.completePerPage[match.matchPageId]++
+		console.log($scope.completePerPage)
+		console.log($scope.currentPage)
         
 		
 
@@ -205,7 +210,9 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 			answerIndex: $scope.selectedQA[$scope.currentPage].answer
 			matchPageId: $scope.currentPage
 			color: _getColor()
+	
 		}
+		_updateCompletionStatus()
 
 		if $scope.matches.length == $scope.totalItems then _assistiveAlert 'All matches complete. The finish button is now available.'
 
@@ -293,12 +300,6 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 	_clearSelections = () ->
 		$scope.selectedQA[$scope.currentPage].question = -1
 		$scope.selectedQA[$scope.currentPage].answer = -1
-
-	_updateCompletionStatus = () ->
-		$scope.completePerPage  = []
-		for match in $scope.matches
-			if !$scope.completePerPage[match.matchPageId] then $scope.completePerPage[match.matchPageId] = 1
-			else $scope.completePerPage[match.matchPageId]++
 
 
 	_updateLines = () ->
@@ -547,12 +548,28 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 			randomIndex = Math.floor Math.random() * (index + 1)
 			[qsetItems[index], qsetItems[randomIndex]] = [qsetItems[randomIndex], qsetItems[index]]
 
+	$scope.setIsFirstPage = () ->
+		isFirstPage = false
+		if $scope.currentPage == 0
+			isFirstPage = true
+		return isFirstPage
+	
+	$scope.setIsLastPage = () ->
+		isLastPage = false
+		if $scope.currentPage == $scope.pages.length - 1
+			isLastPage = true
+		return isLastPage
+		
+	
+	
+	
 	
 
 	_checkUnfinishedPages = () ->
 		$scope.unfinishedPagesBefore = false
 		$scope.unfinishedPagesAfter = false
-
+		console.log("prev is " + $scope.unfinishedPagesBefore)
+		console.log("next is " + $scope.unfinishedPagesAfter)
 		pairsPerPage = []
 		matchesPerPage = []
 		for index in [0..$scope.pages.length-1]
@@ -566,13 +583,12 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 				if matchesPerPage[page] < pairsPerPage[page]
 					if matchesPerPage[$scope.currentPage] == pairsPerPage[$scope.currentPage]
 						$scope.unfinishedPagesBefore = true
+
 		unless $scope.currentPage == $scope.pages.length - 1
 			for page in [$scope.currentPage..pairsPerPage.length]
 				if matchesPerPage[page] < pairsPerPage[page]
 					if matchesPerPage[$scope.currentPage] == pairsPerPage[$scope.currentPage]
 						$scope.unfinishedPagesAfter = true
-
-
-
+						
 	Materia.Engine.start materiaCallbacks
 ]
