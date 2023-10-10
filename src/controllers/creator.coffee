@@ -175,5 +175,3 @@ angular.module 'matching', ['ngAnimate']
 
 	Materia.CreatorCore.start materiaCallbacks
 ]
-
-angular.bootstrap(document, ['matching'])

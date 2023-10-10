@@ -11,10 +11,10 @@ const entries = {
 		path.join(srcPath, 'creator.html'),
 		path.join(srcPath, 'modules', 'matching.coffee'),
 		path.join(srcPath, 'controllers', 'creator.coffee'),
-		path.join(srcPath, 'directives', 'audioControls.coffee'),
 		path.join(srcPath, 'directives', 'focusMe.coffee'),
 		path.join(srcPath, 'directives', 'ngEnter.coffee'),
 		path.join(srcPath, 'directives', 'inputStateManager.coffee'),
+		path.join(srcPath, 'directives', 'audioControls.coffee'),
 		path.join(srcPath, 'creator.scss'),
 	],
 	'player': [
@@ -26,6 +26,7 @@ const entries = {
 	],
 	'audioControls': [
 		path.join(srcPath, 'audioControls.html'),
+		path.join(srcPath, 'directives', 'audioControls.coffee'),
 		path.join(srcPath, 'audioControls.scss'),
 	]
 }

@@ -512,5 +512,3 @@ angular.module 'matching'
 
 	Materia.Engine.start materiaCallbacks
 ]
-
-angular.bootstrap(document, ['matching'])
