@@ -1,9 +1,9 @@
 # https://stackoverflow.com/questions/16587961/is-there-already-a-canvas-drawing-directive-for-angularjs-out-there
 # make a directive to enable Last Chance Cadet-style drawing between questions and answers
 
-Matching = angular.module 'matching'
+angular.module 'matching'
 
-Matching.directive 'ngDraw', ->
+.directive 'ngDraw', ->
 	restrict: 'A'
 	link: (scope, element) ->
 		ctx = element[0].getContext '2d'
