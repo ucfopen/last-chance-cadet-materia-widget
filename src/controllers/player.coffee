@@ -22,6 +22,8 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 
 	$scope.unfinishedPagesBefore = false
 	$scope.unfinishedPagesAfter = false
+	helpModal = document.getElementById("instructions");
+	helpModal.inert = true;
 
 	
 
@@ -47,14 +49,6 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 	CIRCLE_OFFSET = 40
 	PROGRESS_BAR_LENGTH = 160
 
-	_assistiveNotification = (msg) ->
-		notificationEl = document.getElementById('assistive-notification')
-		if notificationEl then notificationEl.innerHTML = msg
-
-	_assistiveAlert = (msg) ->
-		alertEl = document.getElementById('assistive-alert')
-		if alertEl then alertEl.innerHTML = msg
-	
 
 	materiaCallbacks.start = (instance, qset) ->
 		$scope.qset = qset
@@ -186,10 +180,9 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 		for match in $scope.matches
 			if !$scope.completePerPage[match.matchPageId] then $scope.completePerPage[match.matchPageId] = 1
 			else $scope.completePerPage[match.matchPageId]++
-		console.log($scope.completePerPage)
-		console.log($scope.currentPage)
-        
-		
+
+	
+       
 
 
 
@@ -568,8 +561,7 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 	_checkUnfinishedPages = () ->
 		$scope.unfinishedPagesBefore = false
 		$scope.unfinishedPagesAfter = false
-		console.log("prev is " + $scope.unfinishedPagesBefore)
-		console.log("next is " + $scope.unfinishedPagesAfter)
+
 		pairsPerPage = []
 		matchesPerPage = []
 		for index in [0..$scope.pages.length-1]
@@ -589,6 +581,39 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 				if matchesPerPage[page] < pairsPerPage[page]
 					if matchesPerPage[$scope.currentPage] == pairsPerPage[$scope.currentPage]
 						$scope.unfinishedPagesAfter = true
+
+	$scope.unfocused = () ->
+		$scope.helpVisible = !$scope.helpVisible
+		helpButton = document.getElementById("help-button");
+		gameBoard = document.getElementById("gameboard");
+		panelButtons = document.getElementById("page-selector");
+		finishButton = document.getElementById("finish-button");
+		
+
+		panelButtons.inert = true;
+		helpButton.inert = true;
+		gameBoard.inert = true;
+		finishButton.inert = true;
+
+		helpModal.inert = false;
+
+	$scope.focused = () ->
+		
+		$scope.helpVisible = false
+		helpButton = document.getElementById("help-button");
+		gameBoard = document.getElementById("gameboard");
+		panelButtons = document.getElementById("page-selector");
+		finishButton = document.getElementById("finish-button");
+		
+
+		panelButtons.inert = false;
+		helpButton.inert = false;
+		gameBoard.inert = false;
+		finishButton.inert = false;
+
+		
+		helpModal.inert = true;
+		
 						
 	Materia.Engine.start materiaCallbacks
 ]

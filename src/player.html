@@ -32,8 +32,64 @@
 			</div>
 		</header>
 
-		<div class="assistive-element" id="assistive-notification" aria-live="assertive"></div>
-		<div class="assistive-element" id="assistive-alert" aria-live="assertive"></div>
+		<button id='help-button'
+			ng-click= "unfocused()"
+			aria-label="Keyboard Instructions"
+			tabindex="0">
+			Help
+		</button>
+
+		  <dialog id='instructions'
+            ng-class="{'visible': helpVisible}"
+			tabindex="0"
+			role="alertdialog"
+			aria-modal="true"
+			aria-describedby="keyboard-instructions">
+            <div class='scrollable-container'>
+            <aside>A NewMedia Game</aside>
+            <h1>
+                <span>Last Chance Cadet</span>
+                <span>Instruction Manual </span>
+            </h1>
+            <br>
+		    <div > 
+
+            <p>
+               Match the astronauts to their corresponding rockets. Use the mouse to connect the tow cable from each rocket to an astronaut.
+            </p>
+
+            <p>
+                You need to match <b>all</b> astronauts. You can see the number of astronauts still needing help by the dial on the bottom right.
+            </p>
+
+			<p>
+                Once you have matched every astronaut to a rocket, the <b>Finish</b> button will glow. Press <b>Finish</b> to pull the astronauts in. Any incorrect matches will lead to stranded astronauts!
+            </p>
+
+			<h2> Keyboard Instructions </h2>
+
+		    <div > 
+	
+            <p  id="keyboard-instructions"
+			tabindex="0">
+                Use <strong>tab </strong> and <strong> shift-tab </strong> to move between items and buttons at the bottom.
+                Use <strong> enter </strong> or <strong> space </strong> to select an item to match. 
+				Use <strong>left arrow </strong> or <strong> right arrow </strong> to quickly switch between the left and right side.
+            </p>
+
+			</div>
+			 <br>
+			 </div>
+
+			   <button class='close-tab'
+			   ng-click='focused()'  
+			   aria-label="Close"
+			   tabindex="0">
+                close
+			   </button>
+               
+			</dialog>
+		
 
 		<section
 		 class="gameboard"
@@ -365,61 +421,11 @@
 
 		</footer>
 
-		<button id='help-button'
-			ng-click='helpVisible = !helpVisible'
-			aria-label="Instructions"
-			tabindex="1">
-			Help
-		</button>
+		
 
 	
 	
-   <dialog id='instructions'
-            ng-class="{'visible': helpVisible}"
-			tabindex="0"
-			role="alertdialog"
-			aria-modal="true"
-			aria-describedby="keyboard-instructions">
-            <div class='scrollable-container'>
-            <aside>A NewMedia Game</aside>
-            <h1>
-                <span>Last Chance Cadet</span>
-                <span>Instruction Manual </span>
-            </h1>
-            <br>
-		    <div > 
-            <p>
-               Match the astronauts to their corresponding rockets. Use the mouse to connect the tow cable from each rocket to an astronaut.
-            </p>
-            <p>
-                You need to match <b>all</b> astronauts. You can see the number of astronauts still needing help by the dial on the bottom right.
-            </p>
-			<p>
-                Once you have matched every astronaut to a rocket, the <b>Finish</b> button will glow. Press <b>Finish</b> to pull the astronauts in. Any incorrect matches will lead to stranded astronauts!
-            </p>
-
-			<h2> Keyboard Instructions </h2>
-
-		    <div > 
-	
-            <p  id="keyboard-instructions"
-			tabindex="1">
-                Use <strong>tab </strong> and <strong> shift-tab </strong> to move between items and buttons at the bottom.
-                Use <strong> enter </strong> or <strong> space </strong> to select an item to match. 
-				Use <strong>left arrow </strong> or <strong> right arrow </strong> to quickly switch between the left and right side.
-            </p>
-
-			</div>
-			 <br>
-			 </div>
-
-			   <button class='close-tab'
-			   ng-click='helpVisible = false'
-			   tabindex="1">
-                close
-			   </button>
-               
-			</dialog>
+ 
 
 
               
