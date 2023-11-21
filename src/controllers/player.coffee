@@ -25,6 +25,11 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 	helpModal = document.getElementById("instructions");
 	helpModal.inert = true;
 
+
+
+	_assistiveAlert = (msg) ->
+		alertEl = document.getElementById('assistive-alert')
+		if alertEl then alertEl.innerHTML = msg
 	
 
 	$scope.qset = {}
@@ -171,8 +176,8 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 			, ANIMATION_DURATION*1.1
 
 		if _boardElement then _boardElement.focus()
-		if direction == 'next' then _assistiveNotification 'Page incremented. You are on the next page.'
-		else if direction == 'previous' then _assistiveNotification 'Page decremented. You are on the previous page.'
+		if direction == 'next' then _assistiveAlert 'Page incremented. You are on the next page.'
+		else if direction == 'previous' then _assistiveAlert 'Page decremented. You are on the previous page.'
 
 
 	_updateCompletionStatus = () ->
@@ -287,8 +292,8 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 
 			$scope.unapplyHoverSelections()
 
-		else if $scope.selectedQA[$scope.currentPage].question != -1 then _assistiveNotification $scope.selectedQuestion.text + ' selected.'
-		else if $scope.selectedQA[$scope.currentPage].answer != -1 then _assistiveNotification $scope.selectedAnswer.text + ' selected.'
+		else if $scope.selectedQA[$scope.currentPage].question != -1 then _assistiveAlert $scope.selectedQuestion.text + ' selected.'
+		else if $scope.selectedQA[$scope.currentPage].answer != -1 then _assistiveAlert $scope.selectedAnswer.text + ' selected.'
 
 	_clearSelections = () ->
 		$scope.selectedQA[$scope.currentPage].question = -1
