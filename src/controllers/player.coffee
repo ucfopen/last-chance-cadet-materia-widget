@@ -160,6 +160,7 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 		return false if direction == 'previous' and $scope.currentPage <= 0
 		return false if direction == 'next' and $scope.currentPage >= $scope.totalPages - 1
 
+		
 		_clearSelections()
 		$scope.pageAnimate = true
 
@@ -175,8 +176,8 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 				$scope.pageAnimate = false
 			, ANIMATION_DURATION*1.1
 
-		if _boardElement then _boardElement.focus()
-		if direction == 'next' then _assistiveAlert 'Page incremented. You are on the next page.'
+		if _boardElement then _boardElement.focus()										 
+		if direction == 'next' then _assistiveAlert 'Page incremented. You are on the next page.' 
 		else if direction == 'previous' then _assistiveAlert 'Page decremented. You are on the previous page.'
 
 
@@ -185,7 +186,7 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 		for match in $scope.matches
 			if !$scope.completePerPage[match.matchPageId] then $scope.completePerPage[match.matchPageId] = 1
 			else $scope.completePerPage[match.matchPageId]++
-
+	
 	
        
 
@@ -276,10 +277,14 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 				$scope.answerCircles[$scope.currentPage][match2_AIndex].color = 'c0'
 				$scope.matches.splice indexOfAnswer, 1
 
+				
+
+			
 			_assistiveAlert $scope.pages[$scope.currentPage].questions[$scope.selectedQA[$scope.currentPage].question].text + ' matched with ' + 
-					$scope.pages[$scope.currentPage].answers[$scope.selectedQA[$scope.currentPage].answer].text
+					$scope.pages[$scope.currentPage].answers[$scope.selectedQA[$scope.currentPage].answer].text + '. ' +
+					($scope.pages[$scope.currentPage].questions.length - ((parseInt($scope.completePerPage[$scope.currentPage], 10) || 0) + 1)) + ' of ' + $scope.pages[$scope.currentPage].questions.length + ' matches left on current page '
 
-
+	
 			_pushMatch()
 
 			_applyCircleColor()
@@ -558,11 +563,6 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 			isLastPage = true
 		return isLastPage
 		
-	
-	
-	
-	
-
 	_checkUnfinishedPages = () ->
 		$scope.unfinishedPagesBefore = false
 		$scope.unfinishedPagesAfter = false
