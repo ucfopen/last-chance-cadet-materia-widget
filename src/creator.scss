@@ -111,15 +111,27 @@ body {
 		align-items: center;
 		justify-content: center;
 
-		.numInput {
-			width: 30px;
-			margin-top: 10px;
-			margin-bottom: 10px;
+		.numInput-wrapper {
+			display: flex;
+			justify-content: center;
+			width: 100%;
+			align-items: center;
+
+			.numInput {
+				width: 30px;
+				margin: 2px 5px 0 0;
+			}
 		}
 
 		.enable-qb-question {
+
 			margin-top: 15px;
 			margin-bottom: 15px;
+
+			.enable-qb-options {
+				display: flex;
+				justify-content: center;
+			}
 		}
 
 	}
@@ -128,11 +140,16 @@ body {
 		display: block;
 		color: white;
 		border-radius: 3px;
-		margin-bottom: 10px;
+		margin-bottom: 15px;
 		height: 30px;
-		width: 60px;
+		width: 80px;
 		background-color: #3393e3;
+
+		&:hover {
+			background-color: #0f5193;
+		}
 	}
+
 }
 
 .overlay {
@@ -159,12 +176,17 @@ body {
 
 	.qb-button {
 		height: 40px;
-		width: 100px;
+		width: 120px;
 		align-content: center;
 		color: black;
-		background-color: #caa3e9;
-		border: 2px solid #3393e3;
-		border-radius: 3px;
+		background-color: #c28bee;
+		box-shadow: 2px 2px 5px white;
+		border-radius: 5px;
+
+		&:hover {
+			background-color: #453b5c;
+			color: white;
+		}
 	}
 
 	.bottom {
