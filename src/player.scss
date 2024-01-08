@@ -1589,7 +1589,6 @@ footer {
   top: 0;
   z-index: 1000;
   //overflow-y: auto;
-  cursor: pointer;
 border-radius: 4%;
 
   background-color: #fff;
@@ -1665,8 +1664,8 @@ border-radius: 4%;
     position: relative;
     right: -223px;
     top: -2px;
-	border: none;
-
+	  border: none;
+    cursor: pointer;
     background-color: #333;
     border-radius: 50%;
     color: #fff;

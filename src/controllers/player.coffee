@@ -166,8 +166,8 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 
 		$scope.pageNext = (direction == 'next')
 		$timeout ->
-			$scope.currentPage-- if direction == 'previous'
-			$scope.currentPage++ if direction == 'next'
+			# $scope.currentPage-- if direction == 'previous'
+			# $scope.currentPage++ if direction == 'next'
 			_checkUnfinishedPages()
 		, ANIMATION_DURATION/3
 
@@ -177,21 +177,19 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 			, ANIMATION_DURATION*1.1
 
 		if _boardElement then _boardElement.focus()										 
-		if direction == 'next' then _assistiveAlert 'Page incremented. You are on the next page.' 
-		else if direction == 'previous' then _assistiveAlert 'Page decremented. You are on the previous page.'
+		if direction == 'next' then ($scope.currentPage = $scope.currentPage + 1) _assistiveAlert 'Page incremented. You are on the next page. There are ' + 
+		$scope.completePerPage[$scope.currentPage] + ' out of ' + 
+		$scope.pages[$scope.currentPage].questions.length  + ' matches done.'
+		else if direction == 'previous' then ($scope.currentPage = $scope.currentPage - 1) _assistiveAlert 'Page decremented. You are on the previous page. There are ' + 
+		$scope.completePerPage[$scope.currentPage] + " out of " + 
+		$scope.pages[$scope.currentPage].questions.length  + ' matches done.'
 
-
-	_updateCompletionStatus = () ->
-		$scope.completePerPage  = []
-		for match in $scope.matches
-			if !$scope.completePerPage[match.matchPageId] then $scope.completePerPage[match.matchPageId] = 1
-			else $scope.completePerPage[match.matchPageId]++
+	# _updateCompletionStatus = () -> 
+	# 	$scope.completePerPage  = []
+	# 	for match in $scope.matches
+	# 		if !$scope.completePerPage[match.matchPageId] then $scope.completePerPage[match.matchPageId] = 1
+	# 		else $scope.completePerPage[match.matchPageId]++
 	
-	
-       
-
-
-
 	$scope.checkForQuestionAudio = (index) ->
 		$scope.pages[$scope.currentPage].questions[index].asset != undefined
 
@@ -211,7 +209,7 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 			color: _getColor()
 	
 		}
-		_updateCompletionStatus()
+		$scope.completePerPage[$scope.currentPage]++
 
 		if $scope.matches.length == $scope.totalItems then _assistiveAlert 'All matches complete. The finish button is now available.'
 
@@ -278,12 +276,11 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 				$scope.matches.splice indexOfAnswer, 1
 
 				
-
-			
 			_assistiveAlert $scope.pages[$scope.currentPage].questions[$scope.selectedQA[$scope.currentPage].question].text + ' matched with ' + 
 					$scope.pages[$scope.currentPage].answers[$scope.selectedQA[$scope.currentPage].answer].text + '. ' +
-					($scope.pages[$scope.currentPage].questions.length - ((parseInt($scope.completePerPage[$scope.currentPage], 10) || 0) + 1)) + ' of ' + $scope.pages[$scope.currentPage].questions.length + ' matches left on current page '
-
+					($scope.pages[$scope.currentPage].questions.length - ($scope.completePerPage[$scope.currentPage]) - 1) + ' of ' + $scope.pages[$scope.currentPage].questions.length + ' matches left on current page '
+					# ($scope.pages[$scope.currentPage].questions.length - ((parseInt($scope.completePerPage[$scope.currentPage], 10) || 0) + 1)) + ' of ' + $scope.pages[$scope.currentPage].questions.length + ' matches left on current page '
+			
 	
 			_pushMatch()
 
