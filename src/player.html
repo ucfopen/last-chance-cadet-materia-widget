@@ -383,7 +383,7 @@
 			<section id="page-selector" class='button-panel'>
 				<button id="previous-page" 
 					ng-click="changePage('previous')"
-					aria-label="{{ 'Return to previous page ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page. This is the  ' + currentPage + ' page.' }}"
+					aria-label="{{ 'Return to previous page. ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page.'}}"
 					ng-disabled="setIsFirstPage()"
    				    tabindex="{{ setIsFirstPage() ? '-1' : '0' }}">
 					<span class='arrow'></span>
@@ -392,7 +392,7 @@
 			</button>
 				<button id="next-page"
 				    ng-click="changePage('next')" 
-					aria-label="{{ 'Advance to next page ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page. This is the ' + currentPage + ' page.' }}"
+					aria-label="{{ 'Advance to next page. ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page.' }}"
 					ng-disabled="setIsLastPage()"
    				    tabindex="{{ setIsLastPage() ? '-1' : '0' }}">
 					<span class='arrow'></span>
