@@ -143,10 +143,15 @@ body {
 		margin-bottom: 15px;
 		height: 30px;
 		width: 80px;
-		background-color: #3393e3;
+		background-color: #C28BEE;
 
 		&:hover {
 			background-color: #0f5193;
+		}
+
+		&:disabled {
+			background-color: #cccccc;
+			color: white;
 		}
 	}
 
@@ -158,7 +163,7 @@ body {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	z-index: 100;
+	z-index: 101;
 	backdrop-filter: blur(3px);
 }
 
