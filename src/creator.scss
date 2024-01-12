@@ -184,9 +184,9 @@ body {
 		width: 120px;
 		align-content: center;
 		color: black;
+		border-radius  : 5px;
+		border-bottom  : 4px solid rgb(153, 110, 188);
 		background-color: #c28bee;
-		box-shadow: 2px 2px 5px white;
-		border-radius: 5px;
 
 		&:hover {
 			background-color: #453b5c;
