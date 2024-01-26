@@ -25,31 +25,31 @@
 			<div class='logo'></div>
 			<h1 id='title' ng-bind='widget.title' ng-click='showTitleDialog = true'></h1>
 			<div class='link' ng-click='showTitleDialog = true'>Edit...</div>
-			<button class="qb-button" ng-click="questionBankDialog = !questionBankDialog"> Question Bank</button>
+			<button class="qb-button" ng-click="questionBankDialog = !questionBankDialog" ng-disabled="widget.wordPairs.length < 1"> Question Bank</button>
 			<div class='bottom'></div>
 		</div>
 		<div class="question-bank-dialog-wrapper" ng-show= "questionBankDialog">
 			<div class="question-bank-dialog">
 				<div class="enable-qb-question">
-					<strong>Enable question bank? </strong>
+					<label>Enable question bank? </label>
 					<div class="enable-qb-options">
 						<span>
 							<input type="radio" ng-model="enableQuestionBank" ng-value=false> No</input>
-							<input type="radio" ng-model="enableQuestionBank" ng-value=true> Yes</input>
+							<input type="radio" ng-model="enableQuestionBank" ng-value=true ng-change="questionBankVal = widget.wordPairs.length; questionBankValTemp = widget.wordPairs.length"> Yes</input>
 						</span>
 					</div>
 				</div>
 				<div>
 					<span ng-show="enableQuestionBank" >
-						<strong>How many questions to ask? </strong>
+						<label>How many questions to ask? </label>
 						<div class="num-input-wrapper">
-							<input class="num-input" type="number" ng-model="questionBankVal" step="1">
+							<input class="num-input" type="number" ng-model="questionBankValTemp" step="1">
 							<span> out of {{widget.wordPairs.length}} </span>
 						</div>
 					</span>
 				</div>
 			</div>
-			<button class="dialog-close-button" ng-disabled="questionBankVal < 1 || questionBankVal > widget.wordPairs.length" ng-click="questionBankDialog = false">Confirm</button>
+			<button class="dialog-close-button" ng-disabled="questionBankValTemp < 1 || questionBankValTemp > widget.wordPairs.length" ng-click="questionBankDialog = false; questionBankVal = questionBankValTemp">Confirm</button>
 		</div>
 		<section class='main-area'>
 			<div class='titles' ng-show='widget.wordPairs.length'>

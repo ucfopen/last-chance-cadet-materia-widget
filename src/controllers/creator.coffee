@@ -13,6 +13,7 @@ Matching.controller 'matchingCreatorCtrl', ['$scope', '$sce', ($scope, $sce) ->
 	audioRef = []
 	$scope.questionBankDialog = false
 	$scope.enableQuestionBank = false
+	$scope.questionBankValTemp = 1
 	$scope.questionBankVal = 1
 
 	# Adds and removes a pair of textareas for users to input a word pair.
@@ -32,6 +33,7 @@ Matching.controller 'matchingCreatorCtrl', ['$scope', '$sce', ($scope, $sce) ->
 		_items = qset.items[0].items
 		$scope.enableQuestionBank = if qset.options.enableQuestionBank then qset.options.enableQuestionBank else false
 		$scope.questionBankVal = if qset.options.questionBankVal then qset.options.questionBankVal else 1
+		$scope.questionBankValTemp = if qset.options.questionBankVal then qset.options.questionBankVal else 1
 
 		$scope.$apply ->
 			$scope.widget.title = title
@@ -83,6 +85,11 @@ Matching.controller 'matchingCreatorCtrl', ['$scope', '$sce', ($scope, $sce) ->
 
 	$scope.hideCover = ->
 		$scope.showTitleDialog = $scope.showIntroDialog = $scope.showErrorDialog = false
+
+	$scope.validateQuestionBankVal = ->
+		if ($scope.questionBankValTemp >= 1 && $scope.questionBankValTemp <= $scope.widget.wordPairs.length)
+			$scope.questionBankVal = $scope.questionBankValTemp
+
 
 	$scope.autoSize = (pair, audio) ->
 		question = pair.question or ''

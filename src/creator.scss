@@ -192,6 +192,12 @@ body {
 			background-color: #453b5c;
 			color: $white;
 		}
+
+		&:disabled {
+			background-color: #cccccc;
+			color: $white;
+			border-bottom  : 4px solid #cccccc;
+		}
 	}
 
 	.bottom {
