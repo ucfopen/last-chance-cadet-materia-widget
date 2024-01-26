@@ -85,7 +85,7 @@ body {
 	overflow-x: hidden;
 }
 
-.questionBankDialog-wrapper {
+.question-bank-dialog-wrapper {
 	position: fixed;
 	top: 50%;
 	left: 50%;
@@ -102,7 +102,7 @@ body {
 	flex-direction: column;
 	z-index: 200;
 
-	.questionBankDialog {
+	.question-bank-dialog {
 		margin: 15px;
 		width: 100%;
 		position: relative;
@@ -111,13 +111,13 @@ body {
 		align-items: center;
 		justify-content: center;
 
-		.numInput-wrapper {
+		.num-input-wrapper {
 			display: flex;
 			justify-content: center;
 			width: 100%;
 			align-items: center;
 
-			.numInput {
+			.num-input {
 				width: 30px;
 				margin: 2px 5px 0 0;
 			}
@@ -136,7 +136,7 @@ body {
 
 	}
 
-	.dialogCloseButton {
+	.dialog-close-button {
 		display: block;
 		color: $white;
 		border-radius: 3px;
