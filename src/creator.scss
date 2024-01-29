@@ -85,78 +85,6 @@ body {
 	overflow-x: hidden;
 }
 
-.question-bank-dialog-wrapper {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	border: 4px solid #caa3e9;
-	border-radius: 5px;
-	background-color: $white;
-	color: $black;
-	height: 200px;
-	width: 300px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	z-index: 200;
-
-	.question-bank-dialog {
-		margin: 15px;
-		width: 100%;
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-
-		.num-input-wrapper {
-			display: flex;
-			justify-content: center;
-			width: 100%;
-			align-items: center;
-
-			.num-input {
-				width: 30px;
-				margin: 2px 5px 0 0;
-			}
-		}
-
-		.enable-qb-question {
-
-			margin-top: 15px;
-			margin-bottom: 15px;
-
-			.enable-qb-options {
-				display: flex;
-				justify-content: center;
-			}
-		}
-
-	}
-
-	.dialog-close-button {
-		display: block;
-		color: $white;
-		border-radius: 3px;
-		margin-bottom: 15px;
-		height: 30px;
-		width: 80px;
-		background-color: #C28BEE;
-
-		&:hover {
-			background-color: #0f5193;
-		}
-
-		&:disabled {
-			background-color: #cccccc;
-			color: $white;
-		}
-	}
-
-}
-
 .overlay {
 	position: fixed;
 	top: 0;
@@ -180,13 +108,18 @@ body {
 	border-bottom: solid 2px $gray;
 
 	.qb-button {
+
 		height: 40px;
-		width: 120px;
+		width: 150px;
 		align-content: center;
 		color: $black;
-		border-radius  : 5px;
-		border-bottom  : 4px solid #996ebc;
+		line-height: 1;
+		float: right;
+		margin-right: 10px;
+		font-size: 15px;
+		font-family: 'Lato';
 		background-color: #c28bee;
+		cursor: grab;
 
 		&:hover {
 			background-color: #453b5c;
@@ -196,7 +129,11 @@ body {
 		&:disabled {
 			background-color: #cccccc;
 			color: $white;
-			border-bottom  : 4px solid #cccccc;
+		}
+
+		&.gray-out {
+			background-color: $gray;
+			color: $white;
 		}
 	}
 
@@ -653,7 +590,84 @@ body {
 			cursor: pointer;
 		}
 	}
+
 }
+
+.question-bank-dialog {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin: 0;
+	transform: translate(-50%, -50%);
+	background-color: $white;
+	padding: 0;
+	// border-radius: 5px;
+	height: 200px;
+	width: 300px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
+	input {
+		margin-top: 0;
+		padding: 0;
+		width: unset;
+		background: $white;
+		font-size: 17px;
+		text-align: center;
+		border: none;
+		vertical-align: unset;
+		font-family: 'Lato';
+	}
+
+	.num-input-wrapper {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		align-items: center;
+
+		.num-input {
+			width: 35px;
+			outline: 1px solid $black;
+			margin: 2px 5px 0 0;
+		}
+	}
+
+	.enable-qb-question {
+
+		margin-top: 15px;
+		margin-bottom: 15px;
+
+		.enable-qb-options {
+			display: flex;
+			justify-content: center;
+		}
+	}
+
+	.dialog-close-button {
+
+		color: $black;
+		margin-top: 10px;
+		margin-bottom: 5px;
+		height: 30px;
+		width: 80px;
+		background-color: #C28BEE;
+		cursor: grab;
+
+		&:hover {
+			background-color: #453b5c;
+			color: $white;
+		}
+
+		&:disabled {
+			background-color: #cccccc;
+			color: $white;
+		}
+	}
+
+}
+
 
 .arrow_box {
 	position: absolute;

@@ -84,11 +84,14 @@ Matching.controller 'matchingCreatorCtrl', ['$scope', '$sce', ($scope, $sce) ->
 		$scope.hideCover()
 
 	$scope.hideCover = ->
-		$scope.showTitleDialog = $scope.showIntroDialog = $scope.showErrorDialog = false
+		$scope.showTitleDialog = $scope.showIntroDialog = $scope.showErrorDialog = $scope.questionBankDialog = false
+		$scope.questionBankValTemp = $scope.questionBankVal
 
 	$scope.validateQuestionBankVal = ->
 		if ($scope.questionBankValTemp >= 1 && $scope.questionBankValTemp <= $scope.widget.wordPairs.length)
 			$scope.questionBankVal = $scope.questionBankValTemp
+		else
+			$scope.questionBankVal = $scope.widget.wordPairs.length
 
 
 	$scope.autoSize = (pair, audio) ->
