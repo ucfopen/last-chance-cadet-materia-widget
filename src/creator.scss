@@ -129,6 +129,7 @@ body {
 		&:disabled {
 			background-color: #cccccc;
 			color: $white;
+			cursor: not-allowed;
 		}
 
 		&.gray-out {
