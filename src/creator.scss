@@ -119,22 +119,32 @@ body {
 		font-size: 15px;
 		font-family: 'Lato';
 		background-color: #c28bee;
+		border: 1px solid #c28bee;
 		cursor: grab;
 
 		&:hover {
-			background-color: #453b5c;
+			background-color: #6b5b91;
+			border: 1px solid #6b5b91;
 			color: $white;
 		}
 
 		&:disabled {
 			background-color: #cccccc;
+			border: 1px solid #cccccc;
 			color: $white;
 			cursor: not-allowed;
 		}
 
 		&.gray-out {
 			background-color: $gray;
+			border: 1px solid $gray;
 			color: $white;
+
+			&:hover {
+				background-color: #696767;
+				border: 1px solid #696767;
+				color: $white;
+			}
 		}
 	}
 
@@ -650,13 +660,16 @@ body {
 		color: $black;
 		margin-top: 10px;
 		margin-bottom: 5px;
+		font-size: 15px;
 		height: 30px;
 		width: 80px;
 		background-color: #C28BEE;
+		border: 1px solid #C28BEE;
 		cursor: grab;
 
 		&:hover {
 			background-color: #453b5c;
+			border: 1px solid #453b5c;
 			color: $white;
 		}
 
