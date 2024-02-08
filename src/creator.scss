@@ -135,7 +135,7 @@ body {
 			cursor: not-allowed;
 		}
 
-		&.gray-out {
+		&.gray-out:not(:disabled) {
 			background-color: $gray;
 			border: 1px solid $gray;
 			color: $white;
