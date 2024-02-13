@@ -226,18 +226,18 @@
 			ng-class= '{ show: questionBankDialog }'
 			ng-click= 'hideCover()'>
 			<div class="enable-qb-question">
-				<label>Enable question bank? </label>
+				<label style="font-weight: bold;">Enable question bank? </label>
 				<div class="enable-qb-options"
 					ng-click="$event.stopPropagation()">
 					<span>
 						<input type="radio" ng-model="enableQuestionBank" ng-value=false> No</input>
-						<input type="radio" ng-model="enableQuestionBank" ng-value=true ng-change="questionBankVal = widget.wordPairs.length; questionBankValTemp = widget.wordPairs.length"> Yes</input>
+						<input type="radio" ng-model="enableQuestionBank" ng-value=true ng-change="questionBankVal = questionBankValTemp = widget.wordPairs.length"> Yes</input>
 					</span>
 				</div>
 			</div>
 			<div>
 				<span ng-show="enableQuestionBank" >
-					<label>How many questions to ask? </label>
+					<label style="font-weight: bold;">How many questions to ask? </label>
 					<div class="num-input-wrapper"
 						ng-click="$event.stopPropagation()">
 						<input class="num-input" type="number" ng-model="questionBankValTemp" ng-change="validateQuestionBankVal()" step="1">
