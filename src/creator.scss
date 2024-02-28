@@ -85,6 +85,16 @@ body {
 	overflow-x: hidden;
 }
 
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 101;
+	backdrop-filter: blur(3px);
+}
+
 #header {
 	position: relative;
 	top: 0px;
@@ -96,6 +106,47 @@ body {
 	z-index: 100;
 
 	border-bottom: solid 2px $gray;
+
+	.qb-button {
+
+		height: 40px;
+		width: 150px;
+		align-content: center;
+		color: $black;
+		line-height: 1;
+		float: right;
+		margin-right: 10px;
+		font-size: 15px;
+		font-family: 'Lato';
+		background-color: #c28bee;
+		border: 1px solid #c28bee;
+		cursor: grab;
+
+		&:hover {
+			background-color: #6b5b91;
+			border: 1px solid #6b5b91;
+			color: $white;
+		}
+
+		&:disabled {
+			background-color: #cccccc;
+			border: 1px solid #cccccc;
+			color: $white;
+			cursor: not-allowed;
+		}
+
+		&.gray-out:not(:disabled) {
+			background-color: $gray;
+			border: 1px solid $gray;
+			color: $white;
+
+			&:hover {
+				background-color: #696767;
+				border: 1px solid #696767;
+				color: $white;
+			}
+		}
+	}
 
 	.bottom {
 		position:absolute;
@@ -550,7 +601,92 @@ body {
 			cursor: pointer;
 		}
 	}
+
 }
+
+.question-bank-dialog {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin: 0;
+	transform: translate(-50%, -50%);
+	background-color: $white;
+	padding: 0;
+	height: 200px;
+	width: 300px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
+	input {
+		margin-top: 0;
+		padding: 0;
+		width: unset;
+		background: $white;
+		font-size: 17px;
+		text-align: center;
+		border: none;
+		vertical-align: unset;
+		font-family: 'Lato';
+	}
+
+	.num-input-wrapper {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		align-items: center;
+
+		.num-input {
+			width: 35px;
+			outline: 1px solid $black;
+			margin: 2px 5px 0 0;
+		}
+	}
+
+	.enable-qb-question {
+
+		margin-top: 15px;
+		margin-bottom: 15px;
+
+		.enable-qb-options {
+			display: flex;
+			justify-content: center;
+		}
+	}
+
+	.qb-warning {
+		font-size: 14px;
+		margin: 0;
+		text-align: center;
+	}
+
+	.dialog-close-button {
+
+		color: $black;
+		margin-top: 10px;
+		margin-bottom: 5px;
+		font-size: 15px;
+		height: 30px;
+		width: 80px;
+		background-color: #C28BEE;
+		border: 1px solid #C28BEE;
+		cursor: grab;
+
+		&:hover {
+			background-color: #6b5b91;
+			border: 1px solid #6b5b91;
+			color: $white;
+		}
+
+		&:disabled {
+			background-color: #cccccc;
+			color: $white;
+		}
+	}
+
+}
+
 
 .arrow_box {
 	position: absolute;
@@ -612,4 +748,3 @@ body {
 		margin-left: 150px;
 	}
 }
-
