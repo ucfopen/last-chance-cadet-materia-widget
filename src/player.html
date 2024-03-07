@@ -1,426 +1,328 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title> Last Chance Cadet Materia Widget </title>
-		<meta charset="utf-8" />
 
-		<!-- STYLESHEETS -->
-		<link rel="stylesheet" type="text/css" href="player.css">
+<head>
+	<title> Last Chance Cadet Materia Widget </title>
+	<meta charset="utf-8" />
 
-		<!-- REQUIRED MATERIA JAVASCRIPT -->
-		<script src="materia.enginecore.js"></script>
+	<!-- STYLESHEETS -->
+	<link rel="stylesheet" type="text/css" href="player.css">
 
-		<!-- YOUR PREREQUISITES -->
-		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Roboto:400,900" rel="stylesheet">
+	<!-- REQUIRED MATERIA JAVASCRIPT -->
+	<script src="materia.enginecore.js"></script>
 
-		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular.min.js"></script>
+	<!-- YOUR PREREQUISITES -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,900" rel="stylesheet">
 
-		<!-- MAIN PLAYER SCRIPT -->
-		<script src="player.js"></script>
-	</head>
-	<body ng-app='matching' ng-controller='matchingPlayerCtrl' ng-keydown='keydownHandler($event)'>
-		<header id="header">
-			<div id='titleContainer'>
-				<h1>{{ title }}</h1>
-				<div id='glowContainer'>
-					<!-- light-like glows along top of title bar; until we can do it in CSS -->
-					<span class='glow'
-						ng-repeat='i in [1,2,3,4]'>
-					</span>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular.min.js"></script>
+
+	<!-- MAIN PLAYER SCRIPT -->
+	<script src="player.js"></script>
+</head>
+
+<body ng-app='matching' ng-controller='matchingPlayerCtrl' ng-keydown='keydownHandler($event)'>
+	<header id="header">
+		<div id='titleContainer'>
+			<h1>{{ title }}</h1>
+			<div id='glowContainer'>
+				<!-- light-like glows along top of title bar; until we can do it in CSS -->
+				<span class='glow' ng-repeat='i in [1,2,3,4]'>
+				</span>
+			</div>
+		</div>
+	</header>
+
+
+	<div class="assistive-element" id="assistive-alert" aria-live="assertive"></div>
+
+	<button id='help-button' ng-click="unfocused()" aria-label="Keyboard Instructions" tabindex="0">
+		Help
+	</button>
+
+	<dialog id='instructions' ng-class="{'visible': helpVisible}" tabindex="0" role="alertdialog" aria-modal="true"
+		aria-describedby="keyboard-instructions">
+		<div class='scrollable-container'>
+			<aside>A NewMedia Game</aside>
+			<h1>
+				<span>Last Chance Cadet</span>
+				<span>Instruction Manual </span>
+			</h1>
+			<br>
+			<div>
+
+				<p>
+					Match the astronauts to their corresponding rockets. Use the mouse to connect the tow cable from
+					each rocket to an astronaut.
+				</p>
+
+				<p>
+					You need to match <b>all</b> astronauts. You can see the number of astronauts still needing help by
+					the dial on the bottom right.
+				</p>
+
+				<p>
+					Once you have matched every astronaut to a rocket, the <b>Finish</b> button will glow. Press
+					<b>Finish</b> to pull the astronauts in. Any incorrect matches will lead to stranded astronauts!
+				</p>
+
+				<h2> Keyboard Instructions </h2>
+
+				<div>
+
+					<p id="keyboard-instructions" tabindex="0">
+					<p> Use <strong>tab </strong> and <strong> shift-tab </strong> to move between items and buttons at
+						the bottom. </p>
+					<p> Use <strong> enter </strong> or <strong> space </strong> to select an item to match. </p>
+					<p> Use <strong>left arrow </strong> or <strong> right arrow </strong> to quickly switch between the
+						left and right side. </p>
+					<p> Use keys <strong>QWERTY</strong> to select items on the left side and keys
+						<strong>12345</strong> to select items on the right side in the order listed. </p>
+					</p>
+
 				</div>
+				<br>
 			</div>
-		</header>
 
-		
-		<div class="assistive-element" id="assistive-alert" aria-live="assertive"></div>
+			<button class='close-tab' ng-click='focused()' aria-label="Close" tabindex="0">
+				close
+			</button>
 
-		<button id='help-button'
-			ng-click= "unfocused()"
-			aria-label="Keyboard Instructions"
-			tabindex="0">
-			Help
-		</button>
+	</dialog>
 
-		  <dialog id='instructions'
-            ng-class="{'visible': helpVisible}"
-			tabindex="0"
-			role="alertdialog"
-			aria-modal="true"
-			aria-describedby="keyboard-instructions">
-            <div class='scrollable-container'>
-            <aside>A NewMedia Game</aside>
-            <h1>
-                <span>Last Chance Cadet</span>
-                <span>Instruction Manual </span>
-            </h1>
-            <br>
-		    <div > 
 
-            <p>
-               Match the astronauts to their corresponding rockets. Use the mouse to connect the tow cable from each rocket to an astronaut.
-            </p>
-
-            <p>
-                You need to match <b>all</b> astronauts. You can see the number of astronauts still needing help by the dial on the bottom right.
-            </p>
-
-			<p>
-                Once you have matched every astronaut to a rocket, the <b>Finish</b> button will glow. Press <b>Finish</b> to pull the astronauts in. Any incorrect matches will lead to stranded astronauts!
-            </p>
-
-			<h2> Keyboard Instructions </h2>
-
-		    <div > 
-	
-            <p  id="keyboard-instructions"
-			tabindex="0">
-                <p> Use <strong>tab </strong> and <strong> shift-tab </strong> to move between items and buttons at the bottom. </p>  
-               <p> Use <strong> enter </strong> or <strong> space </strong> to select an item to match. </p> 
-				<p> Use <strong>left arrow </strong> or <strong> right arrow </strong> to quickly switch between the left and right side. </p> 
-				<p> Use keys <strong>QWERTY</strong> to select items on the left side and keys <strong>12345</strong> to select items on the right side in the order listed. </p>
-            </p>
-
-			</div>
-			 <br>
-			 </div>
-
-			   <button class='close-tab'
-			   ng-click='focused()'  
-			   aria-label="Close"
-			   tabindex="0">
-                close
-			   </button>
-               
-			</dialog>
-		
-
-		<section
-		 class="gameboard"
-		 id="gameboard"
-		aria-label="Game board."
-			role="application"
-			tabindex="0">
-			<div class='transition'
-				ng-class="{'pageAnimate': pageAnimate}">
-			</div>
-			<div ng-class="{'screenAnimate': pageAnimate}">
-				<ul class="column column1">
-					<li id="question-choice {{$index}}" class="word {{getMatchColor(question)}}"
-					tabindex="0"
-					role="term"
-					aria-label="{{'Question: ' + ($index+1) + ' of ' + pages[currentPage].questions.length + ': ' + question.text 
-					+ ', ' + (isInMatch(question) ? 'Matched with: ' + getMatchWith(question) 
+	<section class="gameboard" id="gameboard" aria-label="Game board." role="application" tabindex="0">
+		<div class='transition' ng-class="{'pageAnimate': pageAnimate}">
+		</div>
+		<div ng-class="{'screenAnimate': pageAnimate}">
+			<ul class="column column1">
+				<li id="question-choice {{$index}}" class="word {{getMatchColor(question)}}" tabindex="0" role="term"
+					aria-label="{{'Question: ' + ($index+1) + ' of ' + pages[currentPage].questions.length + ': ' + question.text
+					+ ', ' + (isInMatch(question) ? 'Matched with: ' + getMatchWith(question)
 					: 'Unmatched.') + (checkForQuestionAudio($index) ? ' This question has an audio clue.' : '')}}"
-						ng-repeat="question in pages[currentPage].questions"
-						ng-click="selectQuestion(question)"
-						ng-mouseover="drawPrelineToLeft(question)"
-						ng-mouseleave="unapplyHoverSelections()"
-						ng-class="{'selected-word' : applyQuestionClass($index),
-							'matched' : isInMatch(question)}"
-						ng-keyup="handleBoardKeypress($event, question)"
-							>
+					ng-repeat="question in pages[currentPage].questions" ng-click="selectQuestion(question)"
+					ng-mouseover="drawPrelineToLeft(question)" ng-mouseleave="unapplyHoverSelections()" ng-class="{'selected-word' : applyQuestionClass($index),
+							'matched' : isInMatch(question)}" ng-keyup="handleBoardKeypress($event, question)">
 
-						<div class="word-text">
-							<span class="item-number">{{$index + 1}}</span>
-							<span class="text-wrapper"
-								ng-class="{'long': (question.text.length > 13)}">
-								{{checkForQuestionAudio($index) ? "" : question.text}}
-							</span>
-							<span ng-class="{'expand': (question.text.length > 45),
-								'noExpand': (question.text.length <= 45 || checkForQuestionAudio($index))}"
-								data-icon="&#xe000;"
-								aria-hidden="true">
-							</span>
-						</div>
+					<div class="word-text">
+						<span class="item-number">{{$index + 1}}</span>
+						<span class="text-wrapper" ng-class="{'long': (question.text.length > 13)}">
+							{{checkForQuestionAudio($index) ? "" : question.text}}
+						</span>
+						<span ng-class="{'expand': (question.text.length > 45),
+								'noExpand': (question.text.length <= 45 || checkForQuestionAudio($index))}" data-icon="&#xe000;"
+							aria-hidden="true">
+						</span>
+					</div>
 
-						<div ng-audio-controls
-							audio-source="{{question.asset}}"
-							ng-if="checkForQuestionAudio($index)"
-							class="audio-control-container">
-						</div>
+					<div ng-audio-controls audio-source="{{question.asset}}" ng-if="checkForQuestionAudio($index)"
+						class="audio-control-container">
+					</div>
 
-						<div class="wrap">
-							<div class="popup"
-								ng-hide="checkForQuestionAudio($index)"
-								ng-class="{'shown': (question.text.length > 45)}">
-								<div class="popup-text left">
-									{{question.text}}
-								</div>
-								<div class="popup-arrow"
-									ng-class="{'left': (question.text.length > 45)}">
-								</div>
+					<div class="wrap">
+						<div class="popup" ng-hide="checkForQuestionAudio($index)"
+							ng-class="{'shown': (question.text.length > 45)}">
+							<div class="popup-text left">
+								{{question.text}}
+							</div>
+							<div class="popup-arrow" ng-class="{'left': (question.text.length > 45)}">
 							</div>
 						</div>
+					</div>
 
-						<div class="wrap">
-							<div class="popup" ng-class="{'shown': (question.text.length > 45)}">
-								<div class="popup-text left">{{question.text}}</div>
-								<div class="popup-arrow" ng-class="{'left': (question.text.length > 45)}"></div>
-							</div>
+					<div class="wrap">
+						<div class="popup" ng-class="{'shown': (question.text.length > 45)}">
+							<div class="popup-text left">{{question.text}}</div>
+							<div class="popup-arrow" ng-class="{'left': (question.text.length > 45)}"></div>
 						</div>
-					</li>
-				</ul>
+					</div>
+				</li>
+			</ul>
 
-				<div class="column svg-column">
-					<svg id="holder" style="height:450px">
-						<!-- full lines, partial opacity - backmost -->
-						<line ng-repeat="line in lines[currentPage]"
-							class="behind {{line.color}}"
-							ng-attr-x1="{{line.startX + 15}}"
-							ng-attr-y1="{{line.startY}}"
-							ng-attr-x2="{{line.endX}}"
-							ng-attr-y2="{{line.endY}}"/>
-						<!-- dashed lines, full opacity - forward -->
-						<line ng-repeat="line in lines[currentPage]"
-							class="linePlaced {{line.color}}"
-							ng-attr-x1="{{line.startX + 15}}"
-							ng-attr-y1="{{line.startY}}"
-							ng-attr-x2="{{line.endX}}"
-							ng-attr-y2="{{line.endY}}"/>
-						<!-- pre-match lines, solid green - foremost -->
-						<line ng-repeat="line in prelines"
-							ng-attr-x1="{{line.linex1 + 15}}"
-							ng-attr-x2="{{line.linex2}}"
-							ng-attr-y1="{{line.liney1}}"
-							ng-attr-y2="{{line.liney2}}"/>
+			<div class="column svg-column">
+				<svg id="holder" style="height:450px">
+					<!-- full lines, partial opacity - backmost -->
+					<line ng-repeat="line in lines[currentPage]" class="behind {{line.color}}"
+						ng-attr-x1="{{line.startX + 15}}" ng-attr-y1="{{line.startY}}" ng-attr-x2="{{line.endX}}"
+						ng-attr-y2="{{line.endY}}" />
+					<!-- dashed lines, full opacity - forward -->
+					<line ng-repeat="line in lines[currentPage]" class="linePlaced {{line.color}}"
+						ng-attr-x1="{{line.startX + 15}}" ng-attr-y1="{{line.startY}}" ng-attr-x2="{{line.endX}}"
+						ng-attr-y2="{{line.endY}}" />
+					<!-- pre-match lines, solid green - foremost -->
+					<line ng-repeat="line in prelines" ng-attr-x1="{{line.linex1 + 15}}" ng-attr-x2="{{line.linex2}}"
+						ng-attr-y1="{{line.liney1}}" ng-attr-y2="{{line.liney2}}" />
 
-						<!-- Rocket ship SVG begin -->
-						<svg version="1.1"
-							xmlns="http://www.w3.org/2000/svg"
-							xmlns:xlink="http://www.w3.org/1999/xlink"
-							xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-							class='rocket'
-							width="37px"
-							height="58px"
-							viewBox="-0.718 -0.167 100 154"
-							overflow="visible"
-							enable-background="new -0.718 -0.167 100 154"
-							xml:space="preserve"
-							fill-opacity="0.5"
-							ng-repeat="circle in questionCircles[currentPage]"
-							ng-attr-x="{{circle.cx  - (37/2)}}"
-							ng-attr-y="{{circle.cy  - (58/2)}}">
-							<defs></defs>
-							<g class = "{{circle.color}}"
-								ng-class="{'hover' : questionCircles[currentPage][$index].lightHover,
+					<!-- Rocket ship SVG begin -->
+					<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+						xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" class='rocket' width="37px"
+						height="58px" viewBox="-0.718 -0.167 100 154" overflow="visible"
+						enable-background="new -0.718 -0.167 100 154" xml:space="preserve" fill-opacity="0.5"
+						ng-repeat="circle in questionCircles[currentPage]" ng-attr-x="{{circle.cx  - (37/2)}}"
+						ng-attr-y="{{circle.cy  - (58/2)}}">
+						<defs></defs>
+						<g class="{{circle.color}}" ng-class="{'hover' : questionCircles[currentPage][$index].lightHover,
 									'selected' : applyCircleClass(circle)
 										|| questionCircles[currentPage][$index].isHover}">
-								<path
-									stroke-width="3"
-									d="M98.524,152.167c-3-31.667-20.922-53.299-20.922-53.299l-0.009,0.022
+							<path stroke-width="3" d="M98.524,152.167c-3-31.667-20.922-53.299-20.922-53.299l-0.009,0.022
 									c5.07-25.788,1.523-60.866-27.735-98.39h-0.577C20.023,38.023,16.476,73.1,21.546,98.888l-0.008-0.021
 									c0,0-17.923,21.632-20.923,53.299c23.333-20,34.374-20.16,34.374-20.16l-0.001-0.002c4.342,6.202,8.505,9.606,10.794,9.516h0.199
 									c-0.177,6.437-0.199,10.646-0.199,10.646h7.576c0,0-0.022-4.21-0.199-10.646h0.199c2.289,0.09,6.452-3.315,10.794-9.517
-									l-0.001,0.003C64.151,132.006,75.192,132.167,98.524,152.167z"/>
-								<path fill="none"
-									stroke-width="3"
-									d="M53.358,141.52c9.968,0.391,55.5-65.354-3.5-141.02h-0.577
-									c-59,75.667-13.467,141.411-3.5,141.02"/>
-								<path fill="none"
-									stroke-width="3"
-									d="M49.281,96.167c-3.333,22.833-3.5,56-3.5,56h7.576
-									c0,0-0.166-33.166-3.5-56H49.281z"/>
-								<circle fill="none"
-									stroke-width="3"
-									cx="49.57"
-									cy="46.833"
-									r="14"/>
-								<circle fill="none"
-									stroke-width="3"
-									cx="49.57"
-									cy="46"
-									r="9.921"/>
-							</g>
-						</svg>
-						<!-- Rocket ship SVG end -->
+									l-0.001,0.003C64.151,132.006,75.192,132.167,98.524,152.167z" />
+							<path fill="none" stroke-width="3" d="M53.358,141.52c9.968,0.391,55.5-65.354-3.5-141.02h-0.577
+									c-59,75.667-13.467,141.411-3.5,141.02" />
+							<path fill="none" stroke-width="3" d="M49.281,96.167c-3.333,22.833-3.5,56-3.5,56h7.576
+									c0,0-0.166-33.166-3.5-56H49.281z" />
+							<circle fill="none" stroke-width="3" cx="49.57" cy="46.833" r="14" />
+							<circle fill="none" stroke-width="3" cx="49.57" cy="46" r="9.921" />
+						</g>
+					</svg>
+					<!-- Rocket ship SVG end -->
 
-						<!-- Astronaut SVG end -->
-						<svg version="1.1"
-							xmlns="http://www.w3.org/2000/svg"
-							xmlns:xlink="http://www.w3.org/1999/xlink"
-							xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-							class="astronaut"
-							width="30px"
-							height="43px"
-							viewBox="-0.132 -0.375 30 43"
-							overflow="visible"
-							enable-background="new -0.132 -0.375 30 43"
-							xml:space="preserve"
-							ng-repeat="circle in answerCircles[currentPage]"
-							ng-attr-x="{{circle.cx - (30/2)}}"
-							ng-attr-y="{{circle.cy - (43/2)}}">
+					<!-- Astronaut SVG end -->
+					<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+						xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" class="astronaut" width="30px"
+						height="43px" viewBox="-0.132 -0.375 30 43" overflow="visible"
+						enable-background="new -0.132 -0.375 30 43" xml:space="preserve"
+						ng-repeat="circle in answerCircles[currentPage]" ng-attr-x="{{circle.cx - (30/2)}}"
+						ng-attr-y="{{circle.cy - (43/2)}}">
 						<defs></defs>
-						<g ng-attr-transform="{{circle.hackRotation}}"
-							ng-class="{'hover' : answerCircles[currentPage][$index].lightHover,
+						<g ng-attr-transform="{{circle.hackRotation}}" ng-class="{'hover' : answerCircles[currentPage][$index].lightHover,
 								'selected' : applyCircleClass(circle)
 									|| answerCircles[currentPage][$index].isHover}">
-							<path class = "{{circle.color}}"
-								stroke="#000000"
+							<path class="{{circle.color}}" stroke="#000000"
 								d="M21.701,10.625c0,0-0.188-0.014-0.514-0.036
 								c-0.962,1.271-2.37,2.078-3.944,2.078c-1.733,0-3.266-0.978-4.222-2.478c-4.474-0.126-9.172-0.065-10.028,0.687
 								c-1.708,1.5-1.542,3.958,1.583,4.042s8.125,1.708,4.125,8.292s-4,6.583-4,6.583s-7.458,8.917-2.5,7.375s11.083-7.042,11.083-7.042
-								S14.035,43,18.035,41.75s0.458-15.042,0.458-15.042S16.284,14.833,26.576,21C34.118,22.5,21.701,10.625,21.701,10.625z"/>
-							<path class = "{{circle.color}}"
-								stroke="#000000"
-								d="M17.243,12.666c1.574,0,2.982-0.807,3.944-2.078
+								S14.035,43,18.035,41.75s0.458-15.042,0.458-15.042S16.284,14.833,26.576,21C34.118,22.5,21.701,10.625,21.701,10.625z" />
+							<path class="{{circle.color}}" stroke="#000000" d="M17.243,12.666c1.574,0,2.982-0.807,3.944-2.078
 								c0.811-1.07,1.306-2.469,1.306-4.005c0-3.359-2.351-6.083-5.25-6.083s-5.25,2.724-5.25,6.083c0,1.351,0.385,2.595,1.028,3.605
-								C13.977,11.688,15.509,12.666,17.243,12.666z"/>
+								C13.977,11.688,15.509,12.666,17.243,12.666z" />
 						</g>
-						</svg>
-						<!-- Astronaut SVG end -->
 					</svg>
-				</div>
+					<!-- Astronaut SVG end -->
+				</svg>
+			</div>
 
-				<ul class="column column2">
-					<li id="answer-choice {{$index}}" class="word {{getMatchColor(answer)}}"
-					 tabindex="0"
-					role="definition"
-					aria-label="{{'Answer. ' + ($index+1) + ' of ' + pages[currentPage].answers.length + ': ' 
-					+ answer.text + ', ' + (isInMatch(answer) ? 'Matched with: ' + getMatchWith(answer) 
+			<ul class="column column2">
+				<li id="answer-choice {{$index}}" class="word {{getMatchColor(answer)}}" tabindex="0" role="definition"
+					aria-label="{{'Answer. ' + ($index+1) + ' of ' + pages[currentPage].answers.length + ': '
+					+ answer.text + ', ' + (isInMatch(answer) ? 'Matched with: ' + getMatchWith(answer)
 					: 'Unmatched.') + (checkForAnswerAudio($index) ? ' This answer has an audio clue.' : '')}}"
-						ng-repeat="answer in pages[currentPage].answers"
-						ng-click="selectAnswer(answer)"
-						ng-mouseover="drawPrelineToRight(answer)"
-						ng-mouseleave="unapplyHoverSelections()"
-						ng-class="{'selected-word' : applyAnswerClass($index),
-							'matched' : isInMatch(answer)}"
-						ng-keyup="handleBoardKeypress($event, question)">
-						<span class='clickable'></span>
-						<div class="word-text">
-							<span class="item-letter">{{getItemLetter($index)}}</span>
-							<span class="text-wrapper"
-								ng-class="{'long': (answer.text.length > 13)}">
-								{{checkForAnswerAudio($index) ? "" : answer.text}}
-							</span>
-							<span ng-class="{'expand': (answer.text.length > 45),
-								'noExpand': (answer.text.length <= 45 || checkForAnswerAudio($index))}"
-								data-icon="&#xe000;"
-								aria-hidden="true">
-							</span>
-						</div>
+					ng-repeat="answer in pages[currentPage].answers" ng-click="selectAnswer(answer)"
+					ng-mouseover="drawPrelineToRight(answer)" ng-mouseleave="unapplyHoverSelections()" ng-class="{'selected-word' : applyAnswerClass($index),
+							'matched' : isInMatch(answer)}" ng-keyup="handleBoardKeypress($event, question)">
+					<span class='clickable'></span>
+					<div class="word-text">
+						<span class="item-letter">{{getItemLetter($index)}}</span>
+						<span class="text-wrapper" ng-class="{'long': (answer.text.length > 13)}">
+							{{checkForAnswerAudio($index) ? "" : answer.text}}
+						</span>
+						<span ng-class="{'expand': (answer.text.length > 45),
+								'noExpand': (answer.text.length <= 45 || checkForAnswerAudio($index))}" data-icon="&#xe000;"
+							aria-hidden="true">
+						</span>
+					</div>
 
-						<div ng-audio-controls
-							audio-source="{{answer.asset}}"
-							ng-if="checkForAnswerAudio($index)"
-							class="audio-control-container">
-						</div>
+					<div ng-audio-controls audio-source="{{answer.asset}}" ng-if="checkForAnswerAudio($index)"
+						class="audio-control-container">
+					</div>
 
-						<div class="wrap">
-							<div class="popup"
-								ng-hide="checkForAnswerAudio($index)"
-								ng-class="{'shown': (answer.text.length > 45)}">
-								<div class="popup-text right">
-									{{answer.text}}
-								</div>
-								<div class="popup-arrow"
-									ng-class="{'right': (answer.text.length > 45)}">
-								</div>
+					<div class="wrap">
+						<div class="popup" ng-hide="checkForAnswerAudio($index)"
+							ng-class="{'shown': (answer.text.length > 45)}">
+							<div class="popup-text right">
+								{{answer.text}}
+							</div>
+							<div class="popup-arrow" ng-class="{'right': (answer.text.length > 45)}">
 							</div>
 						</div>
-					</li>
-				</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<footer ng-class="{'onTop': pageAnimate}">
+		<section id='page-roller' class='number-roller'>
+			<div class='screws'>
+				<div ng-repeat='i in [1,2]' class='screw'>
+					<div class='head'>
+						<div class='groove'></div>
+					</div>
+				</div>
+			</div>
+			<div class='inner-panel'>
+				<div class='screen-effects'>
+					<div class='pointer'></div>
+				</div>
+				<div class='panel-screen'>
+					<div class='numbers' style='left: calc(-1 * {{currentPage}} * 100px)'>
+						<span class='number' ng-repeat='page in pages'>
+							<span>{{$index + 1}}</span>
+						</span>
+					</div>
+				</div>
 			</div>
 		</section>
 
-		<footer ng-class="{'onTop': pageAnimate}">
-			<section id='page-roller' class='number-roller'>
-				<div class='screws'>
-					<div ng-repeat='i in [1,2]'
-						class='screw'>
-						<div class='head'>
-							<div class='groove'></div>
-						</div>
+		<section id='match-roller' class='number-roller'>
+			<div class='screws'>
+				<div ng-repeat='i in [1,2]' class='screw'>
+					<div class='head'>
+						<div class='groove'></div>
 					</div>
 				</div>
-				<div class='inner-panel'>
-					<div class='screen-effects'>
-						<div class='pointer'></div>
-					</div>
-					<div class='panel-screen'>
-						<div class='numbers'
-							style='left: calc(-1 * {{currentPage}} * 100px)'>
-							<span class='number'
-								ng-repeat='page in pages'>
-								<span>{{$index + 1}}</span>
-							</span>
-						</div>
+			</div>
+			<div class='inner-panel'>
+				<div class='screen-effects'>
+					<div class='pointer'></div>
+				</div>
+				<div class='panel-screen'>
+					<div class='numbers' style='right: calc(-1 * {{matches.length}} * 100px)'>
+						<span class='number' ng-repeat='i in [].constructor(totalItems + 1) track by $index'>
+							{{$index}}
+						</span>
 					</div>
 				</div>
-			</section>
+			</div>
+		</section>
 
-			<section id='match-roller' class='number-roller'>
-				<div class='screws'>
-					<div ng-repeat='i in [1,2]'
-						class='screw'>
-						<div class='head'>
-							<div class='groove'></div>
-						</div>
-					</div>
-				</div>
-				<div class='inner-panel'>
-					<div class='screen-effects'>
-						<div class='pointer'></div>
-					</div>
-					<div class='panel-screen'>
-						<div class='numbers'
-							style='right: calc(-1 * {{matches.length}} * 100px)'>
-							<span class='number'
-								ng-repeat='i in [].constructor(totalItems + 1) track by $index'>
-								{{$index}}
-							</span>
-						</div>
-					</div>
-				</div>
-			</section>
+		<section id='page-indicator' class='panel-indicator'>
+			<span class='point-left'>Current Page</span>
+		</section>
+		<section id='match-indicator' class='panel-indicator'>
+			<span class='point-right'>Astronauts Left</span>
+		</section>
 
-			<section id='page-indicator' class='panel-indicator'>
-				<span class='point-left'>Current Page</span>
-			</section>
-			<section id='match-indicator' class='panel-indicator'>
-				<span class='point-right'>Astronauts Left</span>
-			</section>
-
-			<section id="page-selector" class='button-panel'>
-				<button id="previous-page" 
-					ng-click="changePage('previous')"
-					aria-label="{{ 'Return to previous page. ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page.'}}"
-					ng-disabled="setIsFirstPage()"
-   				    tabindex="{{ setIsFirstPage() ? '-1' : '0' }}">
-					<span class='arrow'></span>
-					<span class='overlay'
-						ng-class="{'blink': unfinishedPagesBefore}"></span>
+		<section id="page-selector" class='button-panel'>
+			<button id="previous-page" ng-click="changePage('previous')"
+				aria-label="{{ 'Return to previous page. ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page.'}}"
+				ng-disabled="setIsFirstPage()" tabindex="{{ setIsFirstPage() ? '-1' : '0' }}">
+				<span class='arrow'></span>
+				<span class='overlay' ng-class="{'blink': unfinishedPagesBefore}"></span>
 			</button>
-				<button id="next-page"
-				    ng-click="changePage('next')" 
-					aria-label="{{ 'Advance to next page. ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page.' }}"
-					ng-disabled="setIsLastPage()"
-   				    tabindex="{{ setIsLastPage() ? '-1' : '0' }}">
-					<span class='arrow'></span>
-					<span class='overlay'
-						ng-class="{'blink': unfinishedPagesAfter}"></span>
-		</button>
-			</section>
-			<section class='button-panel'></section>
+			<button id="next-page" ng-click="changePage('next')"
+				aria-label="{{ 'Advance to next page. ' + completePerPage[currentPage] + ' of ' + pages[currentPage].questions.length + ' matches complete for the current page.' }}"
+				ng-disabled="setIsLastPage()" tabindex="{{ setIsLastPage() ? '-1' : '0' }}">
+				<span class='arrow'></span>
+				<span class='overlay' ng-class="{'blink': unfinishedPagesAfter}"></span>
+			</button>
+		</section>
+		<section class='button-panel'></section>
 
-			<button id='finish-button'
-				ng-click="submit()"
-				tabindex="0">
-				<div class='overlay blink'
-					ng-if='getPercentDone() == 1'></div>
-				<div class='bulb'></div>
+		<button id='finish-button' ng-click="submit()" tabindex="0">
+			<div class='overlay blink' ng-if='getPercentDone() == 1'></div>
+			<div class='bulb'></div>
 
-				<svg xmlns="http://www.w3.org/2000/svg"
-					ng-show="setCreated"
-					class='progress-container'>
-					<circle cx = '42.5' cy = '42.5' r = '40' fill='none'
-						stroke='#a24040' stroke-width='5'
-						ng-style="{
+			<svg xmlns="http://www.w3.org/2000/svg" ng-show="setCreated" class='progress-container'>
+				<circle cx='42.5' cy='42.5' r='40' fill='none' stroke='#a24040' stroke-width='5' ng-style="{
 							'stroke-dasharray': circumference,
 							'stroke-dashoffset': circumference - (getPercentDone() * circumference)
-						}"/>
-				</svg>
-			</button>
-		</footer> 
-	</body>
+						}" />
+			</svg>
+		</button>
+	</footer>
+</body>
+
 </html>
