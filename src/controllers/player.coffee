@@ -30,7 +30,7 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 	_assistiveAlert = (msg) ->
 		alertEl = document.getElementById('assistive-alert')
 		if alertEl then alertEl.innerHTML = msg
-	
+	   	 
 
 	$scope.qset = {}
 
@@ -175,41 +175,71 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 			, ANIMATION_DURATION*1.1
 
 		if _boardElement then _boardElement.focus()										 
-		if direction == 'next' then ($scope.currentPage = $scope.currentPage + 1) _assistiveAlert 'Page incremented. You are on the next page. There are ' + 
-		$scope.completePerPage[$scope.currentPage] + ' out of ' + 
-		$scope.pages[$scope.currentPage].questions.length  + ' matches done.'
-		else if direction == 'previous' then ($scope.currentPage = $scope.currentPage - 1) _assistiveAlert 'Page decremented. You are on the previous page. There are ' + 
-		$scope.completePerPage[$scope.currentPage] + " out of " + 
-		$scope.pages[$scope.currentPage].questions.length  + ' matches done.'
+		if direction == 'next'
+			($scope.currentPage = $scope.currentPage + 1) 
+			_assistiveAlert 'Page incremented. You are on the next page. There are ' + ($scope.completePerPage[$scope.currentPage] ?= 0) + ' out of ' + $scope.pages[$scope.currentPage].questions.length  + ' matches done.'
+		else if direction == 'previous'
+			($scope.currentPage = $scope.currentPage - 1) 
+			_assistiveAlert 'Page decremented. You are on the previous page. There are ' + ($scope.completePerPage[$scope.currentPage] ?= 0) + " out of " + $scope.pages[$scope.currentPage].questions.length  + ' matches done.'
 
-	
 	$scope.checkForQuestionAudio = (index) ->
 		$scope.pages[$scope.currentPage].questions[index].asset != undefined
 
-		
-
+	
 	$scope.checkForAnswerAudio = (index) ->
 		$scope.pages[$scope.currentPage].answers[index].asset != undefined
 
 
+
+
+	_updateCompletionStatus = () -> 
+		
+		$scope.completePerPage = [] 
+		for match in $scope.matches 
+			if !$scope.completePerPage[match.matchPageId] then $scope.completePerPage[match.matchPageId] = 1
+			else $scope.completePerPage[match.matchPageId]+=1
+
+
 	_pushMatch = () ->
-		$scope.matches.push {
-			questionId: $scope.selectedQuestion.id
-			questionIndex: $scope.selectedQA[$scope.currentPage].question
-			answerId: $scope.selectedAnswer.id
-			answerIndex: $scope.selectedQA[$scope.currentPage].answer
-			matchPageId: $scope.currentPage
-			color: _getColor()
-	
-		}
-		$scope.completePerPage[$scope.currentPage]++
+		
+		newMatch = {
+				questionId: $scope.selectedQuestion.id,
+				questionIndex: $scope.selectedQA[$scope.currentPage].question,
+				answerId: $scope.selectedAnswer.id,
+				answerIndex: $scope.selectedQA[$scope.currentPage].answer,
+				matchPageId: $scope.currentPage,
+				color: _getColor()
+			}
 
-		if $scope.matches.length == $scope.totalItems then _assistiveAlert 'All matches complete. The finish button is now available.'
+		duplicateFound = false
+		
 
+		for existingMatch in $scope.matches
+			if existingMatch.questionId == newMatch.questionId and existingMatch.answerId == newMatch.answerId
+				duplicateFound = true
+				break
+			
+		
+		if not duplicateFound
+			$scope.matches.push newMatch
+		
+		_updateCompletionStatus()
+
+		if($scope.totalItems == $scope.matches.length)
+			_assistiveAlert 'All matches have been made. You may now submit your answers.'
+		else
+			_assistiveAlert 'Match made. There are ' + ($scope.totalItems - $scope.matches.length) + ' matches left.'
+
+			_assistiveAlert $scope.pages[$scope.currentPage].questions[$scope.selectedQA[$scope.currentPage].question].text + ' matched with ' + 
+				$scope.pages[$scope.currentPage].answers[$scope.selectedQA[$scope.currentPage].answer].text + '. ' +
+				($scope.pages[$scope.currentPage].questions.length - ($scope.completePerPage[$scope.currentPage])) + ' of ' + $scope.pages[$scope.currentPage].questions.length + ' matches left on current page '
+
+		
 	_applyCircleColor = () ->
 		# find appropriate circle
 		$scope.questionCircles[$scope.currentPage][$scope.selectedQA[$scope.currentPage].question].color = _getColor()
 		$scope.answerCircles[$scope.currentPage][$scope.selectedQA[$scope.currentPage].answer].color = _getColor()
+
 
 	_getColor = () ->
 		'c' + colorNumber
@@ -269,12 +299,6 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 				$scope.matches.splice indexOfAnswer, 1
 
 				
-			_assistiveAlert $scope.pages[$scope.currentPage].questions[$scope.selectedQA[$scope.currentPage].question].text + ' matched with ' + 
-					$scope.pages[$scope.currentPage].answers[$scope.selectedQA[$scope.currentPage].answer].text + '. ' +
-					($scope.pages[$scope.currentPage].questions.length - ($scope.completePerPage[$scope.currentPage]) - 1) + ' of ' + $scope.pages[$scope.currentPage].questions.length + ' matches left on current page '
-					
-			
-	
 			_pushMatch()
 
 			_applyCircleColor()
