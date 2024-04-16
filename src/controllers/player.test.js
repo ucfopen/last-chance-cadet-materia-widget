@@ -499,6 +499,17 @@ describe('Matching Player Controller', function(){
 		expect($scope.pages[0].answers[0].text).toEqual('to change');
 	});
 
+	it('should slice the qset if qb is enabled', function () {
+
+		// Enable question bank and set the number of questions to 3
+		qset.data.options = {enableQuestionBank: true, questionBankVal: 3}
+
+		materiaCallbacks.start(widgetInfo, qset.data);
+
+		// qset should be sliced to the length given by questionBankVal
+		expect(qset.data.items[0].items.length).toEqual(3);
+	});
+
 	it('should return progress for empty sets, not that it should ever happen', function() {
 		materiaCallbacks.start(widgetInfo, qset.data);
 
