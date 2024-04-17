@@ -1,6 +1,5 @@
-Matching = angular.module 'matching'
-
-Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope, $timeout, $sce) ->
+angular.module 'matching'
+.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope, $timeout, $sce) ->
 	materiaCallbacks = {}
 	$scope.title = ''
 
@@ -57,6 +56,14 @@ Matching.controller 'matchingPlayerCtrl', ['$scope', '$timeout', '$sce', ($scope
 	materiaCallbacks.start = (instance, qset) ->
 		$scope.qset = qset
 		$scope.title = instance.name
+
+		# Update qset items to only include the number of questions specified in the question bank. Done here since $scope.totalItems depends on it.
+		if qset.options && qset.options.enableQuestionBank
+			_shuffle qset.items[0].items
+			qbItemsLength = qset.options.questionBankVal
+			rndStart = Math.floor(Math.random() * (qset.items[0].items.length - qbItemsLength + 1))
+			qset.items[0].items = qset.items[0].items.slice(rndStart, rndStart + qbItemsLength)
+
 		$scope.totalItems = qset.items[0].items.length
 		$scope.totalPages = Math.ceil $scope.totalItems/ITEMS_PER_PAGE
 

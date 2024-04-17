@@ -200,6 +200,26 @@ describe('Matching Creator Controller', function(){
 		expect(successReport.qset).toMatchSnapshot()
 	});
 
+	it('should update questionBankVal if questionBankValTemp is valid within the range', function () {
+
+		qset.data.options = {enableQuestionBank: true, questionBankVal: 6};
+		materiaCallbacks.initExistingWidget('matcher', widgetInfo, qset.data);
+
+		// set initial values where questionBankValTemp is invalid
+		$scope.questionBankValTemp = 11;
+		$scope.validateQuestionBankVal();
+
+		// expect questionBankVal to change to wordPairs value
+		expect($scope.questionBankVal).toBe(6);
+
+		// this time questionBankValTemp is valid
+		$scope.questionBankValTemp = 8;
+		$scope.validateQuestionBankVal();
+
+		// expect questionBankVal to be updated to questionBankValTemp
+		expect($scope.questionBankVal).toBe(8);
+
+	});
 
 	it('should properly remove word pair', function(){
 		materiaCallbacks.initNewWidget('matcher');
