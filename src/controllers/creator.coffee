@@ -10,6 +10,10 @@ angular.module 'matching', ['ngAnimate']
 
 	$scope.acceptedMediaTypes = ['mp3']
 	audioRef = []
+	$scope.questionBankDialog = false
+	$scope.enableQuestionBank = false
+	$scope.questionBankValTemp = 1
+	$scope.questionBankVal = 1
 
 	# Adds and removes a pair of textareas for users to input a word pair.
 	$scope.addWordPair = (q=null, a=null, media=[0,0], id='') ->
@@ -26,6 +30,11 @@ angular.module 'matching', ['ngAnimate']
 
 	materiaCallbacks.initExistingWidget = (title, widget, qset, version, baseUrl) ->
 		_items = qset.items[0].items
+
+		if qset.options
+			$scope.enableQuestionBank = if qset.options.enableQuestionBank then qset.options.enableQuestionBank else false
+			$scope.questionBankVal = if qset.options.questionBankVal then qset.options.questionBankVal else 1
+			$scope.questionBankValTemp = if qset.options.questionBankVal then qset.options.questionBankVal else 1
 
 		$scope.$apply ->
 			$scope.widget.title = title
@@ -76,7 +85,12 @@ angular.module 'matching', ['ngAnimate']
 		$scope.hideCover()
 
 	$scope.hideCover = ->
-		$scope.showTitleDialog = $scope.showIntroDialog = $scope.showErrorDialog = false
+		$scope.showTitleDialog = $scope.showIntroDialog = $scope.showErrorDialog = $scope.questionBankDialog = false
+		$scope.questionBankValTemp = $scope.questionBankVal
+
+	$scope.validateQuestionBankVal = ->
+		if ($scope.questionBankValTemp >= 1 && $scope.questionBankValTemp <= $scope.widget.wordPairs.length)
+			$scope.questionBankVal = $scope.questionBankValTemp
 
 	$scope.autoSize = (pair, audio) ->
 		question = pair.question or ''
@@ -115,6 +129,7 @@ angular.module 'matching', ['ngAnimate']
 
 	_buildSaveData = ->
 		_qset.items = []
+		_qset.options = {caseSensitive: null, enableQuestionBank: $scope.enableQuestionBank, questionBankVal: $scope.questionBankVal}
 		_qset.items[0] =
 			name: "null"
 			items: []
