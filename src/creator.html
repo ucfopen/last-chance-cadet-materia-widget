@@ -14,11 +14,8 @@
 		<!-- YOUR PREREQUISITES -->
 		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular-animate.min.js"></script>
-
-		<!-- MAIN CREATOR SCRIPT -->
-		<script src="creator.js"></script>
 	</head>
-	<body ng-app='matching' ng-controller="matchingCreatorCtrl">
+	<body ng-controller="matchingCreatorCtrl">
 		<div id='modal'></div>
 		<!-- <div ng-show= "questionBankDialog" class="overlay"></div> -->
 		<div id='header'>
@@ -222,6 +219,7 @@
 			ng-show='!widget.wordPairs.length && step'>
 			<span>Click here to add your first pair</span>
 		</div>
+
 		<div class="box question-bank-dialog"
 			ng-class= '{ show: questionBankDialog }'
 			ng-click= 'hideCover()'>
@@ -248,5 +246,7 @@
 			<p class="qb-warning">If question bank is enabled, questions will be randomized. </p>
 			<button class="dialog-close-button" ng-disabled="questionBankValTemp < 1 || questionBankValTemp > widget.wordPairs.length" ng-click="questionBankDialog = false;">Confirm</button>
 		</div>
+		<!-- MAIN CREATOR SCRIPT -->
+		<script src="creator.js"></script>
 	</body>
 </html>
