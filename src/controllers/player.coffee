@@ -615,12 +615,18 @@ angular.module 'matching'
 		finishButton = document.getElementById("finish-button");
 
 
-		panelButtons.inert = true;
-		helpButton.inert = true;
-		gameBoard.inert = true;
-		finishButton.inert = true;
+		if panelButtons
+			panelButtons.setAttribute("inert", '');
+		if helpButton
+			helpButton.setAttribute("inert", '');
+		if gameBoard
+			gameBoard.setAttribute("inert", '');
+		if finishButton
+			finishButton.setAttribute("inert", '');
 
-		helpModal.inert = false;
+
+		if helpModal
+			helpModal.removeAttribute("inert");
 
 	$scope.focused = () ->
 
@@ -630,14 +636,19 @@ angular.module 'matching'
 		panelButtons = document.getElementById("page-selector");
 		finishButton = document.getElementById("finish-button");
 
+		if panelButtons
+			panelButtons.removeAttribute("inert", '');
+		if helpButton
+			helpButton.removeAttribute("inert", '');
+		if gameBoard
+			gameBoard.removeAttribute("inert", '');
+		if finishButton
+			finishButton.removeAttribute("inert", '');
 
-		panelButtons.inert = false;
-		helpButton.inert = false;
-		gameBoard.inert = false;
-		finishButton.inert = false;
 
 
-		helpModal.inert = true;
+		if helpModal
+			helpModal.setAttribute("inert", '');
 
 
 	Materia.Engine.start materiaCallbacks
