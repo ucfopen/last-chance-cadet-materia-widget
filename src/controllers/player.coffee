@@ -22,7 +22,9 @@ angular.module 'matching'
 	$scope.unfinishedPagesBefore = false
 	$scope.unfinishedPagesAfter = false
 	helpModal = document.getElementById("instructions");
-	helpModal.inert = true;
+	
+	if helpModal
+			helpModal.setAttribute("inert", '');
 
 
 	_assistiveAlert = (msg) ->
@@ -617,6 +619,7 @@ angular.module 'matching'
 
 		if panelButtons
 			panelButtons.setAttribute("inert", '');
+
 		if helpButton
 			helpButton.setAttribute("inert", '');
 		if gameBoard
@@ -629,6 +632,7 @@ angular.module 'matching'
 			helpModal.removeAttribute("inert");
 
 	$scope.focused = () ->
+
 
 		$scope.helpVisible = false
 		helpButton = document.getElementById("help-button");
