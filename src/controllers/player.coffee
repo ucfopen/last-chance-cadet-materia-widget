@@ -97,7 +97,7 @@ angular.module 'matching'
 				_pageIndex++
 
 			wrapQuestionUrl = ->
-				if item.assets[0] != 0 and item.assets[0] != undefined # for qsets published after this commit, this value will be 0, for older qsets it's undefined
+				if item.assets and item.assets?[0] != 0 and item.assets?[0] != undefined # for qsets published after this commit, this value will be 0, for older qsets it's undefined
 					return $sce.trustAsResourceUrl Materia.Engine.getImageAssetUrl(item.assets[0])
 
 			$scope.pages[_pageIndex].questions.push {
@@ -130,7 +130,7 @@ angular.module 'matching'
 			###
 
 			wrapAnswerUrl = ->
-				if item.assets[1] != 0 and item.assets[1] != undefined # for qsets published after this commit, this value will be 0, for older qsets it's undefined
+				if item.assets?[1] != 0 and item.assets?[1] != undefined # for qsets published after this commit, this value will be 0, for older qsets it's undefined
 					return $sce.trustAsResourceUrl Materia.Engine.getImageAssetUrl(item.assets[1])
 
 			$scope.pages[_pageIndex].answers.push {
@@ -560,7 +560,8 @@ angular.module 'matching'
 				matchedItemAnswerId = matchedItem[0].answerId
 				# get the answer of that match at that question id and use that as the 2nd argument
 				mappedQsetItemText = qsetItems.filter( (item) -> item.id == matchedItemAnswerId)[0].answers[0].text
-				mappedQsetAudioString = qsetItems.filter( (item) -> item.id == matchedItemAnswerId)[0].assets[2]
+				# the audioString should ONLY be provided if there is actually an audio asset present for the answer card - we check that by referencing assets[1]. Otherwise, pass null
+				mappedQsetAudioString = if qsetItems.filter( (item) -> item.id == matchedItemAnswerId)[0].assets and qsetItems.filter( (item) -> item.id == matchedItemAnswerId)[0].assets[1] != 0 then qsetItems.filter( (item) -> item.id == matchedItemAnswerId)[0].assets[2] else null
 			else
 				mappedQsetItemText = null
 			Materia.Score.submitQuestionForScoring(qsetItems[i].id, mappedQsetItemText, mappedQsetAudioString)
