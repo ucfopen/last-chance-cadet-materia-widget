@@ -27,7 +27,8 @@ $hover-purple: #d4cee2;
 	font-variant: normal;
 	text-transform: none;
 	-webkit-font-smoothing: antialiased;
-	vertical-align: middle;
+	// vertical-align: middle;
+	// text-align: center;
 }
 
 .play-btn {
@@ -37,23 +38,29 @@ $hover-purple: #d4cee2;
 	border-radius: 5px;
 	background-color: $white;
 	border: solid 1px $gray-dark;
-	color: $black;
+// 	color: $black;
 	width: 36px;
 	height: 30px;
-	line-height: 30px;
-	display: inline-block;
+	// line-height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
 
-	position: relative;
+	position: absolute;
+	
 
-	&:hover {
-		color: $white;
-	}
+// 	&:hover {
+// 		color: $white;
+// 	}
 }
 
 .audio-controls {
 	display: block;
 	padding: 0 0 5px;
 	width: 220px;
+	margin: 0 auto;
+	// text-align: center;
 }
 
 .audio-controls > span {
