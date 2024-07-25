@@ -406,7 +406,7 @@ describe('Matching Player Controller', function(){
 			expect(Materia.Score.submitQuestionForScoring).toHaveBeenCalledWith(
 				question.id,
 				question.answers[0].text,
-				question.assets[2] //null for text answers, audio description for audio answers
+				question.assets[1] != 0 ? question.assets[2] : null //null for text answers, audio description for audio answers
 			)
 		})
 	});
