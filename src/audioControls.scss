@@ -27,33 +27,29 @@ $hover-purple: #d4cee2;
 	font-variant: normal;
 	text-transform: none;
 	-webkit-font-smoothing: antialiased;
-	vertical-align: middle;
 }
 
 .play-btn {
 	width: 25px;
 	font-size: 1em;
-
 	border-radius: 5px;
 	background-color: $white;
 	border: solid 1px $gray-dark;
-	color: $black;
 	width: 36px;
 	height: 30px;
-	line-height: 30px;
-	display: inline-block;
-
-	position: relative;
-
-	&:hover {
-		color: $white;
-	}
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-left: 0.5em;
 }
 
 .audio-controls {
-	display: block;
+	display: flex;
+	justify-content: flex-start;
+	gap: 0.5em;
 	padding: 0 0 5px;
 	width: 220px;
+	margin: 0 auto;
 }
 
 .audio-controls > span {
@@ -86,10 +82,13 @@ $hover-purple: #d4cee2;
 
 .duration, .seek-bar {
 	display: block;
+	align-items: right;
+	
 }
 
 .seek-bar, .seek-bar input {
 	vertical-align: bottom;
+	padding-left: 2px;
 }
 
 .seek-bar input {
@@ -150,7 +149,6 @@ $hover-purple: #d4cee2;
 		outline: none;
 	}
 }
-
 
 /*Have to define these separately because comma-separating them doesn't work for some reason*/
 .seek-bar input::-webkit-slider-thumb {
