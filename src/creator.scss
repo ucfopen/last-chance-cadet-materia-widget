@@ -385,12 +385,6 @@ body {
 				font-family    : "CorbelBold", sans-serif;
 				font-weight    : 300;
 				display        : inline-block;
-
-				.play-btn:before {
-					position: absolute;
-					left: 9px;
-
-				}
 			}
 			.audio-image {
 				color: $gray-dark;
