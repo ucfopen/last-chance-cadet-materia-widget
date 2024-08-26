@@ -143,6 +143,7 @@ angular.module 'matching', ['ngAnimate']
 			items: []
 
 		_qset.options =
+			caseSensitive: null
 			enableQuestionBank: $scope.enableQuestionBank
 			questionBankVal: $scope.questionBankVal
 
