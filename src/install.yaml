@@ -39,3 +39,5 @@ meta_data:
     or definition.
   accessibility_keyboard: Full
   accessibility_reader: Full
+  update_method: github
+  repo: ucfopen/last-chance-cadet-materia-widget
