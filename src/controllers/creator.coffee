@@ -104,7 +104,7 @@ angular.module 'matching', ['ngAnimate']
 
 	$scope.audioUrl = (assetId) ->
 		# use $sce.trustAsResourceUrl to avoid interpolation error
-		$sce.trustAsResourceUrl Materia.CreatorCore.getMediaUrl(assetId + ".mp3")
+		$sce.trustAsResourceUrl Materia.CreatorCore.getMediaUrl(assetId)
 
 	# prevents duplicate ids
 	createUniqueAudioAnswerId = () ->
