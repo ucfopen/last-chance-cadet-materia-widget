@@ -19,7 +19,12 @@ angular.module 'matching', ['ngAnimate']
 	$scope.addWordPair = (q=null, a=null, media=[0,0], id='') ->
 		$scope.widget.wordPairs.push {question:q, answer:a, media:media, id:id}
 
-	$scope.removeWordPair = (index) -> $scope.widget.wordPairs.splice(index, 1)
+	$scope.removeWordPair = (index) ->
+		$scope.widget.wordPairs.splice(index, 1)
+
+		# Update the question bank value if it's greater than the number of word pairs
+		if($scope.enableQuestionBank && $scope.questionBankVal > $scope.widget.wordPairs.length)
+			$scope.questionBankVal = $scope.questionBankValTemp = $scope.widget.wordPairs.length
 
 	$scope.removeAudio = (index, which) -> $scope.widget.wordPairs[index].media.splice(which, 1, 0)
 
@@ -104,7 +109,7 @@ angular.module 'matching', ['ngAnimate']
 
 	$scope.audioUrl = (assetId) ->
 		# use $sce.trustAsResourceUrl to avoid interpolation error
-		$sce.trustAsResourceUrl Materia.CreatorCore.getMediaUrl(assetId + ".mp3")
+		$sce.trustAsResourceUrl Materia.CreatorCore.getMediaUrl(assetId)
 
 	# prevents duplicate ids
 	createUniqueAudioAnswerId = () ->
@@ -128,11 +133,20 @@ angular.module 'matching', ['ngAnimate']
 		assets
 
 	_buildSaveData = ->
+
+		# Update question bank value in case it happens to be greater than the number of word pairs, to avoid errors on player side
+		if $scope.questionBankVal > $scope.widget.wordPairs.length then $scope.questionBankVal = $scope.questionBankValTemp = $scope.widget.wordPairs.length
+
 		_qset.items = []
-		_qset.options = {caseSensitive: null, enableQuestionBank: $scope.enableQuestionBank, questionBankVal: $scope.questionBankVal}
 		_qset.items[0] =
 			name: "null"
 			items: []
+
+		_qset.options =
+			caseSensitive: null
+			enableQuestionBank: $scope.enableQuestionBank
+			questionBankVal: $scope.questionBankVal
+
 		wordPairs = $scope.widget.wordPairs
 
 		return false if not wordPairs.length
