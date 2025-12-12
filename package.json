@@ -3,7 +3,7 @@
   "materia": {
     "cleanName": "last-chance-cadet"
   },
-  "version": "2.1.0",
+  "version": "2.1.1",
   "dependencies": {
     "materia-widget-development-kit": "3.0.4"
   },
